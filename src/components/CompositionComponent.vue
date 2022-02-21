@@ -38,20 +38,18 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const dataValues = ref([30, 40, 60, 70, 5])
+    const dataValues = ref([20, 70, 10])
     const toggleLegend = ref(true)
 
     const testData = computed<ChartData<'doughnut'>>(() => ({
-      labels: ['Paris', 'Nîmes', 'Toulon', 'Perpignan', 'Autre'],
+      labels: ['Dividend', 'Indexed', 'Grow'],
       datasets: [
         {
           data: dataValues.value,
           backgroundColor: [
             '#77CEFF',
             '#0079AF',
-            '#123E6B',
-            '#97B0C4',
-            '#A5C8ED',
+            '#123E6B'
           ],
         },
       ],
@@ -60,6 +58,7 @@ export default defineComponent({
     const options = computed<ChartOptions<'doughnut'>>(() => ({
       scales: {
         myScale: {
+          display: false,
           type: 'logarithmic',
           position: toggleLegend.value ? 'left' : 'right',
         },
