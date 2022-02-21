@@ -10,7 +10,6 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
         <q-toolbar-title> FinDragon </q-toolbar-title>
       </q-toolbar>
     </q-header>
