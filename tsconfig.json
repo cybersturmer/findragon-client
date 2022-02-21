@@ -1,5 +1,6 @@
 {
   "extends": "@quasar/app/tsconfig-preset",
+  "noImplicitAny": false,
   "compilerOptions": {
     "baseUrl": "."
   }
