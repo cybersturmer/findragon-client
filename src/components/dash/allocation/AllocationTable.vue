@@ -1,5 +1,6 @@
 <template>
   <q-table
+    dark
     title="Allocation table"
     :columns="columns"
     :rows="row"
