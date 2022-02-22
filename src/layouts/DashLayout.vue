@@ -53,7 +53,7 @@ const linksList = [
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: 'DashLayout',
 
   components: {
     EssentialLink,
