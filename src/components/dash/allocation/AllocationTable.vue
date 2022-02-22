@@ -7,7 +7,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {defineComponent, PropType} from 'vue'
+import { Allocation } from 'components/models'
 
 const columns = [
   {
@@ -33,7 +34,7 @@ const columns = [
 export default defineComponent({
   name: 'AllocationTable',
   props: {
-    row: Array
+    row: Array as PropType<Allocation[]>
   },
   setup () {
     return {
