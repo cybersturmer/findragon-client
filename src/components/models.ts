@@ -13,3 +13,9 @@ export interface Portfolio {
   created_at: string;
   updated_at: string;
 }
+
+export interface Allocation {
+  title: string
+  portfolio_ratio: number
+  category_ratio: number
+}
