@@ -1,17 +1,17 @@
 export interface Todo {
-  id: number;
-  content: string;
+  id: number
+  content: string
 }
 
 export interface Meta {
-  totalCount: number;
+  totalCount: number
 }
 
 export interface Portfolio {
-  id: number;
-  title: string;
-  created_at: string;
-  updated_at: string;
+  id: number
+  title: string
+  created_at: string
+  updated_at: string
 }
 
 export interface Allocation {
