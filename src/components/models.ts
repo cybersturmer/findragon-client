@@ -17,5 +17,4 @@ export interface Portfolio {
 export interface Allocation {
   title: string
   portfolio_ratio: number
-  category_ratio: number
 }
