@@ -1,5 +1,6 @@
 <template>
-  <DoughnutChart v-bind="doughnutChartProps" />
+  <DoughnutChart
+    v-bind="doughnutChartProps" />
 </template>
 
 <script lang="ts">
@@ -39,6 +40,7 @@ export default defineComponent({
     }))
 
     const options = computed<ChartOptions<'doughnut'>>(() => ({
+      responsive: true,
       scales: {
         myScale: {
           display: false,
@@ -55,6 +57,7 @@ export default defineComponent({
     }))
 
     const { doughnutChartProps, doughnutChartRef } = useDoughnutChart({
+      height: 300,
       chartData: dataObject,
       options,
     })
