@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <DoughnutChart v-bind="doughnutChartProps" />
-  </div>
+  <DoughnutChart v-bind="doughnutChartProps" />
 </template>
 
 <script lang="ts">
