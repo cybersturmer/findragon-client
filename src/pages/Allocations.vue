@@ -2,14 +2,10 @@
   <q-page padding>
     <div class="row">
       <div class="col">
-        <allocation-chart
-          :row="row"
-        />
+        <allocation-chart :row="row" />
       </div>
       <div class="col">
-        <allocation-table
-          :row="row"
-        />
+        <allocation-table :row="row" />
       </div>
     </div>
   </q-page>
@@ -20,8 +16,9 @@ import { defineComponent } from 'vue'
 
 import AllocationTable from 'components/dash/allocation/AllocationTable.vue'
 import AllocationChart from 'components/dash/allocation/AllocationChart.vue'
+import { Allocation } from 'components/models'
 
-const row = [
+const row: Allocation[] = [
   {
     title: 'Indexed',
     portfolio_ratio: 80
