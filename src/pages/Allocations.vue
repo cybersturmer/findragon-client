@@ -2,35 +2,20 @@
   <q-page padding>
     <div class="row">
       <div class="col">
-        <allocation-chart :row="row" />
+        <allocation-chart :row="allocation" />
       </div>
       <div class="col">
-        <allocation-table :row="row" />
+        <allocation-table :row="allocation" />
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
-import { defineComponent, getCurrentInstance, onMounted } from 'vue'
+import { defineComponent, getCurrentInstance, onMounted, ref } from 'vue'
 
 import AllocationTable from 'components/dash/allocation/AllocationTable.vue'
 import AllocationChart from 'components/dash/allocation/AllocationChart.vue'
-
-const row = [
-  {
-    title: 'Indexed',
-    portfolio_ratio: 80
-  },
-  {
-    title: 'Bonds',
-    portfolio_ratio: 10
-  },
-  {
-    title: 'Shares',
-    portfolio_ratio: 10
-  }
-]
 
 export default defineComponent({
   name: 'Allocations',
@@ -39,23 +24,17 @@ export default defineComponent({
     AllocationTable
   },
   setup () {
+    const allocation = ref(null)
     const $vueInstance = getCurrentInstance()
-
-    if ($vueInstance === null) throw new Error('Vue instance cannot be null.')
 
     const { $api } = $vueInstance.appContext.config.globalProperties
 
-    onMounted(() => {
-      const response = $api.get(
-        '/allocations/'
-      )
-      .then((data) => {
-        console.dir(data)
-      })
+    onMounted(async () => {
+      allocation.value = await $api.get('/allocations/')
     })
 
     return {
-      row
+      allocation
     }
   }
 })
