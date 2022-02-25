@@ -11,14 +11,13 @@
   </q-page>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
+import { defineComponent, getCurrentInstance, onMounted } from 'vue'
 
 import AllocationTable from 'components/dash/allocation/AllocationTable.vue'
 import AllocationChart from 'components/dash/allocation/AllocationChart.vue'
-import { Allocation } from 'components/models'
 
-const row: Allocation[] = [
+const row = [
   {
     title: 'Indexed',
     portfolio_ratio: 80
@@ -40,6 +39,21 @@ export default defineComponent({
     AllocationTable
   },
   setup () {
+    const $vueInstance = getCurrentInstance()
+
+    if ($vueInstance === null) throw new Error('Vue instance cannot be null.')
+
+    const { $api } = $vueInstance.appContext.config.globalProperties
+
+    onMounted(() => {
+      const response = $api.get(
+        '/allocations/'
+      )
+      .then((data) => {
+        console.dir(data)
+      })
+    })
+
     return {
       row
     }

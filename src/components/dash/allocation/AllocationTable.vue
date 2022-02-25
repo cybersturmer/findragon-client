@@ -6,9 +6,8 @@
   />
 </template>
 
-<script lang="ts">
-import {defineComponent, PropType} from 'vue'
-import { Allocation } from 'components/models'
+<script>
+import { defineComponent } from 'vue'
 
 const columns = [
   {
@@ -16,8 +15,8 @@ const columns = [
     required: true,
     label: 'Title',
     align: 'left',
-    field: (row: { title: string }) => row.title,
-    format: (val: string) => `${val}`,
+    field: (row) => row.title,
+    format: (val) => `${val}`,
     sortable: true
   },
   {
@@ -25,8 +24,8 @@ const columns = [
     required: true,
     label: 'Ratio',
     align: 'center',
-    field: (row : { portfolio_ratio: number }) => row.portfolio_ratio,
-    format: (val: string) => `${val}`,
+    field: (row) => row.portfolio_ratio,
+    format: (val) => `${val}`,
     sortable: true
   }
 ]
@@ -34,7 +33,7 @@ const columns = [
 export default defineComponent({
   name: 'AllocationTable',
   props: {
-    row: Array as PropType<Allocation[]>
+    row: Array
   },
   setup () {
     return {
