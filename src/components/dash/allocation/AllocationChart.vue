@@ -26,8 +26,6 @@ export default defineComponent({
     const titles = props.row?.map(obj => obj.title)
     const values = props.row?.map(obj => obj.portfolio_ratio)
 
-    if (!titles || !values) throw new Error('Title and value cannot be undefined')
-
     const dataObject = computed(() => ({
       labels: titles,
       datasets: [
