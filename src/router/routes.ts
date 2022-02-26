@@ -6,6 +6,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/DashLayout.vue'),
     children: [
       {
+        name: 'allocation_view',
         path: '',
         component: () => import('pages/Allocations.vue')
       }
