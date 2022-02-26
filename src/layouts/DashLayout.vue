@@ -23,7 +23,7 @@
     >
       <q-list>
         <EssentialLink
-          v-for="link in essentialLinks"
+          v-for="link in linksList"
           :key="link.title"
           v-bind="link"
         />
@@ -44,13 +44,13 @@ const linksList = [
     title: 'Allocation',
     caption: 'Assets allocation',
     icon: 'donut_large',
-    link: 'allocation_view',
+    route: 'allocation_view',
   },
   {
     title: 'Assets',
     caption: 'Assets allocation',
     icon: 'work',
-    link: 'asset_view',
+    route: 'asset_view',
   }
 ];
 
@@ -67,7 +67,7 @@ export default defineComponent({
     const leftDrawerOpen = ref(false);
 
     return {
-      essentialLinks: linksList,
+      linksList,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
