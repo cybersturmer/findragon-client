@@ -9,6 +9,11 @@ const routes: RouteRecordRaw[] = [
         name: 'allocation_view',
         path: '',
         component: () => import('pages/Allocations.vue')
+      },
+      {
+        name: 'asset_view',
+        path: 'assets',
+        component: () => import('pages/Allocations.vue')
       }
     ],
   },
