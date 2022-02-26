@@ -22,8 +22,6 @@
       class="bg-grey-9 text-white"
     >
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
@@ -43,16 +41,10 @@ import EssentialLink from 'components/EssentialLink.vue';
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
+    title: 'Allocation',
+    caption: 'Assets allocation',
+    icon: 'donut_large',
+    link: 'allocation_view',
   }
 ];
 
