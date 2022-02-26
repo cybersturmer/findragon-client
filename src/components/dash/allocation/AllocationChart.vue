@@ -24,7 +24,7 @@ export default defineComponent({
   },
   setup (props) {
     const titles = props.row?.map(obj => obj.title)
-    const values = props.row?.map(obj => obj.portfolio_ratio)
+    const values = props.row?.map(obj => obj.portfolio_ratio / 100)
 
     const dataObject = computed(() => ({
       labels: titles,

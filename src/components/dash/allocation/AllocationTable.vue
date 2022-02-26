@@ -22,9 +22,9 @@ const columns = [
   {
     name: 'portfolio_ratio',
     required: true,
-    label: 'Ratio',
+    label: 'Ratio %',
     align: 'center',
-    field: (row) => row.portfolio_ratio,
+    field: (row) => row.portfolio_ratio / 100,
     format: (val) => `${val}`,
     sortable: true
   }
