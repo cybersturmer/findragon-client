@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div v-if="isAssetDataAvailable"
+    <div v-if="isAssetsDataAvailable"
          class="row">
       <div class="col">
         <assets-table :row="assets" />
@@ -15,7 +15,7 @@ import AssetsTable from 'components/dash/assets/AssetsTable.vue'
 
 export default {
   name: 'Assets',
-  components: {AssetsTable},
+  components: { AssetsTable },
   setup () {
     const assets = ref(null)
     const $vueInstance = getCurrentInstance()
@@ -32,13 +32,13 @@ export default {
       }
     })
 
-    const isAssetDataAvailable = computed(() => {
+    const isAssetsDataAvailable = computed(() => {
       return Array.isArray(assets.value) && assets.value.length > 0
     })
 
     return {
       assets,
-      isAssetDataAvailable
+      isAssetsDataAvailable
     }
   }
 }
