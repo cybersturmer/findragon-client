@@ -21,7 +21,7 @@ const columns = [
   {
     name: 'ticker',
     required: true,
-    label: '',
+    label: 'Ticker',
     align: 'center',
     field: (row) => row.ticker,
     format: (val) => `${val}`
