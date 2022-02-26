@@ -6,18 +6,25 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/DashLayout.vue'),
     children: [
       {
+        name: 'index',
+        path: '/',
+        redirect: to => {
+          return { name: 'allocations_view' }
+        }
+      },
+      {
         name: 'allocations_view',
-        path: '',
+        path: '/allocations',
         component: () => import('pages/Allocations.vue')
       },
       {
         name: 'assets_view',
-        path: 'assets',
+        path: '/assets',
         component: () => import('pages/Assets.vue')
       },
       {
         name: 'transactions_view',
-        path: 'transactions',
+        path: '/transactions',
         component: () => import('pages/Transactions.vue')
       }
     ],

@@ -1,6 +1,14 @@
 <template>
-  <q-item clickable v-ripple :to="{ name: route }">
-    <q-item-section v-if="icon" avatar>
+  <q-item
+    clickable
+    manual-focus
+    v-ripple
+    :to="{ name: route }"
+    active-class="text-grey-5"
+  >
+    <q-item-section
+      v-if="icon"
+      avatar>
       <q-icon :name="icon" />
     </q-item-section>
 
