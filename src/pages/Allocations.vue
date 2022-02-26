@@ -21,8 +21,14 @@ import {
   ref
 } from 'vue'
 
+import { useMeta } from 'quasar'
+
 import AllocationTable from 'components/dash/allocations/AllocationTable.vue'
 import AllocationChart from 'components/dash/allocations/AllocationChart.vue'
+
+const metaData = {
+  title: 'Allocation'
+}
 
 export default defineComponent({
   name: 'Allocations',
@@ -31,6 +37,8 @@ export default defineComponent({
     AllocationTable
   },
   setup () {
+    useMeta(metaData)
+
     const allocations = ref(null)
     const $vueInstance = getCurrentInstance()
 

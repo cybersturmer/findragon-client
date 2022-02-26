@@ -10,13 +10,21 @@
 </template>
 
 <script>
+import { useMeta } from 'quasar'
 import { getCurrentInstance, onMounted, computed, ref } from 'vue'
+
 import AssetsTable from 'components/dash/assets/AssetsTable.vue'
+
+const metaData = {
+  title: 'Assets'
+}
 
 export default {
   name: 'Assets',
   components: { AssetsTable },
   setup () {
+    useMeta(metaData)
+
     const assets = ref(null)
     const $vueInstance = getCurrentInstance()
 
