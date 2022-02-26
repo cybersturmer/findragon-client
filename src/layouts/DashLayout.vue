@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import EssentialLink from 'components/EssentialLink.vue';
+import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
@@ -58,9 +58,9 @@ const linksList = [
     icon: 'shopping_bag',
     route: 'transactions_view'
   }
-];
+]
 
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'DashLayout',
@@ -70,15 +70,15 @@ export default defineComponent({
   },
 
   setup() {
-    const leftDrawerOpen = ref(false);
+    const leftDrawerOpen = ref(false)
 
     return {
       linksList,
       leftDrawerOpen,
       toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
+        leftDrawerOpen.value = !leftDrawerOpen.value
       },
-    };
+    }
   },
-});
+})
 </script>
