@@ -44,13 +44,19 @@ const linksList = [
     title: 'Allocation',
     caption: 'Assets allocation',
     icon: 'donut_large',
-    route: 'allocation_view',
+    route: 'allocations_view',
   },
   {
     title: 'Assets',
-    caption: 'Assets allocation',
+    caption: 'Assets list',
     icon: 'work',
-    route: 'asset_view',
+    route: 'assets_view',
+  },
+  {
+    title: 'Transactions',
+    caption: 'Transactions list',
+    icon: 'shopping_bag',
+    route: 'transactions_view'
   }
 ];
 
