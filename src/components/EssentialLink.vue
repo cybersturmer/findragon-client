@@ -1,12 +1,15 @@
 <template>
-  <q-item clickable tag="a" target="_self" :to="{ name: route }">
+  <q-item clickable v-ripple :to="{ name: route }">
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
 
     <q-item-section>
       <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption class="text-grey-1">
+      <q-item-label
+        v-if="caption"
+        caption
+        class="text-grey-1">
         {{ caption }}
       </q-item-label>
     </q-item-section>
