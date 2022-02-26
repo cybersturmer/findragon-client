@@ -31,7 +31,7 @@ export default defineComponent({
     AllocationTable
   },
   setup () {
-    const allocation = ref(null)
+    const allocations = ref(null)
     const $vueInstance = getCurrentInstance()
 
     const { $api } = $vueInstance.appContext.config.globalProperties
@@ -40,18 +40,18 @@ export default defineComponent({
       try {
         const response = await $api.get('/allocations/')
 
-        allocation.value = response.data
+        allocations.value = response.data
       } catch (e) {
         console.error(e)
       }
     })
 
     const isAllocationDataAvailable = computed(() => {
-      return Array.isArray(allocation.value) && allocation.value.length > 0
+      return Array.isArray(allocations.value) && allocations.value.length > 0
     })
 
     return {
-      allocation,
+      allocation: allocations,
       isAllocationDataAvailable
     }
   }
