@@ -21,8 +21,8 @@ import {
   ref
 } from 'vue'
 
-import AllocationTable from 'components/dash/allocation/AllocationTable.vue'
-import AllocationChart from 'components/dash/allocation/AllocationChart.vue'
+import AllocationTable from 'components/dash/allocations/AllocationTable.vue'
+import AllocationChart from 'components/dash/allocations/AllocationChart.vue'
 
 export default defineComponent({
   name: 'Allocations',
