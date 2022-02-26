@@ -3,10 +3,10 @@
     <div v-if="isAllocationDataAvailable"
       class="row">
       <div class="col">
-        <allocation-chart :row="allocation" />
+        <allocation-chart :row="allocations" />
       </div>
       <div class="col">
-        <allocation-table :row="allocation" />
+        <allocation-table :row="allocations" />
       </div>
     </div>
   </q-page>
@@ -51,7 +51,7 @@ export default defineComponent({
     })
 
     return {
-      allocation: allocations,
+      allocations,
       isAllocationDataAvailable
     }
   }
