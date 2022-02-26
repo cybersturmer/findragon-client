@@ -23,7 +23,8 @@ const columns = [
     label: 'Ticker',
     align: 'center',
     field: (row) => row.ticker,
-    format: (val) => `${val}`
+    format: (val) => `${val}`,
+    sortable: true
   }
 ]
 

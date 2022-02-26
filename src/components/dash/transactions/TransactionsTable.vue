@@ -28,7 +28,8 @@ const columns = [
     label: 'Asset',
     align: 'left',
     field: (row) => row.asset.description,
-    format: (val) => `${val}`
+    format: (val) => `${val}`,
+    sortable: true
   },
   {
     name: 'amount',
@@ -36,7 +37,8 @@ const columns = [
     label: 'Amount',
     align: 'left',
     field: (row) => row.amount,
-    format: (val) => `${val}`
+    format: (val) => `${val}`,
+    sortable: true
   },
   {
     name: 'price',
@@ -44,7 +46,8 @@ const columns = [
     label: 'Price',
     align: 'left',
     field: (row) => row.price,
-    format: (val) => `${val}`
+    format: (val) => `${val}`,
+    sortable: true
   },
   {
     name: 'date',
@@ -52,7 +55,8 @@ const columns = [
     label: 'Date',
     align: 'left',
     field: (row) => row.date,
-    format: (val) => `${val}`
+    format: (val) => `${val}`,
+    sortable: true
   }
 ]
 
