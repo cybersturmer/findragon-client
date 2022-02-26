@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
-    <div class="row">
+    <div v-if="isAllocationDataAvailable"
+      class="row">
       <div class="col">
         <allocation-chart :row="allocation" />
       </div>
@@ -12,7 +13,13 @@
 </template>
 
 <script>
-import { defineComponent, getCurrentInstance, onMounted, ref } from 'vue'
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  ref
+} from 'vue'
 
 import AllocationTable from 'components/dash/allocation/AllocationTable.vue'
 import AllocationChart from 'components/dash/allocation/AllocationChart.vue'
@@ -30,11 +37,22 @@ export default defineComponent({
     const { $api } = $vueInstance.appContext.config.globalProperties
 
     onMounted(async () => {
-      allocation.value = await $api.get('/allocations/')
+      try {
+        const response = await $api.get('/allocations/')
+
+        allocation.value = response.data
+      } catch (e) {
+        console.error(e)
+      }
+    })
+
+    const isAllocationDataAvailable = computed(() => {
+      return Array.isArray(allocation.value) && allocation.value.length > 0
     })
 
     return {
-      allocation
+      allocation,
+      isAllocationDataAvailable
     }
   }
 })
