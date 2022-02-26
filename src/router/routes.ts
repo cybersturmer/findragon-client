@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
       {
         name: 'asset_view',
         path: 'assets',
-        component: () => import('pages/Allocations.vue')
+        component: () => import('pages/Assets.vue')
       }
     ],
   },
