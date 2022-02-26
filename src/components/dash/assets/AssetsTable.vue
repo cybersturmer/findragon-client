@@ -1,6 +1,5 @@
 <template>
   <q-table
-    title="Assets table"
     :columns="columns"
     :rows="row"
   />
