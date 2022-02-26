@@ -45,6 +45,12 @@ const linksList = [
     caption: 'Assets allocation',
     icon: 'donut_large',
     link: 'allocation_view',
+  },
+  {
+    title: 'Assets',
+    caption: 'Assets allocation',
+    icon: 'work',
+    link: 'asset_view',
   }
 ];
 
