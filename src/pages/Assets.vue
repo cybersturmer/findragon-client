@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div v-if="isAssetsDataAvailable"
-         class="row">
+         class="column">
       <div class="col">
         <assets-table :row="assets" />
       </div>
