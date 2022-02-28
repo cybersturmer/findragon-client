@@ -1,7 +1,17 @@
 <template>
   <q-page padding>
+    <div class="column items-end q-pb-md">
+      <div class="col">
+        <q-btn
+          flat
+          color="primary"
+          label="Add transaction"
+          icon="description"
+        />
+      </div>
+    </div>
     <div v-if="isTransactionsDataAvailable"
-         class="row">
+         class="column">
       <div class="col">
         <transactions-table :row="transactions" />
       </div>
