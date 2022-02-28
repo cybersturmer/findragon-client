@@ -2,7 +2,7 @@
   <q-page padding>
     <div v-if="isAllocationDataAvailable"
       class="row">
-      <div class="col">
+      <div class="col-auto">
         <allocation-chart :row="allocations" />
       </div>
       <div class="col">
