@@ -4,7 +4,7 @@
       <div class="col">
         <q-btn
           flat
-          color="primary"
+          color="grey-8"
           label="Add transaction"
           icon="description"
         />
