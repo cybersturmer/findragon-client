@@ -1,13 +1,25 @@
 <template>
   <q-page padding>
-    <div v-if="isAllocationDataAvailable"
-      class="row">
-      <div class="col-auto">
-        <allocation-chart :row="allocations" />
-      </div>
+    <div class="column items-end q-pb-md">
       <div class="col">
-        <allocation-table :row="allocations" />
+        <q-btn
+          flat
+          color="primary"
+          label="Add allocation"
+          icon="description"
+        />
       </div>
+    </div>
+    <div class="column">
+      <div v-if="isAllocationDataAvailable"
+      class="row">
+        <div class="col-auto">
+          <allocation-chart :row="allocations" />
+        </div>
+        <div class="col">
+          <allocation-table :row="allocations" />
+        </div>
+    </div>
     </div>
   </q-page>
 </template>
