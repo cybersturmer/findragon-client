@@ -1,5 +1,8 @@
 <template>
   <q-table
+    flat
+    bordered
+    hide-bottom
     :columns="columns"
     :rows="row" />
 </template>
