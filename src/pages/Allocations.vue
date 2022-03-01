@@ -1,5 +1,6 @@
 <template>
   <q-page padding>
+
     <div class="column items-end q-pb-md">
       <div class="col">
         <q-btn
@@ -7,20 +8,33 @@
           color="grey-8"
           label="Add allocation"
           icon="description"
+          @click="openAllocationAddDialog"
         />
       </div>
     </div>
-    <div class="column">
-      <div v-if="isAllocationDataAvailable"
-      class="row">
-        <div class="col-auto">
-          <allocation-chart :row="allocations" />
-        </div>
-        <div class="col">
-          <allocation-table :row="allocations" />
-        </div>
-    </div>
-    </div>
+    <q-card flat bordered class="column relative-position card-example">
+      <q-card-section>
+        <transition
+          appear
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+        >
+          <div v-if="isAllocationDataAvailable"
+               class="row">
+            <div class="col-auto">
+              <allocation-chart :row="allocations" />
+            </div>
+            <div class="col">
+              <allocation-table :row="allocations" />
+            </div>
+          </div>
+        </transition>
+      </q-card-section>
+
+      <q-inner-loading :showing="!isAllocationDataAvailable">
+        <q-spinner-oval size="100px" color="dark" />
+      </q-inner-loading>
+    </q-card>
   </q-page>
 </template>
 
@@ -33,10 +47,11 @@ import {
   ref
 } from 'vue'
 
-import { useMeta } from 'quasar'
+import { useMeta, useQuasar } from 'quasar'
 
 import AllocationTable from 'components/dash/allocations/AllocationTable.vue'
 import AllocationChart from 'components/dash/allocations/AllocationChart.vue'
+import AllocationAssetAddDialog from 'components/dash/allocations/dialogs/AllocationAssetAddDialog.vue'
 
 const metaData = {
   title: 'Allocation'
@@ -53,6 +68,17 @@ export default defineComponent({
 
     const allocations = ref(null)
     const $vueInstance = getCurrentInstance()
+
+    const $q = useQuasar()
+
+    const openAllocationAddDialog = () => {
+      $q.dialog({
+        component: AllocationAssetAddDialog,
+      })
+      .onOk(() => {
+        console.log('OK')
+      })
+    }
 
     const { $api } = $vueInstance.appContext.config.globalProperties
 
@@ -72,7 +98,8 @@ export default defineComponent({
 
     return {
       allocations,
-      isAllocationDataAvailable
+      isAllocationDataAvailable,
+      openAllocationAddDialog
     }
   }
 })
