@@ -1,40 +1,27 @@
 <template>
   <q-page padding>
-
-    <div class="column items-end q-pb-md">
-      <div class="col">
-        <q-btn
-          flat
-          color="primary"
-          label="Add allocation"
-          icon="description"
-          @click="openAllocationAddDialog"
-        />
+    <div>
+      <div class="column items-end q-pb-md">
+        <div class="col">
+          <q-btn
+            flat
+            color="primary"
+            label="Add allocation"
+            icon="description"
+            @click="openAllocationAddDialog"
+          />
+        </div>
+      </div>
+      <div v-if="isAllocationDataAvailable"
+           class="row">
+        <div class="col-auto">
+          <allocation-chart :row="allocations" />
+        </div>
+        <div class="col">
+          <allocation-table :row="allocations" />
+        </div>
       </div>
     </div>
-    <q-card flat bordered class="column relative-position card-example">
-      <q-card-section>
-        <transition
-          appear
-          enter-active-class="animated fadeIn"
-          leave-active-class="animated fadeOut"
-        >
-          <div v-if="isAllocationDataAvailable"
-               class="row">
-            <div class="col-auto">
-              <allocation-chart :row="allocations" />
-            </div>
-            <div class="col">
-              <allocation-table :row="allocations" />
-            </div>
-          </div>
-        </transition>
-      </q-card-section>
-
-      <q-inner-loading :showing="!isAllocationDataAvailable">
-        <q-spinner-oval size="100px" color="dark" />
-      </q-inner-loading>
-    </q-card>
   </q-page>
 </template>
 
