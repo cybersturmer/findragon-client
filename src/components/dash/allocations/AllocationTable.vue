@@ -3,13 +3,17 @@
     flat
     bordered
     hide-bottom
+    :selection="selection"
     :columns="columns"
     :rows="row"
   />
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import {
+  computed,
+  defineComponent
+} from 'vue'
 
 const columns = [
   {
@@ -35,11 +39,17 @@ const columns = [
 export default defineComponent({
   name: 'AllocationTable',
   props: {
-    row: Array
+    row: Array,
+    isEditing: Boolean
   },
-  setup () {
+  setup (props) {
+    const selection = computed(() => {
+      return props.isEditing ? 'multiple' : 'none'
+    })
+
     return {
-      columns
+      columns,
+      selection
     }
   }
 })
