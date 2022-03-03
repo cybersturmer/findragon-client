@@ -1,9 +1,34 @@
 <template>
-  <div>My component</div>
+  <!-- notice dialogRef here -->
+  <q-dialog ref="dialogRef" @hide="onDialogHide">
+    <q-card class="q-dialog-plugin q-pa-md">
+      <q-input
+        v-model="title"
+        color="dark"
+        label="Category name"
+        type="text"
+      />
+      <q-input
+        v-model="ratio"
+        color="dark"
+        label="Ratio %"
+        type="number"
+      />
+      <q-card-actions align="right">
+        <q-btn
+          flat
+          label="Save"
+          color="dark"
+          @click="onOKClick"
+        />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
 import { useDialogPluginComponent } from 'quasar'
+import {ref} from "vue";
 
 export default {
   name: 'AllocationCategoryAddDialog',
@@ -20,6 +45,8 @@ export default {
     // onDialogCancel - Function to call to settle dialog with "cancel" outcome
 
     return {
+      title: ref(''),
+      ratio: ref(1),
       // This is REQUIRED;
       // Need to inject these (from useDialogPluginComponent() call)
       // into the vue scope for the vue html template
@@ -31,7 +58,7 @@ export default {
       onOKClick () {
         // on OK, it is REQUIRED to
         // call onDialogOK (with optional payload)
-        onDialogOK()
+        onDialogOk()
         // or with payload: onDialogOK({ ... })
         // ...and it will also hide the dialog automatically
       },
