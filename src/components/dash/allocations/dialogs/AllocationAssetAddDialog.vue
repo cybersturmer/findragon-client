@@ -24,15 +24,15 @@ export default {
     const $vueInstance = getCurrentInstance()
     const { $api } = $vueInstance.appContext.config.globalProperties
 
-    // const save
+    const saveAllocation = async () => {
+      try {
+        const payload = {
+          type: 1
+        }
+      } catch (e) {
 
-
-    // dialogRef      - Vue ref to be applied to QDialog
-    // onDialogHide   - Function to be used as handler for @hide on QDialog
-    // onDialogOK     - Function to call to settle dialog with "ok" outcome
-    //                    example: onDialogOK() - no payload
-    //                    example: onDialogOK({ /*.../* }) - with payload
-    // onDialogCancel - Function to call to settle dialog with "cancel" outcome
+      }
+    }
 
     return {
       // This is REQUIRED;
@@ -46,7 +46,7 @@ export default {
       onOKClick () {
         // on OK, it is REQUIRED to
         // call onDialogOK (with optional payload)
-        onDialogOK()
+        onDialogOk()
         // or with payload: onDialogOK({ ... })
         // ...and it will also hide the dialog automatically
       },
