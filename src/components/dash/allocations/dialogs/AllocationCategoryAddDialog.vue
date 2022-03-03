@@ -27,7 +27,8 @@
 
 <script>
 import { useDialogPluginComponent } from 'quasar'
-import {ref} from "vue";
+import { ref, getCurrentInstance } from 'vue'
+
 
 export default {
   name: 'AllocationCategoryAddDialog',
@@ -35,35 +36,50 @@ export default {
     ...useDialogPluginComponent.emits
   ],
   setup () {
-    const { dialogRef, onDialogHide, onDialogOk, onDialogCancel } = useDialogPluginComponent()
-    // dialogRef      - Vue ref to be applied to QDialog
-    // onDialogHide   - Function to be used as handler for @hide on QDialog
-    // onDialogOK     - Function to call to settle dialog with "ok" outcome
-    //                    example: onDialogOK() - no payload
-    //                    example: onDialogOK({ /*.../* }) - with payload
-    // onDialogCancel - Function to call to settle dialog with "cancel" outcome
+    const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } = useDialogPluginComponent()
+
+    const title = ref('')
+    const ratio = ref(1)
+
+    const $vueInstance = getCurrentInstance()
+    const { $api } = $vueInstance.appContext.config.globalProperties
+
+    const saveAllocation = async () => {
+      try {
+
+        const payload = {
+          type: 2,
+          title: title.value,
+          portfolio_id: 1,
+          category_ratio: parseInt(ratio.value) * 100,
+          parent_id: null,
+          ticker: null,
+          exchange: null
+        }
+
+        const response = await $api.post(
+          '/allocations/',
+          payload
+        )
+
+        console.log(response.data)
+
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    const onOKClick = () => {
+      saveAllocation()
+      onDialogOK()
+    }
 
     return {
-      title: ref(''),
-      ratio: ref(1),
-      // This is REQUIRED;
-      // Need to inject these (from useDialogPluginComponent() call)
-      // into the vue scope for the vue html template
+      title,
+      ratio,
       dialogRef,
       onDialogHide,
-
-      // other methods that we used in our vue html template;
-      // these are part of our example (so not required)
-      onOKClick () {
-        // on OK, it is REQUIRED to
-        // call onDialogOK (with optional payload)
-        onDialogOk()
-        // or with payload: onDialogOK({ ... })
-        // ...and it will also hide the dialog automatically
-      },
-
-      // we can passthrough onDialogCancel directly
-      onCancelClick: onDialogCancel
+      onOKClick
     }
   }
 }
