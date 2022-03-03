@@ -3,13 +3,27 @@
     <div>
       <div class="column items-end q-pb-md">
         <div class="col">
-          <q-btn
-            flat
-            color="primary"
+          <q-btn-dropdown
             label="Add allocation"
-            icon="description"
-            @click="openAllocationAddDialog"
-          />
+            flat
+          >
+            <q-list>
+              <q-item clickable v-close-popup @click="openAllocationAddDialog">
+                <q-item-section>
+                  <q-item-label>
+                    Asset
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup @click="openAllocationAddDialog">
+                <q-item-section>
+                  <q-item-label>
+                    Category
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
         </div>
       </div>
       <div v-if="isAllocationDataAvailable"
