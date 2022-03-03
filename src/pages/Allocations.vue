@@ -5,8 +5,7 @@
         <div class="col">
           <q-btn-dropdown
             label="Add allocation"
-            flat
-          >
+            flat>
             <q-list>
               <q-item clickable v-close-popup @click="openAllocationAssetAddDialog">
                 <q-item-section>
@@ -24,6 +23,11 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
+          <q-btn
+            flat
+            :label="flexButtonTitle"
+            @click="changeEditingMode"
+          />
         </div>
       </div>
       <div v-if="isAllocationDataAvailable"
@@ -32,7 +36,10 @@
           <allocation-chart :row="allocations" />
         </div>
         <div class="col">
-          <allocation-table :row="allocations" />
+          <allocation-table
+            :row="allocations"
+            :is-editing="isEditing"
+          />
         </div>
       </div>
     </div>
@@ -68,6 +75,11 @@ export default defineComponent({
   setup () {
     useMeta(metaData)
 
+    const isEditing = ref(false)
+    const flexButtonTitle = computed(() => {
+      return isEditing.value ? 'Complete' : 'Edit'
+    })
+
     const allocations = ref(null)
     const $vueInstance = getCurrentInstance()
 
@@ -82,6 +94,10 @@ export default defineComponent({
       .onOk(() => {
         console.log('OK')
       })
+    }
+
+    const changeEditingMode = () => {
+      isEditing.value = !isEditing.value
     }
 
     const openAllocationCategoryAddDialog = () => {
@@ -112,8 +128,11 @@ export default defineComponent({
     })
 
     return {
+      isEditing,
       allocations,
+      flexButtonTitle,
       isAllocationDataAvailable,
+      changeEditingMode,
       openAllocationAssetAddDialog,
       openAllocationCategoryAddDialog
     }
