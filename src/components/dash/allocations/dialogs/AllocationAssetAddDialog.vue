@@ -11,6 +11,7 @@
 
 <script>
 import { useDialogPluginComponent } from 'quasar'
+import { getCurrentInstance } from 'vue'
 
 export default {
   name: 'AllocationAssetAddDialog',
@@ -19,6 +20,13 @@ export default {
   ],
   setup () {
     const { dialogRef, onDialogHide, onDialogOk, onDialogCancel } = useDialogPluginComponent()
+
+    const $vueInstance = getCurrentInstance()
+    const { $api } = $vueInstance.appContext.config.globalProperties
+
+    // const save
+
+
     // dialogRef      - Vue ref to be applied to QDialog
     // onDialogHide   - Function to be used as handler for @hide on QDialog
     // onDialogOK     - Function to call to settle dialog with "ok" outcome
