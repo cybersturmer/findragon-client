@@ -1,1 +1,4 @@
-// app global css in SCSS form
+// We use this style on allocations table to reduce size of inner checkboxes.
+.q-checkbox__inner {
+  font-size: 30px;
+}
