@@ -4,6 +4,7 @@
       <div class="column items-end q-pb-md">
         <div class="col">
           <q-btn-dropdown
+            v-show="isEditing"
             label="Add allocation"
             flat>
             <q-list>
@@ -24,21 +25,23 @@
             </q-list>
           </q-btn-dropdown>
           <q-btn
+            v-if="!isEditing"
             flat
-            :label="flexButtonTitle"
+            label="Edit"
             @click="changeEditingMode"
           />
         </div>
       </div>
       <div v-if="isAllocationDataAvailable"
            class="row">
-        <div class="col-auto">
-          <allocation-chart :row="allocations" />
+        <div v-show="!isEditing" class="col-6">
+            <allocation-chart :row="allocations" />
         </div>
         <div class="col">
           <allocation-table
             :row="allocations"
             :is-editing="isEditing"
+            @completed="isEditing = !isEditing"
           />
         </div>
       </div>
@@ -76,9 +79,7 @@ export default defineComponent({
     useMeta(metaData)
 
     const isEditing = ref(false)
-    const flexButtonTitle = computed(() => {
-      return isEditing.value ? 'Complete' : 'Edit'
-    })
+    const flexButtonTitle = computed(() => { return isEditing.value ? 'Complete' : 'Edit' })
 
     const allocations = ref(null)
     const $vueInstance = getCurrentInstance()
