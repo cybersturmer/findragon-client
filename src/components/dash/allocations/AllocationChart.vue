@@ -11,9 +11,14 @@ import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
 
 const backgroundColor = [
-  '#77CEFF',
-  '#0079AF',
-  '#123E6B'
+  '#00aff5',
+  '#9a6afa',
+  '#d9c1ff',
+  '#5ac098',
+  '#8fbeb2',
+  '#77ceff',
+  '#0079af',
+  '#123e6b'
 ]
 
 export default defineComponent({
