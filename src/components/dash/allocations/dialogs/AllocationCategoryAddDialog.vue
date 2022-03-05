@@ -57,13 +57,10 @@ export default {
           exchange: null
         }
 
-        const response = await $api.post(
+        await $api.post(
           '/allocations/',
           payload
         )
-
-        console.log(response.data)
-
       } catch (e) {
         console.error(e)
       }
