@@ -22,3 +22,32 @@ export class StorageUtil {
     Object.assign(state, this.$emptyState)
   }
 }
+
+export function removeElement (array, element) {
+  const index = array.indexOf(element)
+  if (index <= -1) throw new Error('Requested array do not contain given element')
+
+  array.splice(index, 1)
+  return array
+}
+
+export function removeElementById (array, element) {
+  const arrayElement = array.find(_element => element.id === _element.id)
+  const index = array.indexOf(arrayElement)
+  if (index <= -1) throw new Error('Requested array do not contain given element')
+
+  array.splice(index, 1)
+  return array
+}
+
+export function updateElement (array, oldElement, newElement) {
+  const oldIndex = array.indexOf(oldElement)
+  if (oldIndex <= -1) throw new Error('Requested array do not contain given element')
+
+  array.splice(oldIndex, 1, newElement)
+}
+
+export function updateElementById (array, newElement) {
+  const oldElement = array.find(element => element.id === newElement.id)
+  updateElement(array, oldElement, newElement)
+}
