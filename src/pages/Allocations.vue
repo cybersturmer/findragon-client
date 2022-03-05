@@ -6,7 +6,7 @@
           <q-btn-dropdown
             v-show="isEditing"
             label="Add allocation"
-            flat>
+            outline>
             <q-list>
               <q-item clickable v-close-popup @click="openAllocationAssetAddDialog">
                 <q-item-section>
@@ -26,7 +26,7 @@
           </q-btn-dropdown>
           <q-btn
             v-if="!isEditing"
-            flat
+            outline
             label="Edit"
             @click="changeEditingMode"
           />
@@ -65,6 +65,7 @@ import AllocationChart from 'components/dash/allocations/AllocationChart.vue'
 import AllocationAssetAddDialog from 'components/dash/allocations/dialogs/AllocationAssetAddDialog.vue'
 import AllocationCategoryAddDialog from 'components/dash/allocations/dialogs/AllocationCategoryAddDialog.vue'
 
+
 const metaData = {
   title: 'Allocation'
 }
@@ -78,11 +79,13 @@ export default defineComponent({
   setup () {
     useMeta(metaData)
 
+    const $vueInstance = getCurrentInstance()
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+
     const isEditing = ref(false)
     const flexButtonTitle = computed(() => { return isEditing.value ? 'Complete' : 'Edit' })
 
-    const allocations = ref(null)
-    const $vueInstance = getCurrentInstance()
+    const allocations = computed(() => $store.getters['allocation/ALLOCATIONS'])
 
     const $q = useQuasar()
 
@@ -112,20 +115,18 @@ export default defineComponent({
       })
     }
 
-    const { $api } = $vueInstance.appContext.config.globalProperties
-
     onMounted(async () => {
       try {
-        const response = await $api.get('/allocations/')
+        const { data } = await $api.get('/allocations/')
 
-        allocations.value = response.data
+        $store.commit('allocation/SET_ALLOCATIONS', data)
       } catch (e) {
         console.error(e)
       }
     })
 
     const isAllocationDataAvailable = computed(() => {
-      return Array.isArray(allocations.value) && allocations.value.length > 0
+      return allocations.value.length > 0
     })
 
     return {
