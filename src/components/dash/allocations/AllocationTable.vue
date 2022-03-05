@@ -4,6 +4,7 @@
     flat
     bordered
     separator="cell"
+    :hide-bottom="!isEditing"
     :rows-per-page-options="[0]"
     :selection="selection"
     :columns="columns"
@@ -11,13 +12,37 @@
   >
     <template v-if="isEditing" #body-cell-title="props">
         <q-td key="title" :props="props">
-          {{ props.value }}
-          <q-popup-edit v-model="props.value" v-slot="scope">
-            <q-input v-model="scope.value" dense autofocus counter />
-          </q-popup-edit>
+          <div class="row items-center">
+            <div class="col col-auto q-pr-md">
+              <q-icon
+                name="folder"
+                size="sm"
+              />
+            </div>
+            <div class="col">
+              {{ props.value }}
+              <q-popup-edit
+                v-model="props.value"
+                v-slot="scope"
+                title="Title"
+                label-set="save"
+                square
+                buttons
+                auto-save
+              >
+                <q-input
+                  v-model="scope.value"
+                  color="dark"
+                  dense
+                  autofocus
+                  counter
+                />
+              </q-popup-edit>
+            </div>
+          </div>
         </q-td>
     </template>
-    <template v-if="isEditing" #body-cell-ratio="props">
+    <template v-if="isEditing" #body-cell-category_ratio="props">
       <q-td key="ratio" :props="props">
         {{ props.value }}
         <q-popup-edit
@@ -43,13 +68,13 @@
     <template v-if="isEditing" #bottom>
       <q-btn-group outline class="q-ma-sm float-right">
         <q-btn
-          color="negative"
+          outline
           label="Remove"
           :disable="!areSelected"
           @click="removeAllocations"
         />
         <q-btn
-          color="primary"
+          outline
           label="Complete"
           @click="completeEditing"
         />
@@ -77,11 +102,20 @@ const columns = [
     sortable: true
   },
   {
-    name: 'ratio',
+    name: 'category_ratio',
     required: true,
-    label: 'Ratio %',
+    label: 'Category Ratio %',
     align: 'center',
     field: (row) => row.category_ratio / 100,
+    format: (val) => `${val}`,
+    sortable: true
+  },
+  {
+    name: 'portfolio_ratio',
+    required: true,
+    label: 'Portfolio Ratio %',
+    align: 'center',
+    field: (row) => row.portfolio_ratio / 100,
     format: (val) => `${val}`,
     sortable: true
   }
