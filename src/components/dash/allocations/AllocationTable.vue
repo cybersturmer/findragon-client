@@ -142,7 +142,7 @@ export default defineComponent({
     })
 
     const $vueInstance = getCurrentInstance()
-    const { $api } = $vueInstance.appContext.config.globalProperties
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
     const removeAllocation = async (id) => {
       try {
@@ -153,8 +153,15 @@ export default defineComponent({
     }
 
     const removeAllocations = async () => {
-      for (const el of selectedTableRows.value) {
-        console.log(el)
+      try {
+        for (const el of selectedTableRows.value) {
+          await removeAllocation(el.id)
+        }
+
+        $store.commit('allocation/REMOVE_ALLOCATIONS', selectedTableRows.value)
+        selectedTableRows.value = []
+      } catch (e) {
+        console.error(e)
       }
     }
 
