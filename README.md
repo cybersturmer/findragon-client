@@ -1,37 +1,16 @@
-# findragon (findragon-client)
+# FinDragon client
 
-Investment helper
+Investment helper to create portfolio with shares and bonds and manage allocation.
 
-## Install the dependencies
+## Special Thanks
+<img src="https://raw.githubusercontent.com/cybersturmer/pmdragon/master/docs/images/jetbrains-variant-4-grayscale.svg" height="75">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/cybersturmer/pmdragon/master/docs/images/icon-pycharm.svg" height="75">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/cybersturmer/pmdragon/master/docs/images/icon-webstorm.svg" height="75">
 
-```bash
-yarn
-```
+Special thanks to [JetBrains](https://www.jetbrains.com/?from=pmdragon) for providing me such powerful tools as [PyCharm](https://www.jetbrains.com/pycharm/?from=pmdragon) and [Webstorm](https://www.jetbrains.com/webstorm/?from=pmdragon).
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## License
 
-```bash
-quasar dev
-```
+PmDragon is an MIT-licensed open source project.
 
-### Lint the files
+Copyright ©2022-present Vladimir Shturmer
 
-```bash
-yarn lint
-```
-
-### Format the files
-
-```bash
-yarn format
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+[MIT License](https://en.wikipedia.org/wiki/MIT_License)
