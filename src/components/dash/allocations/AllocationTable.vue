@@ -1,6 +1,7 @@
 <template>
   <q-table
     v-model:selected="selectedTableRows"
+    dark
     flat
     bordered
     separator="cell"
