@@ -1,10 +1,8 @@
-import { store } from 'quasar/wrappers';
-import { InjectionKey } from 'vue';
-import {
-  createStore,
-  Store as VuexStore,
-  useStore as vuexUseStore,
-} from 'vuex';
+import {store} from 'quasar/wrappers';
+import {InjectionKey} from 'vue';
+import {createStore, Store as VuexStore, useStore as vuexUseStore,} from 'vuex';
+
+import allocation from './allocation'
 
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
@@ -37,17 +35,15 @@ export const storeKey: InjectionKey<VuexStore<StateInterface>> =
   Symbol('vuex-key');
 
 export default store(function (/* { ssrContext } */) {
-  const Store = createStore<StateInterface>({
+  return createStore<StateInterface>({
     modules: {
-      // example
+      allocation
     },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
     strict: !!process.env.DEBUGGING,
   });
-
-  return Store;
 });
 
 export function useStore() {
