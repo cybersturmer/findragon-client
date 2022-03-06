@@ -8,7 +8,7 @@ export function ALLOCATIONS_BY_PARENT (state, getters) {
       return getters.ALLOCATIONS
     } else {
       return state.allocations
-        .filter((allocation) => allocation.children)[0]
+        .filter((allocation) => allocation.id === parentId)[0].children
     }
   }
 }
