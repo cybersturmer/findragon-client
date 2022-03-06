@@ -9,39 +9,45 @@
     :rows-per-page-options="[0]"
     :selection="selection"
     :columns="columns"
-    :rows="row"
+    :rows="currentAllocations"
   >
-    <template v-if="isEditing" #body-cell-title="props">
-        <q-td key="title" :props="props">
-          <div class="row items-center">
-            <div class="col col-auto q-pr-md">
-              <q-icon
-                name="folder"
-                size="sm"
-              />
-            </div>
-            <div class="col">
-              {{ props.value }}
-              <q-popup-edit
-                v-model="props.value"
-                v-slot="scope"
-                title="Title"
-                label-set="save"
-                square
-                buttons
-                auto-save
-              >
-                <q-input
-                  v-model="scope.value"
-                  color="dark"
-                  dense
-                  autofocus
-                  counter
-                />
-              </q-popup-edit>
-            </div>
+    <template  #body-cell-title="props">
+      <q-td key="title" :props="props">
+        <div class="row items-center">
+          <div class="col-auto">
+            <q-btn
+              v-if="props.row.type === allocationType.CATEGORY"
+              flat
+              dense
+              icon="folder"
+              size="md"
+              class="q-mr-md"
+              @click="emitRowSelection(props.row.id)"
+            />
           </div>
-        </q-td>
+          <div class="col">
+            {{ props.value }}
+            <q-popup-edit
+              v-if="isEditing"
+              v-model="props.value"
+              v-slot="scope"
+              title="Title"
+              label-set="save"
+              square
+              buttons
+              auto-save
+            >
+              <q-input
+                v-model="scope.value"
+                color="dark"
+                dense
+                autofocus
+                counter
+              />
+            </q-popup-edit>
+          </div>
+        </div>
+      </q-td>
     </template>
     <template v-if="isEditing" #body-cell-category_ratio="props">
       <q-td key="ratio" :props="props">
@@ -92,6 +98,8 @@ import {
   getCurrentInstance
 } from 'vue'
 
+import { allocationType } from 'src/store/allocation/presets'
+
 const columns = [
   {
     name: 'title',
@@ -125,25 +133,35 @@ const columns = [
 export default defineComponent({
   name: 'AllocationTable',
   emits: [
-    'completed'
+    'completed',
+    'selected'
   ],
   props: {
-    row: Array,
+    currentNode: Number,
     isEditing: Boolean
   },
   setup (props, { emit }) {
+
+    const $vueInstance = getCurrentInstance()
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+
+    // Can we select one or none row in the table.
     const selection = computed(() => {
       return props.isEditing ? 'multiple' : 'none'
     })
 
-    const selectedTableRows = ref([])
+    const currentAllocations = computed(() => {
+      return $store.getters['allocation/ALLOCATIONS_BY_PARENT'](props.currentNode)
+    })
 
+    const selectedTableRows = ref([])
     const areSelected = computed(() => {
       return Array.isArray(selectedTableRows.value) && selectedTableRows.value.length > 0
     })
 
-    const $vueInstance = getCurrentInstance()
-    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+    const emitRowSelection = (id) => {
+      emit('selected', id)
+    }
 
     const removeAllocation = async (id) => {
       try {
@@ -175,7 +193,10 @@ export default defineComponent({
       columns,
       selection,
       areSelected,
+      currentAllocations,
       selectedTableRows,
+      allocationType,
+      emitRowSelection,
       completeEditing,
       removeAllocations
     }
