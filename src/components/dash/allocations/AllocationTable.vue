@@ -4,7 +4,7 @@
     dark
     flat
     bordered
-    separator="cell"
+    separator="vertical"
     :hide-bottom="!isEditing"
     :rows-per-page-options="[0]"
     :selection="selection"
