@@ -20,6 +20,11 @@ export function SET_ALLOCATIONS (state, payload) {
   storageUtil.setState('allocations', payload)
 }
 
+export function ADD_ALLOCATION (state, payload) {
+  state.allocations.push(payload)
+  storageUtil.setState('allocations', payload)
+}
+
 export function REMOVE_ALLOCATION (state, payload) {
   removeElementById(state.allocations, payload)
   storageUtil.setState('allocations', payload)
