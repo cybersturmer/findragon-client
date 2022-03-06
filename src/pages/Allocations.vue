@@ -34,7 +34,7 @@
       </div>
       <div v-if="isAllocationDataAvailable"
            class="row">
-        <div v-if="!isEditing" class="col-6">
+        <div v-show="!isEditing" class="col-6">
             <allocation-chart :row="allocations" />
         </div>
         <div class="col">
