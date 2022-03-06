@@ -36,3 +36,8 @@ export function REMOVE_ALLOCATIONS (state, payload) {
   }
   storageUtil.setState('allocations', payload)
 }
+
+// @todo Check if it works
+export function RESET (state) {
+  storageUtil.clearState(state)
+}
