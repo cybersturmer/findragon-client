@@ -1,5 +1,11 @@
 import { LocalStorage } from 'quasar'
 
+export const allocationType = {
+  ASSET: 1,
+  CATEGORY: 2,
+  CURRENCY: 3
+}
+
 export const empty = () => {
   return {
     enabled: false,
