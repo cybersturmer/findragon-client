@@ -42,7 +42,7 @@ export default {
     const ratio = ref(1)
 
     const $vueInstance = getCurrentInstance()
-    const { $api } = $vueInstance.appContext.config.globalProperties
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
     const saveAllocation = async () => {
       try {
@@ -57,10 +57,8 @@ export default {
           exchange: null
         }
 
-        await $api.post(
-          '/allocations/',
-          payload
-        )
+        const { data } = await $api.post('/allocations/', payload)
+        $store.commit('allocation/ADD_ALLOCATION', data)
       } catch (e) {
         console.error(e)
       }
