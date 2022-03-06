@@ -28,14 +28,14 @@ export default defineComponent({
     row: Array,
   },
   setup (props) {
-    const titles = props.row?.map(obj => obj.title)
-    const values = props.row?.map(obj => obj.portfolio_ratio / 100)
+    const titles = computed(() => props.row.map(obj => obj.title))
+    const values = computed(() =>props.row.map(obj => obj.portfolio_ratio / 100))
 
     const dataObject = computed(() => ({
-      labels: titles,
+      labels: titles.value,
       datasets: [
         {
-          data: values,
+          data: values.value,
           backgroundColor
         },
       ],
