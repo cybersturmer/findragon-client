@@ -33,7 +33,7 @@ export default {
     ...useDialogPluginComponent.emits
   ],
   props: {
-    parentNode: Number
+    parentNodeId: Number
   },
   setup (props) {
     const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } = useDialogPluginComponent()
@@ -52,7 +52,7 @@ export default {
           title: title.value,
           portfolio_id: 1,
           category_ratio: parseInt(ratio.value) * 100,
-          parent_id: props.parentNode,
+          parent_id: props.parentNodeId,
           ticker: null,
           exchange: null
         }
