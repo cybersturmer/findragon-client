@@ -3,44 +3,58 @@
     <div>
       <div class="column items-end q-pb-md">
         <div class="col">
-          <q-btn-dropdown
-            v-show="isEditing"
-            label="Add allocation"
-            outline>
-            <q-list>
-              <q-item clickable v-close-popup @click="openAllocationAssetAddDialog">
-                <q-item-section>
-                  <q-item-label>
-                    Asset
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup @click="openAllocationCategoryAddDialog">
-                <q-item-section>
-                  <q-item-label>
-                    Category
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
-          <q-btn
-            v-if="!isEditing"
-            outline
-            label="Edit"
-            @click="changeEditingMode"
-          />
+          <q-btn-group stretch>
+            <q-btn
+              flat
+              v-show="nodeDefined"
+              icon="chevron_left"
+              @click="selectParentNode"
+            />
+            <q-btn-dropdown
+              v-show="isEditing"
+              label="Add allocation"
+              flat
+            >
+              <q-list>
+                <q-item clickable v-close-popup @click="openAllocationAssetAddDialog">
+                  <q-item-section>
+                    <q-item-label>
+                      Asset
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="openAllocationCategoryAddDialog">
+                  <q-item-section>
+                    <q-item-label>
+                      Category
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+            <q-btn
+              v-if="!isEditing"
+              flat
+              label="Edit"
+              @click="changeEditingMode"
+            />
+          </q-btn-group>
         </div>
       </div>
-      <div v-if="isAllocationDataAvailable"
-           class="row">
-        <div v-show="!isEditing" class="col-6">
-            <allocation-chart :row="allocations" />
+      <div
+        v-if="isAllocationDataAvailable"
+        class="row">
+        <div v-show="!isEditing" class="col-4">
+            <allocation-chart
+              :current-node="currentNode"
+              :row="allocations"
+            />
         </div>
         <div class="col">
           <allocation-table
-            :row="allocations"
+            :current-node="currentNode"
             :is-editing="isEditing"
+            @selected="selectNode($event)"
             @completed="isEditing = !isEditing"
           />
         </div>
@@ -82,6 +96,19 @@ export default defineComponent({
     const $vueInstance = getCurrentInstance()
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
+    // Current active parent element. Null if the root element.
+    const currentNode = ref(null)
+    const parentNode = ref(null)
+    const selectNode = (id) => {
+      parentNode.value = currentNode.value
+      currentNode.value = id
+    }
+    const selectParentNode = () => {
+      currentNode.value = parentNode.value
+    }
+
+    const nodeDefined = computed(() => currentNode.value !== null)
+
     const isEditing = ref(false)
     const flexButtonTitle = computed(() => { return isEditing.value ? 'Complete' : 'Edit' })
 
@@ -107,6 +134,10 @@ export default defineComponent({
     const openAllocationCategoryAddDialog = () => {
       $q.dialog({
         component: AllocationCategoryAddDialog,
+        componentProps: {
+          parentNode: currentNode.value
+        },
+        parent: this,
         cancel: true,
         persistent: true
       })
@@ -132,6 +163,10 @@ export default defineComponent({
     return {
       isEditing,
       allocations,
+      currentNode,
+      nodeDefined,
+      selectNode,
+      selectParentNode,
       flexButtonTitle,
       isAllocationDataAvailable,
       changeEditingMode,
