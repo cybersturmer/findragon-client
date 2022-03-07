@@ -23,6 +23,10 @@ export class StorageUtil {
   }
 }
 
+export function getElementById (array, id) {
+  return array.find(_el => _el.id === id)
+}
+
 export function removeElement (array, element) {
   const index = array.indexOf(element)
   if (index <= -1) throw new Error('Requested array do not contain given element')
