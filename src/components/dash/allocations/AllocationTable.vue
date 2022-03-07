@@ -5,7 +5,6 @@
     flat
     bordered
     separator="vertical"
-    :hide-bottom="!isEditing"
     :rows-per-page-options="[0]"
     :selection="selection"
     :columns="columns"
@@ -16,12 +15,12 @@
         <div class="row items-center">
           <div class="col-auto">
             <q-btn
-              v-if="props.row.type === allocationType.CATEGORY"
               flat
               dense
-              icon="folder"
+              :icon="icons[props.row.type]"
               size="md"
               class="q-mr-md"
+              :disable="props.row.type !== allocationType.CATEGORY"
               @click="emitRowSelection(props.row.id)"
             />
           </div>
@@ -99,6 +98,12 @@ import {
 } from 'vue'
 
 import { allocationType } from 'src/store/allocation/presets'
+
+const icons = {
+  1: 'description',
+  2: 'folder',
+  3: 'payment'
+}
 
 const columns = [
   {
@@ -190,6 +195,7 @@ export default defineComponent({
     }
 
     return {
+      icons,
       columns,
       selection,
       areSelected,
