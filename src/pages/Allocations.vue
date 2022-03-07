@@ -3,17 +3,19 @@
     <div>
       <div class="column items-end q-pb-md">
         <div class="col">
-          <q-btn-group stretch>
+          <q-btn-group spread>
             <q-btn
-              flat
+              outline
               v-show="nodeDefined"
               icon="chevron_left"
+              class="q-mr-xs"
               @click="selectParentNode"
             />
             <q-btn-dropdown
+              dark
+              outline
               v-show="isEditing"
               label="Add allocation"
-              flat
             >
               <q-list>
                 <q-item clickable v-close-popup @click="openAllocationAssetAddDialog">
@@ -34,7 +36,7 @@
             </q-btn-dropdown>
             <q-btn
               v-if="!isEditing"
-              flat
+              outline
               label="Edit"
               @click="changeEditingMode"
             />
