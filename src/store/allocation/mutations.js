@@ -23,7 +23,7 @@ export function SET_ALLOCATIONS (state, payload) {
 
 export function ADD_ALLOCATION (state, payload) {
   state.allocations.push(payload)
-  storageUtil.setState('allocations', payload)
+  storageUtil.setState('allocations', state.allocations)
 }
 
 export function UPDATE_ALLOCATION (state, payload) {
