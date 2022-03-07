@@ -36,13 +36,12 @@
               v-model="props.value"
               v-slot="scope"
               title="Title"
-              label-set="save"
               square
-              buttons
               auto-save
             >
               <q-input
-                v-model="scope.value"
+                :model-value="props.value"
+                @update:model-value="patchAllocationCategoryTitle(props.row.id, $event)"
                 dense
                 autofocus
                 counter
@@ -59,13 +58,12 @@
           v-model="props.value"
           v-slot="scope"
           :title="`${props.row.title} ratio`"
-          label-set="save"
           square
-          buttons
           auto-save
         >
           <q-input
-            v-model="scope.value"
+            :model-value="props.value"
+            @update:model-value="patchAllocationCategoryRatio(props.row.id, $event)"
             dense
             autofocus
             counter
@@ -89,6 +87,20 @@
           @click="completeEditing"
         />
       </q-btn-group>
+    </template>
+    <template v-if="isEditing && !isCurrentAllocationConsistent" #bottom>
+      <q-icon
+        name="warning_amber"
+        size="sm"
+        class="q-mr-md"
+      />
+      The total amount of ratio should be exactly 100%
+      &nbsp;&nbsp;
+      <q-badge
+        outline
+        color="warning"
+        class="q-pa-sm"
+        :label="`${currentAllocationRatio}%`" />
     </template>
   </q-table>
 </template>
@@ -154,6 +166,21 @@ export default defineComponent({
       return $store.getters['allocation/ALLOCATIONS_BY_PARENT'](props.currentNode)
     })
 
+    const currentAllocationRatio = computed(() => {
+      // If current allocation is an empty Array - let's return false
+      if (currentAllocations.value.length === 0) {
+        return false
+      }
+
+      const categoryRatioList = currentAllocations.value.map(obj => obj.category_ratio)
+
+      return (categoryRatioList.reduce((pool, cur) => pool + cur) / 100)
+    })
+
+    const isCurrentAllocationConsistent = computed(() => {
+      return currentAllocationRatio.value === 100
+    })
+
     const selectedTableRows = ref([])
     const areSelected = computed(() => {
       return Array.isArray(selectedTableRows.value) && selectedTableRows.value.length > 0
@@ -184,6 +211,27 @@ export default defineComponent({
       }
     }
 
+    const patchAllocation = async (id, payload) => {
+      try {
+        const { data } = await $api.patch(
+          `/allocations/${id}`,
+          payload
+        )
+
+        $store.commit('allocation/UPDATE_ALLOCATION', data)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    const patchAllocationCategoryTitle = async (id, title) => {
+      await patchAllocation(id, { title })
+    }
+
+    const patchAllocationCategoryRatio = async (id, category_ratio) => {
+      await patchAllocation(id, { category_ratio : category_ratio * 100 })
+    }
+
     const completeEditing = () => {
       selectedTableRows.value = []
       emit('completed')
@@ -195,11 +243,15 @@ export default defineComponent({
       selection,
       areSelected,
       currentAllocations,
+      currentAllocationRatio,
+      isCurrentAllocationConsistent,
       selectedTableRows,
       allocationType,
-      emitRowSelection,
       completeEditing,
-      removeAllocations
+      emitRowSelection,
+      removeAllocations,
+      patchAllocationCategoryTitle,
+      patchAllocationCategoryRatio
     }
   }
 })
