@@ -149,7 +149,7 @@ export default defineComponent({
     'selected'
   ],
   props: {
-    currentNode: Number,
+    currentNodeId: Number,
     isEditing: Boolean
   },
   setup (props, { emit }) {
@@ -163,7 +163,7 @@ export default defineComponent({
     })
 
     const currentAllocations = computed(() => {
-      return $store.getters['allocation/ALLOCATIONS_BY_PARENT'](props.currentNode)
+      return $store.getters['allocation/ALLOCATIONS_BY_PARENT'](props.currentNodeId)
     })
 
     const currentAllocationRatio = computed(() => {
