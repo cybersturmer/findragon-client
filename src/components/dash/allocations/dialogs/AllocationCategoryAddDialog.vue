@@ -3,13 +3,11 @@
     <q-card class="q-dialog-plugin q-pa-md">
       <q-input
         v-model="title"
-        color="dark"
         label="Category name"
         type="text"
       />
       <q-input
         v-model="ratio"
-        color="dark"
         label="Ratio %"
         type="number"
       />
@@ -17,7 +15,6 @@
         <q-btn
           flat
           label="Save"
-          color="dark"
           @click="onOKClick"
         />
       </q-card-actions>

@@ -1,7 +1,6 @@
 <template>
   <q-table
     v-model:selected="selectedTableRows"
-    dark
     flat
     bordered
     separator="vertical"
@@ -44,7 +43,6 @@
             >
               <q-input
                 v-model="scope.value"
-                color="dark"
                 dense
                 autofocus
                 counter
@@ -68,7 +66,6 @@
         >
           <q-input
             v-model="scope.value"
-            color="dark"
             dense
             autofocus
             counter

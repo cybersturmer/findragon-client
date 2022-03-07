@@ -12,7 +12,6 @@
               @click="selectParentNode"
             />
             <q-btn-dropdown
-              dark
               outline
               v-show="isEditing"
               label="Add allocation"

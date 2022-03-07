@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="bg-dark text-white">
+  <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar class="bg-grey-9">
+      <q-toolbar class="bg-blue-grey-10">
         <q-btn
           flat
           dense
@@ -19,7 +19,7 @@
       show-if-above
       bordered
       mini
-      class="bg-grey-9 text-white"
+      class="bg-blue-grey-10 text-white"
     >
       <q-list>
         <EssentialLink
