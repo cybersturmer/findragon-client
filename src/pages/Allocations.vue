@@ -99,12 +99,16 @@ export default defineComponent({
     // Current active parent element. Null if the root element.
     const currentNode = ref(null)
     const parentNode = ref(null)
+
     const selectNode = (id) => {
       parentNode.value = currentNode.value
       currentNode.value = id
     }
+
     const selectParentNode = () => {
+      const node = $store.getters['allocation/ALLOCATION_BY_ID'](parentNode.value)
       currentNode.value = parentNode.value
+      parentNode.value = node.parent_id
     }
 
     const nodeDefined = computed(() => currentNode.value !== null)
@@ -164,6 +168,7 @@ export default defineComponent({
       isEditing,
       allocations,
       currentNode,
+      parentNode,
       nodeDefined,
       selectNode,
       selectParentNode,
