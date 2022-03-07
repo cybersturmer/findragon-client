@@ -3,7 +3,7 @@
     <div>
       <div class="column items-end q-pb-md">
         <div class="col">
-          <q-btn-group spread>
+          <q-btn-group>
             <q-btn
               outline
               v-show="nodeDefined"
