@@ -9,7 +9,7 @@ export function ALLOCATIONS_BY_PARENT (state, getters) {
         .filter((allocation) => allocation.parent_id === null)
     } else {
       return state.allocations
-        .filter((allocation) => allocation.id === parentId)[0]?.children
+        .filter((allocation) => allocation.parent_id === parentId)
     }
   }
 }
