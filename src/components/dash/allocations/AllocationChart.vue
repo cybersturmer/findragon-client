@@ -13,12 +13,16 @@ Chart.register(...registerables)
 const backgroundColor = [
   '#00aff5',
   '#9a6afa',
-  '#d9c1ff',
   '#5ac098',
-  '#8fbeb2',
+  '#123e6b',
   '#77ceff',
+  '#d9c1ff',
   '#0079af',
-  '#123e6b'
+  '#8fbeb2'
+]
+
+const borderColor = [
+  '#121212'
 ]
 
 export default defineComponent({
@@ -46,7 +50,9 @@ export default defineComponent({
       datasets: [
         {
           data: dataValues.value,
-          backgroundColor
+          backgroundColor,
+          borderColor,
+          borderWidth: 2
         },
       ],
     }))
