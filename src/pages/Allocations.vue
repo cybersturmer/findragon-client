@@ -5,14 +5,14 @@
         <div class="col">
           <q-btn-group>
             <q-btn
-              outline
+              dense
+              label="Upper"
               v-show="nodeDefined"
-              icon="chevron_left"
-              class="q-mr-xs"
+              icon="keyboard_arrow_up"
+              class="q-mr-xs q-pr-md"
               @click="selectParentNode"
             />
             <q-btn-dropdown
-              outline
               v-show="isEditing"
               label="Add allocation"
             >
@@ -37,6 +37,7 @@
               v-if="!isEditing"
               outline
               label="Edit"
+              icon-right="edit"
               @click="changeEditingMode"
             />
           </q-btn-group>
@@ -58,6 +59,18 @@
             @selected="selectNode($event)"
             @completed="isEditing = !isEditing"
           />
+          <q-banner
+            v-show="isEditing && isAllocationDataAvailable"
+            class="q-mt-md bg-grey-9">
+            <q-icon
+              name="warning_amber"
+              size="sm"
+            />
+            The total amount of ratio should be exactly 100%
+            <template v-slot:action>
+              <q-btn flat label="Spread equally" />
+            </template>
+          </q-banner>
         </div>
       </div>
     </div>
@@ -98,23 +111,23 @@ export default defineComponent({
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
     // Current active parent element. Null if the root element.
-    const currentNode = ref(null)
-    const parentNode = ref(null)
+    const currentNodeId = ref(null)
+    const parentNodeId = ref(null)
 
     const selectNode = (id) => {
-      parentNode.value = currentNode.value
-      currentNode.value = id
+      parentNodeId.value = currentNodeId.value
+      currentNodeId.value = id
     }
 
     const selectParentNode = () => {
-      currentNode.value = parentNode.value
-      if (parentNode.value) {
-        const node = $store.getters['allocation/ALLOCATION_BY_ID'](parentNode.value)
-        parentNode.value = node.parent_id
+      currentNodeId.value = parentNodeId.value
+      if (parentNodeId.value) {
+        const node = $store.getters['allocation/ALLOCATION_BY_ID'](parentNodeId.value)
+        parentNodeId.value = node.parent_id
       }
     }
 
-    const nodeDefined = computed(() => currentNode.value !== null)
+    const nodeDefined = computed(() => currentNodeId.value !== null)
 
     const isEditing = ref(false)
     const flexButtonTitle = computed(() => { return isEditing.value ? 'Complete' : 'Edit' })
@@ -142,7 +155,7 @@ export default defineComponent({
       $q.dialog({
         component: AllocationCategoryAddDialog,
         componentProps: {
-          parentNode: currentNode.value
+          parentNodeId: currentNodeId.value
         },
         parent: this,
         cancel: true,
@@ -170,8 +183,8 @@ export default defineComponent({
     return {
       isEditing,
       allocations,
-      currentNode,
-      parentNode,
+      currentNode: currentNodeId,
+      parentNode: parentNodeId,
       nodeDefined,
       selectNode,
       selectParentNode,
