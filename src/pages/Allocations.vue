@@ -46,7 +46,7 @@
       <div
         v-if="isAllocationDataAvailable"
         class="row">
-        <div v-show="!isEditing" class="col-3">
+        <div v-show="!isEditing" class="col-4">
             <allocation-chart
               :current-node="currentNodeId"
               :row="allocations"
@@ -54,7 +54,7 @@
         </div>
         <div class="col">
           <allocation-table
-            :current-node="currentNodeId"
+            :current-node-id="currentNodeId"
             :is-editing="isEditing"
             @selected="selectNode($event)"
             @completed="isEditing = !isEditing"
