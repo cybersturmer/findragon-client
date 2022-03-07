@@ -14,13 +14,19 @@
       <q-td key="title" :props="props">
         <div class="row items-center">
           <div class="col-auto">
+            <q-icon
+              v-if="props.row.type !== allocationType.CATEGORY"
+              :name="icons[props.row.type]"
+              size="sm"
+              class="q-mr-md"
+            />
             <q-btn
+              v-else
               flat
               dense
               :icon="icons[props.row.type]"
               size="md"
               class="q-mr-md"
-              :disable="props.row.type !== allocationType.CATEGORY"
               @click="emitRowSelection(props.row.id)"
             />
           </div>
