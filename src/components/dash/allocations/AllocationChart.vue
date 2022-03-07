@@ -11,14 +11,23 @@ import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
 
 const backgroundColor = [
+  '#4dc9f6',
+  '#a67f65',
+  '#f53794',
+  '#537bc4',
+  '#acc236',
+  '#166a8f',
+  '#00a950',
+  '#58595b',
+  '#8549ba',
   '#00aff5',
+  '#6eb8b9',
+  '#8fbeb2',
   '#9a6afa',
   '#5ac098',
-  '#123e6b',
   '#77ceff',
   '#d9c1ff',
   '#0079af',
-  '#8fbeb2'
 ]
 
 const borderColor = [
@@ -52,7 +61,7 @@ export default defineComponent({
           data: dataValues.value,
           backgroundColor,
           borderColor,
-          borderWidth: 2
+          borderWidth: 1
         },
       ],
     }))
