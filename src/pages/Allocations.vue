@@ -48,29 +48,17 @@
         class="row">
         <div v-show="!isEditing" class="col-3">
             <allocation-chart
-              :current-node="currentNode"
+              :current-node="currentNodeId"
               :row="allocations"
             />
         </div>
         <div class="col">
           <allocation-table
-            :current-node="currentNode"
+            :current-node="currentNodeId"
             :is-editing="isEditing"
             @selected="selectNode($event)"
             @completed="isEditing = !isEditing"
           />
-          <q-banner
-            v-show="isEditing && isAllocationDataAvailable"
-            class="q-mt-md bg-grey-9">
-            <q-icon
-              name="warning_amber"
-              size="sm"
-            />
-            The total amount of ratio should be exactly 100%
-            <template v-slot:action>
-              <q-btn flat label="Spread equally" />
-            </template>
-          </q-banner>
         </div>
       </div>
     </div>
@@ -183,8 +171,8 @@ export default defineComponent({
     return {
       isEditing,
       allocations,
-      currentNode: currentNodeId,
-      parentNode: parentNodeId,
+      currentNodeId,
+      parentNodeId,
       nodeDefined,
       selectNode,
       selectParentNode,
