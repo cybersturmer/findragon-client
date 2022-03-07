@@ -1,6 +1,7 @@
 import {
   removeElementById,
   updateElementById,
+  getElementById,
   StorageUtil
 } from 'src/services/utils'
 
@@ -11,6 +12,10 @@ const storageUtil = new StorageUtil(
   empty()
 )
 
+const saveAllocationsState = (state) => {
+  storageUtil.setState('allocations', state.allocations)
+}
+
 export function ACTIVATE (state) {
   state.enabled = true
   storageUtil.setState('enabled', true)
@@ -18,29 +23,29 @@ export function ACTIVATE (state) {
 
 export function SET_ALLOCATIONS (state, payload) {
   state.allocations = payload
-  storageUtil.setState('allocations', payload)
+  saveAllocationsState(state)
 }
 
 export function ADD_ALLOCATION (state, payload) {
   state.allocations.push(payload)
-  storageUtil.setState('allocations', state.allocations)
+  saveAllocationsState(state)
 }
 
 export function UPDATE_ALLOCATION (state, payload) {
   updateElementById(state.allocations, payload)
-  storageUtil.setState('allocations', payload)
+  saveAllocationsState(state)
 }
 
 export function REMOVE_ALLOCATION (state, payload) {
   removeElementById(state.allocations, payload)
-  storageUtil.setState('allocations', payload)
+  saveAllocationsState(state)
 }
 
 export function REMOVE_ALLOCATIONS (state, payload) {
   for (const element of payload) {
     removeElementById(state.allocations, element)
   }
-  storageUtil.setState('allocations', payload)
+  saveAllocationsState(state)
 }
 
 // @todo Check if it works
