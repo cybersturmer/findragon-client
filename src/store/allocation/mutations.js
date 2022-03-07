@@ -1,5 +1,6 @@
 import {
   removeElementById,
+  updateElementById,
   StorageUtil
 } from 'src/services/utils'
 
@@ -22,6 +23,11 @@ export function SET_ALLOCATIONS (state, payload) {
 
 export function ADD_ALLOCATION (state, payload) {
   state.allocations.push(payload)
+  storageUtil.setState('allocations', payload)
+}
+
+export function UPDATE_ALLOCATION (state, payload) {
+  updateElementById(state.allocations, payload)
   storageUtil.setState('allocations', payload)
 }
 
