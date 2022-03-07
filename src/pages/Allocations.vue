@@ -45,7 +45,7 @@
       <div
         v-if="isAllocationDataAvailable"
         class="row">
-        <div v-show="!isEditing" class="col-4">
+        <div v-show="!isEditing" class="col-3">
             <allocation-chart
               :current-node="currentNode"
               :row="allocations"
@@ -107,9 +107,11 @@ export default defineComponent({
     }
 
     const selectParentNode = () => {
-      const node = $store.getters['allocation/ALLOCATION_BY_ID'](parentNode.value)
       currentNode.value = parentNode.value
-      parentNode.value = node.parent_id
+      if (parentNode.value) {
+        const node = $store.getters['allocation/ALLOCATION_BY_ID'](parentNode.value)
+        parentNode.value = node.parent_id
+      }
     }
 
     const nodeDefined = computed(() => currentNode.value !== null)
