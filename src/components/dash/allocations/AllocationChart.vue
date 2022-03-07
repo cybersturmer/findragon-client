@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, getCurrentInstance } from 'vue'
 import { DoughnutChart, useDoughnutChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
 
@@ -25,11 +25,21 @@ export default defineComponent({
   name: 'AllocationChart',
   components: { DoughnutChart },
   props: {
-    row: Array,
+    currentNode: Number
   },
   setup (props) {
-    const titles = computed(() => props.row.map(obj => obj.title))
-    const dataValues = computed(() =>props.row.map(obj => obj.portfolio_ratio / 100))
+    const $vueInstance = getCurrentInstance()
+    const { $store } = $vueInstance.appContext.config.globalProperties
+
+    const currentAllocations = computed(() => {
+      return $store.getters['allocation/ALLOCATIONS_BY_PARENT'](props.currentNode)
+    })
+
+    const titles = computed(() => {
+      return currentAllocations.value.map(obj => obj.title)
+    })
+
+    const dataValues = computed(() => currentAllocations.value.map(obj => obj.category_ratio / 100))
 
     const dataObject = computed(() => ({
       labels: titles.value,
