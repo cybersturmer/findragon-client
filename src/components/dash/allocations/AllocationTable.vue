@@ -3,7 +3,7 @@
     v-model:selected="selectedTableRows"
     flat
     bordered
-    separator="vertical"
+    separator="horizontal"
     :rows-per-page-options="[0]"
     :selection="selection"
     :columns="columns"
@@ -74,8 +74,9 @@
         </q-popup-edit>
       </q-td>
     </template>
-    <template v-if="isEditing" #bottom>
-      <q-btn-group outline class="q-ma-sm float-right">
+    <template v-if="isEditing" #top-right>
+      <q-btn-group
+        outline>
         <q-btn
           outline
           label="Remove"
@@ -124,15 +125,6 @@ const columns = [
     label: 'Category Ratio %',
     align: 'center',
     field: (row) => row.category_ratio / 100,
-    format: (val) => `${val}`,
-    sortable: true
-  },
-  {
-    name: 'portfolio_ratio',
-    required: true,
-    label: 'Portfolio Ratio %',
-    align: 'center',
-    field: (row) => row.portfolio_ratio / 100,
     format: (val) => `${val}`,
     sortable: true
   }
