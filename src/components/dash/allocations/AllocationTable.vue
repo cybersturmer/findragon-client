@@ -40,6 +40,7 @@
               auto-save
             >
               <q-input
+                debounce="500"
                 :model-value="props.value"
                 @update:model-value="patchAllocationCategoryTitle(props.row.id, $event)"
                 dense
@@ -62,6 +63,7 @@
           auto-save
         >
           <q-input
+            debounce="500"
             :model-value="props.value"
             @update:model-value="patchAllocationCategoryRatio(props.row.id, $event)"
             dense
