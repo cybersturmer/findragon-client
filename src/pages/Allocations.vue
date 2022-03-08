@@ -16,8 +16,8 @@
               v-show="isEditing"
               label="Add allocation"
             >
-              <q-list>
-                <q-item clickable v-close-popup @click="openAllocationAssetAddDialog">
+              <q-list separator bordered >
+                <q-item clickable v-ripple v-close-popup @click="openAllocationAssetAddDialog">
                   <q-item-section avatar>
                     <q-icon
                       name="description"
@@ -25,11 +25,14 @@
                   </q-item-section>
                   <q-item-section>
                     <q-item-label>
-                      Asset
+                      ASSET
+                    </q-item-label>
+                    <q-item-label caption>
+                      Exchange based asset
                     </q-item-label>
                   </q-item-section>
                 </q-item>
-                <q-item clickable v-close-popup @click="openAllocationCategoryAddDialog">
+                <q-item clickable v-ripple v-close-popup @click="openAllocationCategoryAddDialog">
                   <q-item-section avatar>
                     <q-icon
                       name="folder"
@@ -37,7 +40,10 @@
                   </q-item-section>
                   <q-item-section>
                     <q-item-label>
-                      Category
+                      CATEGORY
+                    </q-item-label>
+                    <q-item-label caption>
+                      Category for assets
                     </q-item-label>
                   </q-item-section>
                 </q-item>
