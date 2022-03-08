@@ -1,7 +1,6 @@
 import {
   removeElementById,
   updateElementById,
-  getElementById,
   StorageUtil
 } from 'src/services/utils'
 
