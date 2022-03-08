@@ -20,7 +20,7 @@
                 <q-item clickable v-ripple v-close-popup @click="openAllocationAssetAddDialog">
                   <q-item-section avatar>
                     <q-icon
-                      name="description"
+                      name="feed"
                     />
                   </q-item-section>
                   <q-item-section>
