@@ -1,9 +1,27 @@
 <template>
   <q-dialog ref="dialogRef" @hide="onDialogHide">
-    <q-card class="q-dialog-plugin">
-
-      <q-card-actions align="right">
-        <q-btn color="primary" label="OK" @click="onOKClick" />
+    <q-card class="q-dialog-plugin q-px-md q-py-sm">
+      <q-input
+        v-model="ticker"
+        label="Ticker"
+        type="text"
+      />
+      <q-input
+        v-model="exchange"
+        label="Exchange"
+        type="text"
+      />
+      <q-input
+        v-model="ratio"
+        label="Ratio"
+        type="number"
+      />
+      <q-card-actions vertical>
+        <q-btn
+          flat
+          label="Save"
+          @click="onOKClick"
+        />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -11,48 +29,57 @@
 
 <script>
 import { useDialogPluginComponent } from 'quasar'
-import { getCurrentInstance } from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 
 export default {
   name: 'AllocationAssetAddDialog',
   emits: [
     ...useDialogPluginComponent.emits
   ],
-  setup () {
+  props: {
+    parentNodeId: Number
+  },
+  setup (props) {
     const { dialogRef, onDialogHide, onDialogOk, onDialogCancel } = useDialogPluginComponent()
 
     const $vueInstance = getCurrentInstance()
-    const { $api } = $vueInstance.appContext.config.globalProperties
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+
+    const ticker = ref('')
+    const exchange = ref('')
+    const ratio = ref(1)
 
     const saveAllocation = async () => {
       try {
         const payload = {
-          type: 1
+          type: 1,
+          title: `${ticker}.${exchange}`,
+          portfolio_id: 1, // It should be defined from $store.
+          category_ratio: parseInt(ratio.value) * 100,
+          parent_id: props.parentNodeId,
+          ticker,
+          exchange
         }
-      } catch (e) {
 
+        const { data } = await $api.post('/allocations/', payload)
+        $store.commit('allocation/ADD_ALLOCATION', data)
+      } catch (e) {
+        console.error(e)
       }
     }
 
+    const onOKClick = () => {
+      saveAllocation()
+      onDialogOk()
+    }
+
     return {
-      // This is REQUIRED;
-      // Need to inject these (from useDialogPluginComponent() call)
-      // into the vue scope for the vue html template
+      ticker,
+      exchange,
+      ratio,
       dialogRef,
       onDialogHide,
-
-      // other methods that we used in our vue html template;
-      // these are part of our example (so not required)
-      onOKClick () {
-        // on OK, it is REQUIRED to
-        // call onDialogOK (with optional payload)
-        onDialogOk()
-        // or with payload: onDialogOK({ ... })
-        // ...and it will also hide the dialog automatically
-      },
-
-      // we can passthrough onDialogCancel directly
-      onCancelClick: onDialogCancel
+      onOKClick
     }
   }
 }
