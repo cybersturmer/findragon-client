@@ -35,9 +35,8 @@
             </q-btn-dropdown>
             <q-btn
               v-if="!isEditing"
-              outline
+              flat
               label="Edit"
-              icon-right="edit"
               @click="changeEditingMode"
             />
           </q-btn-group>
