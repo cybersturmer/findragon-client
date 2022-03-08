@@ -36,7 +36,6 @@
               v-model="props.value"
               v-slot="scope"
               title="Title"
-              square
               auto-save
             >
               <q-input
@@ -59,7 +58,6 @@
           v-model="props.value"
           v-slot="scope"
           :title="`${props.row.title} ratio`"
-          square
           auto-save
         >
           <q-input
