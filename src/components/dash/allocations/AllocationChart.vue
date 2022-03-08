@@ -13,7 +13,6 @@ Chart.register(...registerables)
 const backgroundColor = [
   '#4dc9f6',
   '#a67f65',
-  '#f53794',
   '#537bc4',
   '#acc236',
   '#166a8f',
@@ -85,6 +84,7 @@ export default defineComponent({
 
     const { doughnutChartProps, doughnutChartRef } = useDoughnutChart({
       height: 300,
+      width: 300,
       chartData: dataObject,
       options,
     })
