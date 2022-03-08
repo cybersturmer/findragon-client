@@ -43,13 +43,13 @@ const linksList = [
   {
     title: 'Allocation',
     caption: 'Assets allocation',
-    icon: 'donut_large',
+    icon: 'pie_chart',
     route: 'allocations_view',
   },
   {
     title: 'Assets',
     caption: 'Assets list',
-    icon: 'work',
+    icon: 'business_center',
     route: 'assets_view',
   },
   {
