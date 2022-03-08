@@ -17,8 +17,14 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
+
+      width="200"
+      breakpoint="500"
+
       bordered
-      mini
+      :mini="mini"
+      @mouseover="changeMiniState"
+      @mouseout="changeMiniState"
       class="bg-grey-10 text-white"
     >
       <q-list>
@@ -42,19 +48,19 @@ import EssentialLink from 'components/EssentialLink.vue'
 const linksList = [
   {
     title: 'Allocation',
-    caption: 'Assets allocation',
+    caption: null,
     icon: 'pie_chart',
     route: 'allocations_view',
   },
   {
     title: 'Assets',
-    caption: 'Assets list',
+    caption: null,
     icon: 'business_center',
     route: 'assets_view',
   },
   {
     title: 'Transactions',
-    caption: 'Transactions list',
+    caption: null,
     icon: 'shopping_bag',
     route: 'transactions_view'
   }
@@ -71,13 +77,22 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false)
+    const mini = ref(true)
+
+    const changeMiniState = () => {
+      mini.value = !mini.value
+    }
+
+    const toggleLeftDrawer = () => {
+      leftDrawerOpen.value = !leftDrawerOpen.value
+    }
 
     return {
+      mini,
       linksList,
       leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      },
+      changeMiniState,
+      toggleLeftDrawer
     }
   },
 })
