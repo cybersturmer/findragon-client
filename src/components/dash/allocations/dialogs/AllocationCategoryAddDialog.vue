@@ -1,6 +1,6 @@
 <template>
   <q-dialog ref="dialogRef" @hide="onDialogHide">
-    <q-card class="q-dialog-plugin q-pa-md">
+    <q-card class="q-dialog-plugin q-px-md q-py-sm">
       <q-input
         v-model="title"
         label="Category name"
@@ -11,7 +11,7 @@
         label="Ratio %"
         type="number"
       />
-      <q-card-actions align="right">
+      <q-card-actions vertical>
         <q-btn
           flat
           label="Save"
