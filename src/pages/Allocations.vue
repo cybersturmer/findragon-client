@@ -18,6 +18,11 @@
             >
               <q-list>
                 <q-item clickable v-close-popup @click="openAllocationAssetAddDialog">
+                  <q-item-section avatar>
+                    <q-icon
+                      name="description"
+                    />
+                  </q-item-section>
                   <q-item-section>
                     <q-item-label>
                       Asset
@@ -25,6 +30,11 @@
                   </q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup @click="openAllocationCategoryAddDialog">
+                  <q-item-section avatar>
+                    <q-icon
+                      name="folder"
+                    />
+                  </q-item-section>
                   <q-item-section>
                     <q-item-label>
                       Category
