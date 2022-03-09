@@ -1,8 +1,8 @@
 <template>
   <q-item
     clickable
-    manual-focus
     v-ripple
+    manual-focus
     :to="{ name: route }"
     active-class="text-grey-5"
   >
