@@ -11,6 +11,7 @@
         v-model="ratio"
         label="Ratio %"
         type="number"
+        @keydown.enter.prevent="onOKClick"
       />
       <q-card-actions vertical>
         <q-btn
