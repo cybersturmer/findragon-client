@@ -14,6 +14,15 @@
       <q-td key="title" :props="props">
         <div class="row items-center">
           <div class="col-auto">
+            <q-btn
+              v-if="isEditing"
+              flat
+              dense
+              icon="edit"
+              size="md"
+              class="q-mr-md"
+              @click="emitAllocationEdit(props.row)"
+            />
             <q-icon
               v-if="props.row.type !== allocationType.CATEGORY"
               :name="icons[props.row.type]"
