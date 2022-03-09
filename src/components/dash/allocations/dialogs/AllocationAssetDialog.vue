@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin q-px-md q-py-sm">
       <q-input
         :disable="isEditing"
-        autofocus
+        :autofocus="!isEditing"
         v-model="ticker"
         label="Ticker"
         type="text"
@@ -16,8 +16,10 @@
       />
       <q-input
         v-model="ratio"
+        :autofocus="isEditing"
         label="Ratio"
         type="number"
+        @keydown.enter.prevent="onOKClick"
       />
       <q-card-actions vertical>
         <q-btn
