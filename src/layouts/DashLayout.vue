@@ -18,16 +18,17 @@
       v-model="leftDrawerOpen"
       show-if-above
 
-      width="200"
+      width="180"
       breakpoint="500"
 
       bordered
       :mini="mini"
       @mouseover="changeMiniState"
       @mouseout="changeMiniState"
-      class="bg-grey-10 text-white"
+
+      class="bg-grey-10"
     >
-      <q-list>
+      <q-list padding>
         <EssentialLink
           v-for="link in linksList"
           :key="link.title"
