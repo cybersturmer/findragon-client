@@ -10,8 +10,39 @@ import { Chart, registerables } from 'chart.js'
 
 Chart.register(...registerables)
 
+const chartPrimaryColor = '#4dc9f6'
+
+const emptyDoughnutPlugin = {
+  id: 'emptyDoughnut',
+  afterDraw(chart, args, options) {
+    const { datasets } = chart.data
+    const { color, width, radiusDecrease } = options
+
+    let hasData = false
+
+    for (let i = 0; i < datasets.length; i += 1) {
+      const dataset = datasets[i]
+      hasData |= dataset.data.length > 0
+    }
+
+    if (!hasData) {
+      const { chartArea: { left, top, right, bottom}, ctx} = chart
+      const centerX = (left + right) / 2
+      const centerY = (top + bottom) / 2
+
+      const r = Math.min(right - left, bottom - top) / 2
+
+      ctx.beginPath()
+      ctx.lineWidth = width || 2
+      ctx.strokeStyle = color || chartPrimaryColor
+      ctx.arc(centerX, centerY, (r - radiusDecrease || 0), 0, 2 * Math.PI)
+      ctx.stroke()
+    }
+  }
+}
+
 const backgroundColor = [
-  '#4dc9f6',
+  chartPrimaryColor,
   '#a67f65',
   '#537bc4',
   '#acc236',
@@ -78,6 +109,11 @@ export default defineComponent({
         legend: {
           display: false,
           position: 'bottom',
+        },
+        emptyDoughnut: {
+          color: chartPrimaryColor,
+          width: 2,
+          radiusDecrease: 20
         }
       },
     }))
@@ -87,6 +123,7 @@ export default defineComponent({
       width: 300,
       chartData: dataObject,
       options,
+      plugins: [emptyDoughnutPlugin]
     })
 
     return {
