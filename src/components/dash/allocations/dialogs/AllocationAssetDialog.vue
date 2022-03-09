@@ -2,14 +2,14 @@
   <q-dialog ref="dialogRef" @hide="onDialogHide">
     <q-card class="q-dialog-plugin q-px-md q-py-sm">
       <q-input
-        v-show="!isEditing"
+        :disable="isEditing"
         autofocus
         v-model="ticker"
         label="Ticker"
         type="text"
       />
       <q-input
-        v-show="!isEditing"
+        :disable="isEditing"
         v-model="exchange"
         label="Exchange"
         type="text"
@@ -69,8 +69,8 @@ export default {
 
     // Let's predefine if it's editing.
     if (props.editing) {
-      ticker.value = props.node.ticker
-      exchange.value = props.node.exchange
+      ticker.value = props.node.asset.ticker
+      exchange.value = props.node.asset.exchange
       ratio.value = props.node.category_ratio / 100
     }
 
