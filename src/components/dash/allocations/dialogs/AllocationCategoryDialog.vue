@@ -29,21 +29,39 @@ import { ref, getCurrentInstance } from 'vue'
 
 
 export default {
-  name: 'AllocationCategoryAddDialog',
+  name: 'AllocationCategoryDialog',
   emits: [
     ...useDialogPluginComponent.emits
   ],
   props: {
-    parentNodeId: Number
+    editing: {
+      type: Boolean,
+      required: true
+    },
+    node:  {
+      type: Object,
+      required: false
+    },
+    parentNodeId: {
+      type: Number,
+      required: false
+    }
   },
   setup (props) {
-    const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } = useDialogPluginComponent()
+    const { dialogRef, onDialogHide, onDialogOK } = useDialogPluginComponent()
+
+    const $vueInstance = getCurrentInstance()
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
     const title = ref('')
     const ratio = ref(1)
 
-    const $vueInstance = getCurrentInstance()
-    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+    // If we do not intent to create and just editing.
+    if (props.editing) {
+      title.value = props.node.title
+      ratio.value = props.node.category_ratio / 100
+    }
+
 
     const saveAllocation = async () => {
       try {
@@ -53,13 +71,18 @@ export default {
           title: title.value,
           portfolio_id: 1, // We have to define portfolio id
           category_ratio: parseInt(ratio.value) * 100,
-          parent_id: props.parentNodeId,
+          parent_id: props.editing ? props.node.parent_id : props.parentNodeId,
           ticker: null,
           exchange: null
         }
 
-        const { data } = await $api.post('/allocations/', payload)
-        $store.commit('allocation/ADD_ALLOCATION', data)
+        if (props.editing) {
+          const { data } = await $api.patch(`/allocations/${props.node.id}`, payload)
+          $store.commit('allocation/UPDATE_ALLOCATION', data)
+        } else {
+          const { data } = await $api.post('/allocations/', payload)
+          $store.commit('allocation/ADD_ALLOCATION', data)
+        }
       } catch (e) {
         console.error(e)
       }
