@@ -18,9 +18,8 @@
               v-if="isEditing"
               flat
               dense
-              icon="edit"
+              icon="edit_note"
               size="md"
-              class="q-mr-md"
               @click="emitAllocationEdit(props.row)"
             />
             <q-icon
