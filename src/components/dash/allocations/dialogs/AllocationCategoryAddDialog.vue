@@ -50,7 +50,7 @@ export default {
         const payload = {
           type: 2,
           title: title.value,
-          portfolio_id: 1,
+          portfolio_id: 1, // We have to define portfolio id
           category_ratio: parseInt(ratio.value) * 100,
           parent_id: props.parentNodeId,
           ticker: null,
