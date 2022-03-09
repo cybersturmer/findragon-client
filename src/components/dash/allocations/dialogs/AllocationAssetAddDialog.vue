@@ -53,12 +53,12 @@ export default {
       try {
         const payload = {
           type: 1,
-          title: `${ticker}.${exchange}`,
+          title: `${ticker.value}.${exchange.value}`,
           portfolio_id: 1, // It should be defined from $store.
           category_ratio: parseInt(ratio.value) * 100,
           parent_id: props.parentNodeId,
-          ticker,
-          exchange
+          ticker: ticker.value,
+          exchange: exchange.value
         }
 
         const { data } = await $api.post('/allocations/', payload)
