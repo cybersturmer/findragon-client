@@ -142,6 +142,10 @@ export default defineComponent({
     const openAllocationAssetAddDialog = () => {
       $q.dialog({
         component: AllocationAssetAddDialog,
+        componentProps: {
+          parentNodeId: currentNodeId.value
+        },
+        parent: this,
         cancel: true,
         persistent: true
       })
