@@ -2,6 +2,7 @@
   <q-dialog ref="dialogRef" @hide="onDialogHide">
     <q-card class="q-dialog-plugin q-px-md q-py-sm">
       <q-input
+        autofocus
         v-model="ticker"
         label="Ticker"
         type="text"
