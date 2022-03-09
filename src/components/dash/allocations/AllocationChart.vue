@@ -41,6 +41,10 @@ const emptyDoughnutPlugin = {
   }
 }
 
+const tooltipPlugin = (tooltipItem) => {
+  return `${tooltipItem.label}: ${tooltipItem.parsed}%`
+}
+
 const backgroundColor = [
   chartPrimaryColor,
   '#a67f65',
@@ -106,6 +110,11 @@ export default defineComponent({
         },
       },
       plugins: {
+        tooltip: {
+          callbacks: {
+            label: tooltipPlugin
+          }
+        },
         legend: {
           display: false,
           position: 'bottom',
