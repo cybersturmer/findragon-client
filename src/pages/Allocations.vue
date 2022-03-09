@@ -65,6 +65,7 @@
             <allocation-chart
               :current-node="currentNodeId"
               :row="allocations"
+              @selected="selectNode($event)"
             />
         </div>
         <div class="col">

@@ -71,10 +71,13 @@ const borderColor = [
 export default defineComponent({
   name: 'AllocationChart',
   components: { DoughnutChart },
+  emits: [
+    'selected'
+  ],
   props: {
     currentNode: Number
   },
-  setup (props) {
+  setup (props, { emit }) {
     const $vueInstance = getCurrentInstance()
     const { $store } = $vueInstance.appContext.config.globalProperties
 
@@ -87,6 +90,7 @@ export default defineComponent({
     })
 
     const dataValues = computed(() => currentAllocations.value.map(obj => obj.category_ratio / 100))
+    const ids = computed(() => currentAllocations.value.map(obj => obj.id))
 
     const dataObject = computed(() => ({
       labels: titles.value,
@@ -102,6 +106,12 @@ export default defineComponent({
 
     const options = computed(() => ({
       responsive: true,
+      onClick: (event, array) => {
+        const index = array[0].datasetIndex
+        const id = currentAllocations?.value[index]?.id
+
+        emit('selected', id)
+      },
       scales: {
         myScale: {
           display: false,
@@ -132,13 +142,17 @@ export default defineComponent({
       width: 300,
       chartData: dataObject,
       options,
-      plugins: [emptyDoughnutPlugin]
+      plugins: [
+        emptyDoughnutPlugin
+      ]
     })
 
     return {
+      ids,
       dataObject,
       options,
       doughnutChartProps,
+      currentAllocations,
       doughnutChartRef
     }
   }
