@@ -23,8 +23,6 @@
 
       bordered
       mini
-      @mouseover="changeMiniState"
-      @mouseout="changeMiniState"
 
       class="bg-grey-10"
     >
