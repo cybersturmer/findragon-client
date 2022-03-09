@@ -8,8 +8,9 @@
     :selection="selection"
     :columns="columns"
     :rows="currentAllocations"
+    :pagination="pagination"
   >
-    <template  #body-cell-title="props">
+    <template #body-cell-title="props">
       <q-td key="title" :props="props">
         <div class="row items-center">
           <div class="col-auto">
@@ -29,47 +30,17 @@
               @click="emitRowSelection(props.row.id)"
             />
           </div>
-          <div class="col">
+          <div class="col" @click="emitAllocationEdit(props.row)">
             {{ props.value }}
-            <q-popup-edit
-              v-if="isEditing"
-              v-model="props.value"
-              v-slot="scope"
-              title="Title"
-              auto-save
-            >
-              <q-input
-                debounce="500"
-                :model-value="props.value"
-                @update:model-value="patchAllocationCategoryTitle(props.row.id, $event)"
-                dense
-                autofocus
-                counter
-              />
-            </q-popup-edit>
           </div>
         </div>
       </q-td>
     </template>
-    <template v-if="isEditing" #body-cell-category_ratio="props">
+    <template #body-cell-category_ratio="props">
       <q-td key="ratio" :props="props">
-        {{ props.value }}
-        <q-popup-edit
-          v-model="props.value"
-          v-slot="scope"
-          :title="`${props.row.title} ratio`"
-          auto-save
-        >
-          <q-input
-            debounce="500"
-            :model-value="props.value"
-            @update:model-value="patchAllocationCategoryRatio(props.row.id, $event)"
-            dense
-            autofocus
-            counter
-            suffix="%"
-          />
-        </q-popup-edit>
+        <div @click="emitAllocationEdit(props.row)">
+          {{ props.value }}%
+        </div>
       </q-td>
     </template>
     <template v-if="isEditing" #top-right>
@@ -121,6 +92,11 @@ const icons = {
   3: 'payment'
 }
 
+const pagination = {
+  sortBy: 'category_ratio',
+  descending: true
+}
+
 const columns = [
   {
     name: 'title',
@@ -146,7 +122,8 @@ export default defineComponent({
   name: 'AllocationTable',
   emits: [
     'completed',
-    'selected'
+    'selected',
+    'edit'
   ],
   props: {
     currentNodeId: Number,
@@ -237,16 +214,24 @@ export default defineComponent({
       emit('completed')
     }
 
+    const emitAllocationEdit = (node) => {
+      if (props.isEditing) {
+        emit('edit', node)
+      }
+    }
+
     return {
       icons,
       columns,
       selection,
+      pagination,
       areSelected,
       currentAllocations,
       currentAllocationRatio,
       isCurrentAllocationConsistent,
       selectedTableRows,
       allocationType,
+      emitAllocationEdit,
       completeEditing,
       emitRowSelection,
       removeAllocations,
