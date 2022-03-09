@@ -58,9 +58,8 @@
           </q-btn-group>
         </div>
       </div>
-      <div
-        v-if="isAllocationDataAvailable"
-        class="row">
+      <div v-if="isAllocationDataAvailable"
+           class="row">
         <div v-show="!isEditing" class="col-4">
             <allocation-chart
               :current-node="currentNodeId"
