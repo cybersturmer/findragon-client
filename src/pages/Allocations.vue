@@ -17,7 +17,7 @@
               label="Add allocation"
             >
               <q-list separator bordered >
-                <q-item clickable v-ripple v-close-popup @click="openAllocationAssetAddDialog">
+                <q-item clickable v-ripple v-close-popup @click="openAddAllocationAssetDialog">
                   <q-item-section avatar>
                     <q-icon
                       name="feed"
@@ -32,7 +32,7 @@
                     </q-item-label>
                   </q-item-section>
                 </q-item>
-                <q-item clickable v-ripple v-close-popup @click="openAllocationCategoryAddDialog">
+                <q-item clickable v-ripple v-close-popup @click="openAddAllocationCategoryDialog">
                   <q-item-section avatar>
                     <q-icon
                       name="folder"
@@ -71,6 +71,7 @@
           <allocation-table
             :current-node-id="currentNodeId"
             :is-editing="isEditing"
+            @edit="editAllocation($event)"
             @selected="selectNode($event)"
             @completed="isEditing = !isEditing"
           />
@@ -91,10 +92,12 @@ import {
 
 import { useMeta, useQuasar } from 'quasar'
 
+import { allocationType } from 'src/store/allocation/presets'
+
 import AllocationTable from 'components/dash/allocations/AllocationTable.vue'
 import AllocationChart from 'components/dash/allocations/AllocationChart.vue'
-import AllocationAssetAddDialog from 'components/dash/allocations/dialogs/AllocationAssetAddDialog.vue'
-import AllocationCategoryAddDialog from 'components/dash/allocations/dialogs/AllocationCategoryAddDialog.vue'
+import AllocationAssetDialog from 'components/dash/allocations/dialogs/AllocationAssetDialog.vue'
+import AllocationCategoryDialog from 'components/dash/allocations/dialogs/AllocationCategoryDialog.vue'
 
 
 const metaData = {
@@ -139,29 +142,16 @@ export default defineComponent({
 
     const $q = useQuasar()
 
-    const openAllocationAssetAddDialog = () => {
-      $q.dialog({
-        component: AllocationAssetAddDialog,
-        componentProps: {
-          parentNodeId: currentNodeId.value
-        },
-        parent: this,
-        cancel: true,
-        persistent: true
-      })
-      .onOk(() => {
-        console.log('OK')
-      })
-    }
-
     const changeEditingMode = () => {
       isEditing.value = !isEditing.value
     }
 
-    const openAllocationCategoryAddDialog = () => {
+    const openAddAllocationCategoryDialog = () => {
       $q.dialog({
-        component: AllocationCategoryAddDialog,
+        component: AllocationCategoryDialog,
         componentProps: {
+          editing: false,
+          node: null,
           parentNodeId: currentNodeId.value
         },
         parent: this,
@@ -171,6 +161,66 @@ export default defineComponent({
       .onOk(() => {
         console.log('OK')
       })
+    }
+
+    const openEditAllocationCategoryDialog = (node) => {
+      $q.dialog({
+        component: AllocationCategoryDialog,
+        componentProps: {
+          editing: true,
+          node: node,
+          parentNodeId: null
+        },
+        parent: this,
+        cancel: true,
+        persistent: true
+      })
+      .onOk(() => {
+        console.log('OK')
+      })
+    }
+
+    const openAddAllocationAssetDialog = () => {
+      $q.dialog({
+        component: AllocationAssetDialog,
+        componentProps: {
+          editing: false,
+          node: null,
+          parentNodeId: currentNodeId.value
+        },
+        parent: this,
+        cancel: true,
+        persistent: true
+      })
+      .onOk(() => {
+        console.log('OK')
+      })
+    }
+
+    const openEditAllocationAssetDialog = (node) => {
+      $q.dialog({
+        component: AllocationAssetDialog,
+        componentProps: {
+          editing: true,
+          node: node,
+          parentNodeId: currentNodeId.value
+        },
+        parent: this,
+        cancel: true,
+        persistent: true
+      })
+      .onOk(() => {
+        console.log('OK')
+      })
+    }
+
+    const editAllocation = (node) => {
+      switch (node.type) {
+        case allocationType.CATEGORY:
+          return openEditAllocationCategoryDialog(node)
+        case allocationType.ASSET:
+          return openEditAllocationAssetDialog(node)
+      }
     }
 
     onMounted(async () => {
@@ -197,9 +247,12 @@ export default defineComponent({
       selectParentNode,
       flexButtonTitle,
       isAllocationDataAvailable,
+      editAllocation,
       changeEditingMode,
-      openAllocationAssetAddDialog,
-      openAllocationCategoryAddDialog
+      openAddAllocationCategoryDialog,
+      openEditAllocationCategoryDialog,
+      openAddAllocationAssetDialog,
+      openEditAllocationAssetDialog
     }
   }
 })
