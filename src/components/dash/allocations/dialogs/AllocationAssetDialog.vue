@@ -33,15 +33,26 @@ import { useDialogPluginComponent } from 'quasar'
 import { getCurrentInstance, ref } from 'vue'
 
 export default {
-  name: 'AllocationAssetAddDialog',
+  name: 'AllocationAssetDialog',
   emits: [
     ...useDialogPluginComponent.emits
   ],
   props: {
-    parentNodeId: Number
+    editing: {
+      type: Boolean,
+      required: true
+    },
+    node: {
+      type: Object,
+      required: false
+    },
+    parentNodeId: {
+      type: Number,
+      required: false
+    }
   },
   setup (props) {
-    const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } = useDialogPluginComponent()
+    const { dialogRef, onDialogHide, onDialogOK } = useDialogPluginComponent()
 
     const $vueInstance = getCurrentInstance()
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
@@ -50,6 +61,15 @@ export default {
     const exchange = ref('')
     const ratio = ref(1)
 
+    console.dir(props)
+
+    // Let's predefine if it's editing.
+    if (props.editing) {
+      ticker.value = props.node.asset.ticker
+      exchange.value = props.node.asset.exchange
+      ratio.value = props.node.category_ratio / 100
+    }
+
     const saveAllocation = async () => {
       try {
         const payload = {
@@ -57,13 +77,18 @@ export default {
           title: `${ticker.value}.${exchange.value}`,
           portfolio_id: 1, // It should be defined from $store.
           category_ratio: parseInt(ratio.value) * 100,
-          parent_id: props.parentNodeId,
+          parent_id: props.editing ? props.node.parent_id : props.parentNodeId,
           ticker: ticker.value,
           exchange: exchange.value
         }
 
-        const { data } = await $api.post('/allocations/', payload)
-        $store.commit('allocation/ADD_ALLOCATION', data)
+        if (props.editing) {
+          const { data } = await $api.patch(`/allocations/${props.node.id}`, payload)
+          $store.commit('allocation/UPDATE_ALLOCATION', data)
+        } else {
+          const { data } = await $api.post('/allocations/', payload)
+          $store.commit('allocation/ADD_ALLOCATION', data)
+        }
       } catch (e) {
         console.error(e)
       }
