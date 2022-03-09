@@ -50,7 +50,7 @@ const linksList = [
   {
     title: 'Allocation',
     caption: null,
-    icon: 'pie_chart',
+    icon: 'donut_small',
     route: 'allocations_view',
   },
   {
