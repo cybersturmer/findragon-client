@@ -18,8 +18,8 @@
       v-model="leftDrawerOpen"
       show-if-above
 
-      width="180"
-      breakpoint="500"
+      :width="180"
+      :breakpoint="500"
 
       bordered
       mini
