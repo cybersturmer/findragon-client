@@ -40,7 +40,7 @@ export default {
     parentNodeId: Number
   },
   setup (props) {
-    const { dialogRef, onDialogHide, onDialogOk, onDialogCancel } = useDialogPluginComponent()
+    const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } = useDialogPluginComponent()
 
     const $vueInstance = getCurrentInstance()
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
@@ -70,7 +70,7 @@ export default {
 
     const onOKClick = () => {
       saveAllocation()
-      onDialogOk()
+      onDialogOK()
     }
 
     return {
