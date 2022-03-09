@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header reveal elevated>
       <q-toolbar class="bg-grey-10">
         <q-btn
           flat
@@ -22,7 +22,7 @@
       breakpoint="500"
 
       bordered
-      :mini="mini"
+      mini
       @mouseover="changeMiniState"
       @mouseout="changeMiniState"
 
@@ -78,21 +78,14 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false)
-    const mini = ref(true)
-
-    const changeMiniState = () => {
-      mini.value = !mini.value
-    }
 
     const toggleLeftDrawer = () => {
       leftDrawerOpen.value = !leftDrawerOpen.value
     }
 
     return {
-      mini,
       linksList,
       leftDrawerOpen,
-      changeMiniState,
       toggleLeftDrawer
     }
   },
