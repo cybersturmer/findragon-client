@@ -2,7 +2,8 @@
   <q-table
     flat
     bordered
-    hide-bottom
+    separator="horizontal"
+    :rows-per-page-options="[0]"
     :columns="columns"
     :rows="row" />
 </template>
