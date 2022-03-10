@@ -38,7 +38,7 @@
               @click="emitRowSelection(props.row.id)"
             />
           </div>
-          <div class="col" @click="emitAllocationEdit(props.row)">
+          <div class="col">
             {{ props.value }}
           </div>
         </div>
@@ -46,7 +46,7 @@
     </template>
     <template #body-cell-category_ratio="props">
       <q-td key="ratio" :props="props">
-        <div @click="emitAllocationEdit(props.row)">
+        <div>
           {{ props.value }}%
         </div>
       </q-td>
