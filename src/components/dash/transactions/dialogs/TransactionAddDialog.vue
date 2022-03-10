@@ -10,7 +10,16 @@
           label="Transaction Type"
         />
         <!-- Date -->
+        <q-date
+          v-model="transactionDate"
+          minimal
+        />
         <!-- Amount -->
+        <q-input
+          v-model="transactionAmount"
+          type="number"
+          label="Amount"
+        />
         <!-- Price -->
         <!-- Commission -->
         <!-- Currency -->
@@ -62,7 +71,12 @@ export default {
   ],
   setup () {
     const { dialogRef, onDialogHide, onDialogOk, onDialogCancel } = useDialogPluginComponent()
+
+    const todayString = new Date(Date.now()).toLocaleDateString()
+
     const transactionType = ref(null)
+    const transactionDate = ref(todayString)
+    const transactionAmount = ref(1)
 
     const onOKClick = () => {
       onDialogOk()
@@ -74,7 +88,9 @@ export default {
       onOKClick,
       onDialogCancel,
       transactionType,
-      transactionTypes
+      transactionDate,
+      transactionTypes,
+      transactionAmount
     }
   }
 }
