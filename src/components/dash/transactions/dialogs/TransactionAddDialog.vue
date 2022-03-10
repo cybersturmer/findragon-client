@@ -21,7 +21,17 @@
           label="Amount"
         />
         <!-- Price -->
+        <q-input
+          v-model="transactionPrice"
+          type="number"
+          label="Price"
+        />
         <!-- Commission -->
+        <q-input
+          v-model="transactionCommission"
+          type="number"
+          label="Commission"
+        />
         <!-- Currency -->
         <!-- Note -->
         <q-btn
@@ -76,7 +86,10 @@ export default {
 
     const transactionType = ref(null)
     const transactionDate = ref(todayString)
+
     const transactionAmount = ref(1)
+    const transactionPrice = ref(1)
+    const transactionCommission = ref(0)
 
     const onOKClick = () => {
       onDialogOk()
@@ -90,7 +103,9 @@ export default {
       transactionType,
       transactionDate,
       transactionTypes,
-      transactionAmount
+      transactionAmount,
+      transactionPrice,
+      transactionCommission
     }
   }
 }
