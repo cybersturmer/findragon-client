@@ -29,7 +29,9 @@ const metaData = {
 
 export default {
   name: 'Transactions',
-  components: { TransactionsTable },
+  components: {
+    TransactionsTable
+  },
   setup () {
     useMeta(metaData)
 
