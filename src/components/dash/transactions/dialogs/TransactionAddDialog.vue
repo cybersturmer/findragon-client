@@ -5,7 +5,9 @@
         <!-- Select for assets -->
         <!-- Transaction Type -->
         <q-select
-          v-model=""
+          v-model="transactionType"
+          :options="transactionTypes"
+          label="Transaction Type"
         />
         <!-- Date -->
         <!-- Amount -->
@@ -70,7 +72,9 @@ export default {
       dialogRef,
       onDialogHide,
       onOKClick,
-      onDialogCancel
+      onDialogCancel,
+      transactionType,
+      transactionTypes
     }
   }
 }
