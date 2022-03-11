@@ -25,16 +25,16 @@ export default {
   setup () {
     useMeta(metaData)
 
-    const assets = ref(null)
     const $vueInstance = getCurrentInstance()
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
-    const { $api } = $vueInstance.appContext.config.globalProperties
+    const assets = computed(() => $store.getters['asset/ASSETS'])
 
     onMounted(async () => {
       try {
-        const response = await $api.get('/assets/')
+        const { data } = await $api.get('/assets/')
 
-        assets.value = response.data
+        $store.commit('asset/SET_ASSETS', data)
       } catch (e) {
         console.error(e)
       }
