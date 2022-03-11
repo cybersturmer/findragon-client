@@ -5,6 +5,7 @@
         <q-btn
           flat
           label="Add transaction"
+          @click="openAddTransactionDialog"
         />
       </div>
     </div>
@@ -18,10 +19,11 @@
 </template>
 
 <script>
-import { useMeta } from 'quasar'
+import {useMeta, useQuasar} from 'quasar'
 import { getCurrentInstance, onMounted, ref, computed } from 'vue'
 
 import TransactionsTable from "components/dash/transactions/TransactionsTable.vue"
+import TransactionAddDialog from 'components/dash/transactions/dialogs/TransactionAddDialog.vue'
 
 const metaData = {
   title: 'Transactions'
@@ -30,13 +32,15 @@ const metaData = {
 export default {
   name: 'Transactions',
   components: {
-    TransactionsTable
+    TransactionsTable,
+    TransactionAddDialog
   },
   setup () {
     useMeta(metaData)
 
     const transactions = ref(null)
     const $vieInstance = getCurrentInstance()
+    const $q = useQuasar()
 
     const { $api } = $vieInstance.appContext.config.globalProperties
 
@@ -54,9 +58,24 @@ export default {
       return Array.isArray(transactions.value) && transactions.value.length > 0
     })
 
+    const openAddTransactionDialog = () => {
+      $q.dialog({
+        component: TransactionAddDialog,
+        componentProps: {
+        },
+        parent: this,
+        cancel: true,
+        persistent: true
+      })
+      .onOk(() => {
+        console.log('OK')
+      })
+    }
+
     return {
       transactions,
-      isTransactionsDataAvailable
+      isTransactionsDataAvailable,
+      openAddTransactionDialog
     }
   }
 }
