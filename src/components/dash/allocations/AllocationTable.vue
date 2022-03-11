@@ -23,7 +23,7 @@
               @click="emitAllocationEdit(props.row)"
             />
             <q-icon
-              v-if="props.row.type !== allocationType.CATEGORY"
+              v-if="props.row.type !== allocationTypesEnum.CATEGORY"
               :name="icons[props.row.type]"
               size="sm"
               class="q-mr-md"
@@ -92,7 +92,7 @@ import {
   getCurrentInstance
 } from 'vue'
 
-import { allocationType } from 'src/store/allocation/presets'
+import { allocationTypesEnum } from 'src/services/enums'
 
 const icons = {
   1: 'description',
@@ -238,7 +238,7 @@ export default defineComponent({
       currentAllocationRatio,
       isCurrentAllocationConsistent,
       selectedTableRows,
-      allocationType,
+      allocationTypesEnum,
       emitAllocationEdit,
       completeEditing,
       emitRowSelection,
