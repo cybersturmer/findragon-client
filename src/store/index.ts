@@ -3,6 +3,7 @@ import {InjectionKey} from 'vue';
 import {createStore, Store as VuexStore, useStore as vuexUseStore,} from 'vuex';
 
 import allocation from './allocation'
+import asset from './asset'
 
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
@@ -37,7 +38,8 @@ export const storeKey: InjectionKey<VuexStore<StateInterface>> =
 export default store(function (/* { ssrContext } */) {
   return createStore<StateInterface>({
     modules: {
-      allocation
+      allocation,
+      asset
     },
 
     // enable strict mode (adds overhead!)
