@@ -92,7 +92,7 @@ import {
 
 import { useMeta, useQuasar } from 'quasar'
 
-import { allocationTypeEnum } from 'src/services/enums'
+import { allocationTypesEnum } from 'src/services/enums'
 
 import AllocationTable from 'components/dash/allocations/AllocationTable.vue'
 import AllocationChart from 'components/dash/allocations/AllocationChart.vue'
@@ -216,9 +216,9 @@ export default defineComponent({
 
     const editAllocation = (node) => {
       switch (node.type) {
-        case allocationTypeEnum.CATEGORY:
+        case allocationTypesEnum.CATEGORY:
           return openEditAllocationCategoryDialog(node)
-        case allocationTypeEnum.ASSET:
+        case allocationTypesEnum.ASSET:
           return openEditAllocationAssetDialog(node)
       }
     }
