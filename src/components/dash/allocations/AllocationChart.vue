@@ -107,8 +107,8 @@ export default defineComponent({
     const options = computed(() => ({
       responsive: true,
       onClick: (event, array) => {
-        const index = array[0].datasetIndex
-        const id = currentAllocations?.value[index]?.id
+        const dataIndex = array.pop().element?.$context?.dataIndex
+        const id = currentAllocations?.value[dataIndex]?.id
 
         emit('selected', id)
       },
