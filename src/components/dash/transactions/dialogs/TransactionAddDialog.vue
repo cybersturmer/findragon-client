@@ -1,39 +1,47 @@
 <template>
   <q-dialog ref="dialogRef" @hide="onDialogHide">
     <q-card class="q-dialog-plugin q-px-md q-py-sm">
+      <!-- Select for assets -->
+      <!-- Transaction Type -->
+      <q-select
+        v-model="transactionType"
+        :options="transactionTypes"
+        label="Transaction Type"
+      />
+      <!-- Date -->
+      <q-date
+        v-model="transactionDate"
+        mask="MM/DD/YYYY"
+        minimal
+      />
+      <!-- Amount -->
+      <q-input
+        v-model="transactionAmount"
+        type="number"
+        label="Amount"
+      />
+      <!-- Price -->
+      <q-input
+        square
+        v-model="transactionPrice"
+        type="number"
+        label="Price"
+      />
+      <!-- Commission -->
+      <q-input
+        v-model="transactionCommission"
+        type="number"
+        label="Commission"
+      />
+      <!-- Currency -->
+      <!-- @todo preselect currency for chosen asset -->
+      <!-- Note -->
+      <q-input
+        v-model="transactionNote"
+        type="textarea"
+        label="Notes"
+      />
       <q-card-actions vertical>
-        <!-- Select for assets -->
-        <!-- Transaction Type -->
-        <q-select
-          v-model="transactionType"
-          :options="transactionTypes"
-          label="Transaction Type"
-        />
-        <!-- Date -->
-        <q-date
-          v-model="transactionDate"
-          minimal
-        />
-        <!-- Amount -->
-        <q-input
-          v-model="transactionAmount"
-          type="number"
-          label="Amount"
-        />
-        <!-- Price -->
-        <q-input
-          v-model="transactionPrice"
-          type="number"
-          label="Price"
-        />
-        <!-- Commission -->
-        <q-input
-          v-model="transactionCommission"
-          type="number"
-          label="Commission"
-        />
-        <!-- Currency -->
-        <!-- Note -->
         <q-btn
           flat
           label="Save"
@@ -48,12 +56,7 @@
 import { useDialogPluginComponent } from 'quasar'
 import { ref } from 'vue'
 
-const transactionTypesEnum = {
-  BUY: 1,
-  SELL: 2,
-  DIVIDENDS: 3,
-  COUPON: 4
-}
+import { transactionTypesEnum } from 'src/services/enums'
 
 const transactionTypes = [
   {
@@ -84,12 +87,13 @@ export default {
 
     const todayString = new Date(Date.now()).toLocaleDateString()
 
-    const transactionType = ref(null)
+    const transactionType = ref(transactionTypes[0])
     const transactionDate = ref(todayString)
 
-    const transactionAmount = ref(1)
-    const transactionPrice = ref(1)
-    const transactionCommission = ref(0)
+    const transactionAmount = ref(null)
+    const transactionPrice = ref(null)
+    const transactionCommission = ref(null)
+    const transactionNote = ref(null)
 
     const onOKClick = () => {
       onDialogOk()
@@ -105,8 +109,24 @@ export default {
       transactionTypes,
       transactionAmount,
       transactionPrice,
+      transactionNote,
       transactionCommission
     }
   }
 }
 </script>
+
+<style lang="css">
+ .q-date {
+   width: auto;
+ }
+
+ .q-date__view {
+   min-height: auto;
+   padding: 16px 0 0 0;
+ }
+
+ .q-date__calendar-days-container {
+   min-height: auto;
+ }
+</style>
