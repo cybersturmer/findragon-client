@@ -37,6 +37,7 @@
       <!-- @todo preselect currency for chosen asset -->
       <!-- Note -->
       <q-input
+        autogrow
         v-model="transactionNote"
         type="textarea"
         label="Notes"
