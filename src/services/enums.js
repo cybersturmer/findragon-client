@@ -4,3 +4,9 @@ export const transactionTypesEnum = {
   DIVIDENDS: 3,
   COUPON: 4
 }
+
+export const allocationTypeEnum = {
+  ASSET: 1,
+  CATEGORY: 2,
+  CURRENCY: 3
+}
