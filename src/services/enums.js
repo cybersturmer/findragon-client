@@ -5,8 +5,14 @@ export const transactionTypesEnum = {
   COUPON: 4
 }
 
-export const allocationTypeEnum = {
+export const allocationTypesEnum = {
   ASSET: 1,
   CATEGORY: 2,
   CURRENCY: 3
+}
+
+export const assetTypesEnum = {
+  SHARE: 1,
+  BOND: 2,
+  FUND: 3
 }
