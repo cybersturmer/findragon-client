@@ -4,7 +4,6 @@
     v-ripple
     manual-focus
     :to="{ name: route }"
-    active-class="text-grey-5"
   >
     <q-item-section
       v-if="icon"
