@@ -151,10 +151,6 @@ export default {
     const saveTransaction = async () => {
       try {
         const asset = $store.getters['asset/ASSET_BY_ID'](transactionAsset.value.value)
-
-        console.log(transactionAsset.value.value)
-        console.log(asset)
-
         const payload = {
           amount: transactionAmount.value,
           asset_type: 2,
