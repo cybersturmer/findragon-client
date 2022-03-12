@@ -18,8 +18,8 @@ export const assetTypesEnum = {
 }
 
 export const currenciesOptions = [
-  { label: 'USD', value: 'USD' },
   { label: 'RUB', value: 'RUB' },
+  { label: 'USD', value: 'USD' },
   { label: 'EUR', value: 'EUR' },
   { label: 'AUD', value: 'AUD' },
   { label: 'CAD', value: 'CAD' },
