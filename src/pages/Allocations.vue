@@ -6,9 +6,9 @@
           <q-btn-group>
             <q-btn
               dense
-              label="Upper"
+              label="Back"
               v-show="nodeDefined"
-              icon="keyboard_arrow_up"
+              icon="arrow_left"
               class="q-mr-xs q-pr-md"
               @click="selectParentNode"
             />
