@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import {useMeta, useQuasar} from 'quasar'
+import { useMeta, useQuasar } from 'quasar'
 import { getCurrentInstance, onMounted, ref, computed } from 'vue'
 
-import TransactionsTable from "components/dash/transactions/TransactionsTable.vue"
+import TransactionsTable from 'components/dash/transactions/TransactionsTable.vue'
 import TransactionAddDialog from 'components/dash/transactions/dialogs/TransactionAddDialog.vue'
 
 const metaData = {
