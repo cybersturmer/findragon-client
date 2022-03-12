@@ -62,10 +62,10 @@
 </template>
 
 <script>
-import {useDialogPluginComponent} from 'quasar'
-import {computed, getCurrentInstance, onMounted, ref} from 'vue'
+import { useDialogPluginComponent } from 'quasar'
+import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 
-import {transactionTypesEnum} from 'src/services/enums'
+import { transactionTypesEnum } from 'src/services/enums'
 
 const transactionTypes = [
   {
