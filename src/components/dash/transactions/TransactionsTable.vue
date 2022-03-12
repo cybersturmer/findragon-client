@@ -5,15 +5,35 @@
     separator="horizontal"
     :rows-per-page-options="[0]"
     :columns="columns"
-    :rows="row" />
+    :rows="row">
+    <template #body-cell-type="props">
+      <q-td key="type" :props="props">
+        <q-icon
+          :name="transactionTypeIconsMapping[props.row.type].icon"
+          :color="transactionTypeIconsMapping[props.row.type].color"
+          size="md"
+        />
+        {{ props.value }}
+      </q-td>
+    </template>
+  </q-table>
 </template>
 
 <script>
 const transactionTypesMapping = {
   1: 'Buy',
-  2: 'Sell',
-  3: 'Dividends',
-  4: 'Coupons'
+  2: 'Sell'
+}
+
+const transactionTypeIconsMapping = {
+  1: {
+    icon: 'arrow_drop_up',
+    color: 'positive'
+  },
+  2: {
+    icon: 'arrow_drop_down',
+    color: 'negative'
+  }
 }
 
 const columns = [
@@ -71,7 +91,8 @@ export default {
   },
   setup () {
     return {
-      columns
+      columns,
+      transactionTypeIconsMapping
     }
   }
 }
