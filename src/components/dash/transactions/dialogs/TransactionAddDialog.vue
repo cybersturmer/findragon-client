@@ -35,15 +35,24 @@
         type="number"
         label="Price"
       />
-      <!-- Commission -->
-      <q-input
-        v-model="transactionCommission"
-        type="number"
-        label="Commission"
-      />
-      <!-- Currency -->
-      <!-- @todo preselect currency for chosen asset -->
       <!-- Note -->
+      <div class="row">
+        <div class="col q-pr-sm">
+          <!-- Commission -->
+          <q-input
+            v-model="transactionCommission"
+            type="number"
+            label="Commission"
+          />
+        </div>
+        <div class="col q-pl-sm">
+          <q-select
+            v-model="transactionCommissionCurrency"
+            label="Commission currency"
+            :options="currenciesOptions"
+          />
+        </div>
+      </div>
       <q-input
         autogrow
         v-model="transactionNote"
@@ -62,10 +71,10 @@
 </template>
 
 <script>
-import { useDialogPluginComponent } from 'quasar'
+import { useDialogPluginComponent, date as quasarDate } from 'quasar'
 import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 
-import { transactionTypesEnum } from 'src/services/enums'
+import { transactionTypesEnum, currenciesOptions } from 'src/services/enums'
 
 const transactionTypes = [
   {
@@ -92,7 +101,7 @@ export default {
     ...useDialogPluginComponent.emits
   ],
   setup () {
-    const { dialogRef, onDialogHide, onDialogOk, onDialogCancel } = useDialogPluginComponent()
+    const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } = useDialogPluginComponent()
 
     const $vueInstance = getCurrentInstance()
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
@@ -112,6 +121,7 @@ export default {
     const transactionAmount = ref(null)
     const transactionPrice = ref(null)
     const transactionCommission = ref(null)
+    const transactionCommissionCurrency = ref(currenciesOptions[0])
     const transactionNote = ref(null)
 
     onMounted(async () => {
@@ -140,15 +150,22 @@ export default {
 
     const saveTransaction = async () => {
       try {
+        const asset = $store.getters['asset/ASSET_BY_ID'](transactionAsset.value.value)
+
+        console.log(transactionAsset.value.value)
+        console.log(asset)
 
         const payload = {
           amount: transactionAmount.value,
-          asset_type: transactionType.value.value,
+          asset_type: 2,
+          ticker: asset.ticker,
+          exchange: asset.exchange,
           commission: transactionCommission.value,
+          currency: transactionCommissionCurrency.value.value,
           description: transactionNote.value,
           price: transactionPrice.value,
           type: transactionType.value.value,
-          date: transactionDate.value,
+          date: quasarDate.formatDate(transactionDate.value, 'YYYY-MM-DD'),
           portfolio_id: 1
         }
 
@@ -161,7 +178,7 @@ export default {
 
     const onOKClick = () => {
       saveTransaction()
-      onDialogOk()
+      onDialogOK()
     }
 
     return {
@@ -180,7 +197,9 @@ export default {
       transactionAsset,
       transactionPrice,
       transactionNote,
-      transactionCommission
+      transactionCommission,
+      transactionCommissionCurrency,
+      currenciesOptions
     }
   }
 }
