@@ -7,6 +7,7 @@
 import { computed, defineComponent, getCurrentInstance } from 'vue'
 import { DoughnutChart, useDoughnutChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
+import { allocationTypesEnum } from 'src/services/enums'
 
 Chart.register(...registerables)
 
@@ -108,9 +109,11 @@ export default defineComponent({
       responsive: true,
       onClick: (event, array) => {
         const dataIndex = array.pop().element?.$context?.dataIndex
-        const id = currentAllocations?.value[dataIndex]?.id
+        const allocation = currentAllocations?.value[dataIndex]
 
-        emit('selected', id)
+        if (allocation.type === allocationTypesEnum.CATEGORY) {
+          emit('selected', allocation.id)
+        }
       },
       scales: {
         myScale: {
