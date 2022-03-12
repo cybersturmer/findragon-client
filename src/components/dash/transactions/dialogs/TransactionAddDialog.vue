@@ -2,6 +2,11 @@
   <q-dialog ref="dialogRef" @hide="onDialogHide">
     <q-card class="q-dialog-plugin q-px-md q-py-sm">
       <!-- Select for assets -->
+      <q-select
+        v-model="transactionAsset"
+        :options="assetsOptions"
+        label="Asset"
+      />
       <!-- Transaction Type -->
       <q-select
         v-model="transactionType"
@@ -55,7 +60,7 @@
 
 <script>
 import { useDialogPluginComponent } from 'quasar'
-import { ref } from 'vue'
+import { ref, computed, getCurrentInstance, onMounted } from 'vue'
 
 import { transactionTypesEnum } from 'src/services/enums'
 
@@ -86,9 +91,19 @@ export default {
   setup () {
     const { dialogRef, onDialogHide, onDialogOk, onDialogCancel } = useDialogPluginComponent()
 
+    const $vueInstance = getCurrentInstance()
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+
     const todayString = new Date(Date.now()).toLocaleDateString()
+    console.dir($store.getters['asset/ASSETS'])
+
+    const assets = computed(() => $store.getters['asset/ASSETS'])
+    const assetsOptions = computed(() => {
+      return assets.value.map(option => ({ label: option.description, value: option.id }))
+    })
 
     const transactionType = ref(transactionTypes[0])
+    const transactionAsset = ref(assetsOptions.value[0])
     const transactionDate = ref(todayString)
 
     const transactionAmount = ref(null)
@@ -96,7 +111,39 @@ export default {
     const transactionCommission = ref(null)
     const transactionNote = ref(null)
 
+    onMounted(async () => {
+      try {
+        const { data } = await $api.get('/assets/')
+
+        $store.commit('asset/SET_ASSETS', data)
+      } catch (e) {
+        console.error(e)
+      }
+    })
+
+    const saveTransaction = async () => {
+      try {
+
+        const payload = {
+          amount: transactionAmount.value,
+          asset_type: transactionType.value.value,
+          commission: transactionCommission.value,
+          description: transactionNote.value,
+          price: transactionPrice.value,
+          type: transactionType.value.value,
+          date: transactionDate.value,
+          portfolio_id: 1
+        }
+
+        const { data } = await $api.post('/transactions/', payload)
+        console.dir(data)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
     const onOKClick = () => {
+      saveTransaction()
       onDialogOk()
     }
 
@@ -109,6 +156,9 @@ export default {
       transactionDate,
       transactionTypes,
       transactionAmount,
+      assets,
+      assetsOptions,
+      transactionAsset,
       transactionPrice,
       transactionNote,
       transactionCommission
