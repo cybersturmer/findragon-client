@@ -17,23 +17,23 @@ export const assetTypesEnum = {
   FUND: 3
 }
 
-export const currenciesEnum = {
-  USD: 'USD',
-  RUB: 'RUB',
-  EUR: 'EUR',
-  AUD: 'AUD',
-  CAD: 'CAD',
-  CHF: 'CHF',
-  CNY: 'CNY',
-  CZK: 'CZK',
-  GBP: 'GBP',
-  HKD: 'HKD',
-  ILS: 'ILS',
-  JPY: 'JPY',
-  KZT: 'KZT',
-  PLN: 'PLN',
-  SEK: 'SEK',
-  SGD: 'SGD',
-  TRY: 'TRY',
-  UAH: 'UAH',
-}
+export const currenciesOptions = [
+  { label: 'USD', value: 'USD' },
+  { label: 'RUB', value: 'RUB' },
+  { label: 'EUR', value: 'EUR' },
+  { label: 'AUD', value: 'AUD' },
+  { label: 'CAD', value: 'CAD' },
+  { label: 'CHF', value: 'CHF' },
+  { label: 'CNY', value: 'CNY' },
+  { label: 'CZK', value: 'CZK' },
+  { label: 'GBP', value: 'GBP' },
+  { label: 'HKD', value: 'HKD' },
+  { label: 'ILS', value: 'ILS' },
+  { label: 'JPY', value: 'JPY' },
+  { label: 'KZT', value: 'KZT' },
+  { label: 'PLN', value: 'PLN' },
+  { label: 'SEK', value: 'SEK' },
+  { label: 'SGD', value: 'SGD' },
+  { label: 'TRY', value: 'TRY' },
+  { label: 'UAH', value: 'UAH' }
+]
