@@ -4,8 +4,11 @@
       <!-- Select for assets -->
       <q-select
         v-model="transactionAsset"
-        :options="assetsOptions"
+        :options="filteredAssetsOptions"
+        @filter="filterAssets"
         label="Asset"
+        use-input
+        clearable
       />
       <!-- Transaction Type -->
       <q-select
@@ -59,10 +62,10 @@
 </template>
 
 <script>
-import { useDialogPluginComponent } from 'quasar'
-import { ref, computed, getCurrentInstance, onMounted } from 'vue'
+import {useDialogPluginComponent} from 'quasar'
+import {computed, getCurrentInstance, onMounted, ref} from 'vue'
 
-import { transactionTypesEnum } from 'src/services/enums'
+import {transactionTypesEnum} from 'src/services/enums'
 
 const transactionTypes = [
   {
@@ -95,12 +98,12 @@ export default {
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
     const todayString = new Date(Date.now()).toLocaleDateString()
-    console.dir($store.getters['asset/ASSETS'])
 
     const assets = computed(() => $store.getters['asset/ASSETS'])
     const assetsOptions = computed(() => {
       return assets.value.map(option => ({ label: option.description, value: option.id }))
     })
+    const filteredAssetsOptions = ref([])
 
     const transactionType = ref(transactionTypes[0])
     const transactionAsset = ref(assetsOptions.value[0])
@@ -120,6 +123,20 @@ export default {
         console.error(e)
       }
     })
+
+    const filterAssets = (val, update, abort) => {
+      if (val === '') {
+        update(() => {
+          filteredAssetsOptions.value = assetsOptions.value
+        })
+        return
+      }
+
+      update(() => {
+        const needle = val.toLowerCase()
+        filteredAssetsOptions.value = assetsOptions.value.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+      })
+    }
 
     const saveTransaction = async () => {
       try {
@@ -158,6 +175,8 @@ export default {
       transactionAmount,
       assets,
       assetsOptions,
+      filteredAssetsOptions,
+      filterAssets,
       transactionAsset,
       transactionPrice,
       transactionNote,
