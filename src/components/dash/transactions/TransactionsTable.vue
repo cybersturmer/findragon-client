@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { date as quasarDate } from 'quasar'
+
 const transactionTypesMapping = {
   1: 'Buy',
   2: 'Sell'
@@ -78,7 +80,7 @@ const columns = [
     required: true,
     label: 'Date',
     align: 'left',
-    field: (row) => row.date,
+    field: (row) => quasarDate.formatDate(row.date, 'DD.MM.YYYY'),
     format: (val) => `${val}`,
     sortable: true
   }
