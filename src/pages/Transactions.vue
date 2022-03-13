@@ -38,17 +38,18 @@ export default {
   setup () {
     useMeta(metaData)
 
-    const transactions = ref(null)
     const $vieInstance = getCurrentInstance()
     const $q = useQuasar()
 
-    const { $api } = $vieInstance.appContext.config.globalProperties
+    const { $api, $store } = $vieInstance.appContext.config.globalProperties
+    const transactions = computed(() => {
+      return $store.getters['transaction/TRANSACTIONS']
+    })
 
     onMounted(async () => {
       try {
-        const response = await $api.get('/transactions/')
-
-        transactions.value = response.data
+        const { data } = await $api.get('/transactions/')
+        $store.commit('transaction/SET_TRANSACTIONS', data)
       } catch (e) {
         console.error(e)
       }
