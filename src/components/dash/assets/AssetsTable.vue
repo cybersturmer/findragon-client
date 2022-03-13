@@ -7,11 +7,16 @@
       :rows-per-page-options="[0]"
       :columns="columns"
       :rows="row"
+      :pagination="pagination"
     />
   </q-scroll-area>
 </template>
 
 <script>
+const pagination = {
+  sortBy: 'amount',
+  descending: true
+}
 
 const columns = [
   {
@@ -68,7 +73,8 @@ export default {
   },
   setup () {
     return {
-      columns
+      columns,
+      pagination
     }
   }
 }
