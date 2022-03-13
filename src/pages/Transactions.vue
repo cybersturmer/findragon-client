@@ -22,6 +22,7 @@
         <transactions-table
           :transactions="transactions"
           :is-editing="isEditing"
+          @completed="isEditing = !isEditing"
         />
       </div>
     </div>
