@@ -33,6 +33,7 @@
         square
         v-model="transactionPrice"
         type="number"
+        step="0.01"
         label="Price"
       />
       <!-- Note -->
@@ -40,8 +41,9 @@
         <div class="col q-pr-sm">
           <!-- Commission -->
           <q-input
-            v-model="transactionCommission"
+            v-model.number="transactionCommission"
             type="number"
+            step="0.01"
             label="Commission"
           />
         </div>
@@ -112,7 +114,7 @@ export default {
 
     const transactionAmount = ref(null)
     const transactionPrice = ref(null)
-    const transactionCommission = ref(null)
+    const transactionCommission = ref(0.0)
     const transactionCommissionCurrency = ref(currenciesOptions[0])
     const transactionNote = ref(null)
 
