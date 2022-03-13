@@ -19,7 +19,7 @@ const columns = [
     required: true,
     label: 'Title',
     align: 'left',
-    field: (row) => row.asset.description,
+    field: (row) => row.description,
     format: (val) => `${val}`,
     sortable: true
   },
@@ -28,7 +28,7 @@ const columns = [
     required: true,
     label: 'Ticker',
     align: 'center',
-    field: (row) => row.asset.ticker,
+    field: (row) => row.ticker,
     format: (val) => `${val}`,
     sortable: true
   },
