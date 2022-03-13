@@ -2,11 +2,17 @@
   <q-page padding>
     <div class="column items-end q-pb-md">
       <div class="col">
+        <q-btn-group outline>
         <q-btn
           flat
           label="Add transaction"
           @click="openAddTransactionDialog"
         />
+        <q-btn
+          flat
+          label="Edit"
+        />
+        </q-btn-group>
       </div>
     </div>
     <div v-if="isTransactionsDataAvailable"
