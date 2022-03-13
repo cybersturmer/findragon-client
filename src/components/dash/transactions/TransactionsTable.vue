@@ -4,10 +4,12 @@
     bordered
     separator="horizontal"
     :rows-per-page-options="[0]"
+    v-model:selected="selectedTableRows"
     :selection="selection"
-    :pagination="pagination"
     :columns="columns"
-    :rows="transactions">
+    :rows="transactions"
+    :pagination="pagination"
+  >
     <template #body-cell-type="props">
       <q-td key="type" :props="props">
         <q-icon
@@ -23,8 +25,9 @@
         outline>
         <q-btn
           outline
-          :disable="areSelected"
+          :disable="!areSelected"
           label="Remove"
+          @click="removeTransactions"
         />
         <q-btn
           outline
@@ -129,6 +132,27 @@ export default {
       return Array.isArray(selectedTableRows.value) && selectedTableRows.value.length > 0
     })
 
+    const removeTransaction = async (id) => {
+      try {
+        await $api.delete(`/transactions/${id}`)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    const removeTransactions = async () => {
+      try {
+        for (const el of selectedTableRows.value) {
+          await removeTransaction(el.id)
+        }
+
+        $store.commit('transaction/REMOVE_TRANSACTIONS', selectedTableRows.value)
+        selectedTableRows.value = []
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
     const completeEditing = () => {
       selectedTableRows.value = []
       emit('completed')
@@ -140,6 +164,8 @@ export default {
       selection,
       areSelected,
       completeEditing,
+      removeTransactions,
+      selectedTableRows,
       transactionTypeIconsMapping
     }
   }
