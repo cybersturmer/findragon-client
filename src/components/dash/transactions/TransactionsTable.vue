@@ -4,9 +4,10 @@
     bordered
     separator="horizontal"
     :rows-per-page-options="[0]"
+    :selection="selection"
     :pagination="pagination"
     :columns="columns"
-    :rows="row">
+    :rows="transactions">
     <template #body-cell-type="props">
       <q-td key="type" :props="props">
         <q-icon
@@ -17,11 +18,27 @@
         {{ props.value }}
       </q-td>
     </template>
+    <template v-if="isEditing" #top-right>
+      <q-btn-group
+        outline>
+        <q-btn
+          outline
+          :disable="areSelected"
+          label="Remove"
+        />
+        <q-btn
+          outline
+          label="Complete"
+          @click="completeEditing"
+        />
+      </q-btn-group>
+    </template>
   </q-table>
 </template>
 
 <script>
 import { date as quasarDate } from 'quasar'
+import { ref, computed, getCurrentInstance } from 'vue'
 
 const transactionTypesMapping = {
   1: 'Buy',
@@ -95,12 +112,34 @@ const columns = [
 export default {
   name: 'TransactionsTable',
   props: {
-    row: Array
+    transactions: Array,
+    isEditing: Boolean
   },
-  setup () {
+  setup (props, { emit }) {
+    const $vueInstance = getCurrentInstance()
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+
+    // We can select one or none row in the table
+    const selection = computed(() => {
+      return props.isEditing ? 'multiple' : 'none'
+    })
+
+    const selectedTableRows = ref([])
+    const areSelected = computed(() => {
+      return Array.isArray(selectedTableRows.value) && selectedTableRows.value.length > 0
+    })
+
+    const completeEditing = () => {
+      selectedTableRows.value = []
+      emit('completed')
+    }
+
     return {
       columns,
       pagination,
+      selection,
+      areSelected,
+      completeEditing,
       transactionTypeIconsMapping
     }
   }
