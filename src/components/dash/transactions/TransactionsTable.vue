@@ -4,6 +4,7 @@
     bordered
     separator="horizontal"
     :rows-per-page-options="[0]"
+    :pagination="pagination"
     :columns="columns"
     :rows="row">
     <template #body-cell-type="props">
@@ -38,11 +39,16 @@ const transactionTypeIconsMapping = {
   }
 }
 
+const pagination = {
+  sortBy: 'date',
+  descending: true
+}
+
 const columns = [
   {
     name: 'type',
     required: true,
-    label: 'Transaction',
+    label: 'Operation',
     align: 'left',
     field: (row) => row.type,
     format: (val) => `${transactionTypesMapping[val]}`,
@@ -94,6 +100,7 @@ export default {
   setup () {
     return {
       columns,
+      pagination,
       transactionTypeIconsMapping
     }
   }
