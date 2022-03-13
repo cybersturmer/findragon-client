@@ -11,6 +11,7 @@
         <q-btn
           flat
           label="Edit"
+          @click="changeEditingMode"
         />
         </q-btn-group>
       </div>
@@ -18,7 +19,10 @@
     <div v-if="isTransactionsDataAvailable"
          class="column">
       <div class="col">
-        <transactions-table :row="transactions" />
+        <transactions-table
+          :transactions="transactions"
+          :is-editing="isEditing"
+        />
       </div>
     </div>
   </q-page>
@@ -46,6 +50,8 @@ export default {
 
     const $vieInstance = getCurrentInstance()
     const $q = useQuasar()
+
+    const isEditing = ref(false)
 
     const { $api, $store } = $vieInstance.appContext.config.globalProperties
     const transactions = computed(() => {
@@ -79,10 +85,16 @@ export default {
       })
     }
 
+    const changeEditingMode = () => {
+      isEditing.value = !isEditing.value
+    }
+
     return {
+      isEditing,
       transactions,
       isTransactionsDataAvailable,
-      openAddTransactionDialog
+      openAddTransactionDialog,
+      changeEditingMode
     }
   }
 }
