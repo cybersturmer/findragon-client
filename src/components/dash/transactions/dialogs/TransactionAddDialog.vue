@@ -159,7 +159,7 @@ export default {
 
         const { data } = await $api.post('/transactions/', payload)
 
-        $store.commit()
+        $store.commit('transaction/ADD_TRANSACTION', data)
       } catch (e) {
         console.error(e)
       }
