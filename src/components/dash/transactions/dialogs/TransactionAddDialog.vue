@@ -84,14 +84,6 @@ const transactionTypes = [
   {
     label: 'Sell',
     value: transactionTypesEnum.SELL
-  },
-  {
-    label: 'Dividends',
-    value: transactionTypesEnum.DIVIDENDS
-  },
-  {
-    label: 'Coupon',
-    value: transactionTypesEnum.COUPON
   }
 ]
 
@@ -152,7 +144,7 @@ export default {
       try {
         const asset = $store.getters['asset/ASSET_BY_ID'](transactionAsset.value.value)
         const payload = {
-          amount: transactionAmount.value,
+          amount: parseInt(transactionAmount.value),
           asset_type: 2,
           ticker: asset.ticker,
           exchange: asset.exchange,
@@ -166,7 +158,8 @@ export default {
         }
 
         const { data } = await $api.post('/transactions/', payload)
-        console.dir(data)
+
+        $store.commit()
       } catch (e) {
         console.error(e)
       }
