@@ -1,9 +1,9 @@
 <template>
   <q-table
-    v-model:selected="selectedTableRows"
     flat
     bordered
     separator="horizontal"
+    v-model:selected="selectedTableRows"
     :rows-per-page-options="[0]"
     :selection="selection"
     :columns="columns"
