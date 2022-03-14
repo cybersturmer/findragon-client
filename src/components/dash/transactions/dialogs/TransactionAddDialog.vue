@@ -19,8 +19,9 @@
       <!-- Date -->
       <q-date
         v-model="transactionDate"
-        mask="MM/DD/YYYY"
+        :mask="dateFormat"
         minimal
+        flat
       />
       <!-- Amount -->
       <q-input
@@ -78,6 +79,8 @@ import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 
 import { transactionTypesEnum, currenciesOptions } from 'src/services/enums'
 
+const dateFormat = 'MM/DD/YYYY'
+
 const transactionTypes = [
   {
     label: 'Buy',
@@ -100,7 +103,7 @@ export default {
     const $vueInstance = getCurrentInstance()
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
-    const todayString = new Date(Date.now()).toLocaleDateString()
+    const todayString = quasarDate.formatDate(new Date(), dateFormat)
 
     const assets = computed(() => $store.getters['asset/ASSETS'])
     const assetsOptions = computed(() => {
@@ -182,6 +185,7 @@ export default {
       transactionTypes,
       transactionAmount,
       assets,
+      dateFormat,
       assetsOptions,
       filteredAssetsOptions,
       filterAssets,
