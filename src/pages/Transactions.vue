@@ -9,6 +9,7 @@
           @click="openAddTransactionDialog"
         />
         <q-btn
+          v-if="!isEditing"
           flat
           label="Edit"
           @click="changeEditingMode"
