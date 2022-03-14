@@ -3,7 +3,9 @@
     <div v-if="isAssetsDataAvailable"
          class="column">
       <div class="col">
-        <assets-table :row="assets" />
+        <assets-table
+          :assets="assets"
+        />
       </div>
     </div>
   </q-page>
