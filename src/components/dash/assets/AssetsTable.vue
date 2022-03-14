@@ -6,15 +6,14 @@
       separator="horizontal"
       :rows-per-page-options="[0]"
       :columns="columns"
-      :rows="assets"
+      :rows="filteredAssets"
       :pagination="pagination"
-      :filter-method="filterSoldMethod"
     />
   </q-scroll-area>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const pagination = {
   sortBy: 'amount',
@@ -83,11 +82,17 @@ export default {
   props: {
     assets: Array
   },
-  setup () {
+  setup (props) {
+    const showSold = ref('false')
+
+    const filteredAssets = computed(() => {
+      return props.assets.filter(asset => asset.amount > 0)
+    })
+
     return {
       columns,
       pagination,
-      filterSoldMethod
+      filteredAssets
     }
   }
 }
