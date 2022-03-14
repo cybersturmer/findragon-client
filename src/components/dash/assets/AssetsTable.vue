@@ -6,13 +6,16 @@
       separator="horizontal"
       :rows-per-page-options="[0]"
       :columns="columns"
-      :rows="row"
+      :rows="assets"
       :pagination="pagination"
+      :filter-method="filterSoldMethod"
     />
   </q-scroll-area>
 </template>
 
 <script>
+import { ref } from 'vue'
+
 const pagination = {
   sortBy: 'amount',
   descending: true
@@ -66,15 +69,25 @@ const columns = [
   }
 ]
 
+const filterSoldMethod = (rows, terms, cols, getCellValue) => {
+  console.dir(rows)
+  console.dir(terms)
+  console.dir(cols)
+  console.dir(getCellValue)
+
+  return rows
+}
+
 export default {
   name: 'AssetsTable',
   props: {
-    row: Array
+    assets: Array
   },
   setup () {
     return {
       columns,
-      pagination
+      pagination,
+      filterSoldMethod
     }
   }
 }
