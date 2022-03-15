@@ -17,7 +17,7 @@
         </q-btn-group>
       </div>
     </div>
-    <div v-if="isTransactionsDataAvailable"
+    <div v-if="isDataAvailable"
          class="column">
       <div class="col">
         <transactions-table
