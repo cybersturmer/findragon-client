@@ -21,6 +21,11 @@ export default {
     const $q = useQuasar()
 
     const isEditing = ref(false)
+
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+    const income = computed(() => {
+
+    })
   }
 }
 </script>
