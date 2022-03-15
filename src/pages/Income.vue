@@ -34,6 +34,10 @@ export default {
         console.error(e)
       }
     })
+
+    const isDataAvailable = computed(() => {
+      return Array.isArray(income.value) && income.value.length > 0
+    })
   }
 }
 </script>
