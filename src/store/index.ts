@@ -2,9 +2,10 @@ import {store} from 'quasar/wrappers';
 import {InjectionKey} from 'vue';
 import {createStore, Store as VuexStore, useStore as vuexUseStore,} from 'vuex';
 
-import transaction from './transaction'
-import allocation from './allocation'
 import asset from './asset'
+import income from './income'
+import allocation from './allocation'
+import transaction from './transaction'
 
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
@@ -41,6 +42,7 @@ export default store(function (/* { ssrContext } */) {
     modules: {
       transaction,
       allocation,
+      income,
       asset
     },
 
