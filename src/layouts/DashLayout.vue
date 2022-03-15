@@ -60,8 +60,14 @@ const linksList = [
   {
     title: 'Transactions',
     caption: null,
-    icon: 'shopping_bag',
+    icon: 'handshake',
     route: 'transactions_view'
+  },
+  {
+    title: 'Income',
+    caption: null,
+    icon: 'poll',
+    route: 'income_view'
   }
 ]
 
