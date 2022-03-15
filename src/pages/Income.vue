@@ -23,8 +23,16 @@ export default {
     const isEditing = ref(false)
 
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
-    const income = computed(() => {
+    const income = computed(() => $store.getters['income/INCOME'])
 
+    onMounted(async () => {
+      try {
+        const { data } = await $api.get('/income/')
+
+        $store.commit('income/SET_INCOME', data)
+      } catch (e) {
+        console.error(e)
+      }
     })
   }
 }
