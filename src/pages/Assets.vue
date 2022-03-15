@@ -42,13 +42,13 @@ export default {
       }
     })
 
-    const isAssetsDataAvailable = computed(() => {
+    const isDataAvailable = computed(() => {
       return Array.isArray(assets.value) && assets.value.length > 0
     })
 
     return {
       assets,
-      isAssetsDataAvailable
+      isDataAvailable
     }
   }
 }
