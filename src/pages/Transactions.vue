@@ -69,7 +69,7 @@ export default {
       }
     })
 
-    const isTransactionsDataAvailable = computed(() => {
+    const isDataAvailable = computed(() => {
       return Array.isArray(transactions.value) && transactions.value.length > 0
     })
 
@@ -94,7 +94,7 @@ export default {
     return {
       isEditing,
       transactions,
-      isTransactionsDataAvailable,
+      isDataAvailable,
       openAddTransactionDialog,
       changeEditingMode
     }
