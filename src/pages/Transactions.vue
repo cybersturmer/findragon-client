@@ -50,12 +50,12 @@ export default {
   setup () {
     useMeta(metaData)
 
-    const $vieInstance = getCurrentInstance()
+    const $vueInstance = getCurrentInstance()
     const $q = useQuasar()
 
     const isEditing = ref(false)
 
-    const { $api, $store } = $vieInstance.appContext.config.globalProperties
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
     const transactions = computed(() => {
       return $store.getters['transaction/TRANSACTIONS']
     })
