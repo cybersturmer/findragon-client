@@ -68,15 +68,6 @@ const columns = [
   }
 ]
 
-const filterSoldMethod = (rows, terms, cols, getCellValue) => {
-  console.dir(rows)
-  console.dir(terms)
-  console.dir(cols)
-  console.dir(getCellValue)
-
-  return rows
-}
-
 export default {
   name: 'AssetsTable',
   props: {
