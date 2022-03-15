@@ -5,7 +5,16 @@
 </template>
 
 <script>
+import { useMeta, useQuasar } from 'quasar'
+
+const metaData = {
+  title: 'Income'
+}
+
 export default {
-  // name: 'PageName',
+  name: 'Income',
+  setup () {
+
+  }
 }
 </script>
