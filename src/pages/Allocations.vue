@@ -233,7 +233,7 @@ export default defineComponent({
       }
     })
 
-    const isAllocationDataAvailable = computed(() => {
+    const isDataAvailable = computed(() => {
       return allocations.value.length > 0
     })
 
@@ -246,7 +246,7 @@ export default defineComponent({
       selectNode,
       selectParentNode,
       flexButtonTitle,
-      isAllocationDataAvailable,
+      isDataAvailable,
       editAllocation,
       changeEditingMode,
       openAddAllocationCategoryDialog,
