@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div v-if="isAssetsDataAvailable"
+    <div v-if="isDataAvailable"
          class="column">
       <div class="col">
         <assets-table
