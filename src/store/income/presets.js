@@ -3,14 +3,14 @@ import { LocalStorage } from 'quasar'
 export const empty = () => {
   return {
     enabled: false,
-    income: []
+    incomes: []
   }
 }
 
 export const restored = () => {
   return {
     enabled: LocalStorage.getItem('income.enabled'),
-    allocations: LocalStorage.getItem('income.income') || empty().allocations
+    incomes: LocalStorage.getItem('income.incomes') || empty().incomes
   }
 }
 
