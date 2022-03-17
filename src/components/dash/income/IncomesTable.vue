@@ -1,5 +1,16 @@
 <template>
-  <div>My component</div>
+  <q-table
+  flat
+  bordered
+  separator="horizontal"
+  :rows-per-page-options="[0]"
+  v-model:selected="selectedTableRows"
+  :selection="selection",
+  :columns="columns"
+  :rows="incomes"
+  :pagination="pagination"
+  >
+  </q-table>
 </template>
 
 <script>
@@ -67,6 +78,11 @@ const columns = [
     sortable: true
   }
 ]
+
+const pagination = {
+  sortBy: 'date',
+  descending: true
+}
 
 export default {
   name: 'IncomesTable',
