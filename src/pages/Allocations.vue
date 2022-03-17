@@ -68,7 +68,7 @@
             />
         </div>
         <div class="col">
-          <allocation-table
+          <allocations-table
             :current-node-id="currentNodeId"
             :is-editing="isEditing"
             @edit="editAllocation($event)"
@@ -94,7 +94,7 @@ import { useMeta, useQuasar } from 'quasar'
 
 import { allocationTypesEnum } from 'src/services/enums'
 
-import AllocationTable from 'components/dash/allocations/AllocationTable.vue'
+import AllocationsTable from 'components/dash/allocations/AllocationsTable.vue'
 import AllocationChart from 'components/dash/allocations/AllocationChart.vue'
 import AllocationAssetDialog from 'components/dash/allocations/dialogs/AllocationAssetDialog.vue'
 import AllocationCategoryDialog from 'components/dash/allocations/dialogs/AllocationCategoryDialog.vue'
@@ -108,7 +108,7 @@ export default defineComponent({
   name: 'Allocations',
   components: {
     AllocationChart,
-    AllocationTable
+    AllocationsTable
   },
   setup () {
     useMeta(metaData)
