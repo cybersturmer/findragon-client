@@ -28,9 +28,9 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/Transactions.vue')
       },
       {
-        name: 'income_view',
-        path: '/income',
-        component: () => import('pages/Income.vue')
+        name: 'incomes_view',
+        path: '/incomes',
+        component: () => import('pages/Incomes.vue')
       }
     ],
   },
