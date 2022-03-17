@@ -13,7 +13,7 @@ const metaData = {
 }
 
 export default {
-  name: 'Income',
+  name: 'Incomes',
   setup () {
     useMeta(metaData)
 
