@@ -4,9 +4,15 @@
 
 <script>
 export default {
-  // name: 'ComponentName',
+  name: 'IncomesTable',
+  props: {
+    incomes: Array,
+    isEditing: Boolean
+  },
   setup () {
-    return {}
+    return {
+
+    }
   }
 }
 </script>
