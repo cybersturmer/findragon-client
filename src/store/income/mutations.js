@@ -12,7 +12,7 @@ const storageUtil = new StorageUtil(
 )
 
 const saveIncomeState = (state) => {
-  storageUtil.setState('income', state.income)
+  storageUtil.setState('incomes', state.incomes)
 }
 
 export function ACTIVATE (state) {
@@ -20,29 +20,29 @@ export function ACTIVATE (state) {
   storageUtil.setState('enabled', true)
 }
 
-export function SET_INCOME (state, payload) {
-  state.income = payload
+export function SET_INCOMES (state, payload) {
+  state.incomes = payload
   saveIncomeState(state)
 }
 
 export function ADD_INCOME (state, payload) {
-  state.income.push(payload)
+  state.incomes.push(payload)
   saveIncomeState(state)
 }
 
 export function UPDATE_INCOME (state, payload) {
-  updateElementById(state.income, payload)
+  updateElementById(state.incomes, payload)
   saveIncomeState(state)
 }
 
 export function REMOVE_INCOME (state, payload) {
-  removeElementById(state.income, payload)
+  removeElementById(state.incomes, payload)
   saveIncomeState(state)
 }
 
 export function REMOVE_INCOMES (state, payload) {
   for (const element of payload) {
-    removeElementById(state.income, element)
+    removeElementById(state.incomes, element)
   }
   saveIncomeState(state)
 }
