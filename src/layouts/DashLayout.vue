@@ -64,10 +64,10 @@ const linksList = [
     route: 'transactions_view'
   },
   {
-    title: 'Income',
+    title: 'Incomes',
     caption: null,
     icon: 'poll',
-    route: 'income_view'
+    route: 'incomes_view'
   }
 ]
 
