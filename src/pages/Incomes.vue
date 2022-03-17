@@ -27,7 +27,7 @@ export default {
 
     onMounted(async () => {
       try {
-        const { data } = await $api.get('/income/')
+        const { data } = await $api.get('/incomes/')
 
         $store.commit('income/SET_INCOME', data)
       } catch (e) {
