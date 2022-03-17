@@ -10,7 +10,7 @@ export const empty = () => {
 export const restored = () => {
   return {
     enabled: LocalStorage.getItem('asset.enabled'),
-    allocations: LocalStorage.getItem('asset.assets') || empty().allocations
+    assets: LocalStorage.getItem('asset.assets') || empty().assets
   }
 }
 
