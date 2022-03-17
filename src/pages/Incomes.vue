@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <!-- content -->
+    <incomes-table :incomes="incomes" :is-editing="false"/>
   </q-page>
 </template>
 
@@ -8,12 +8,17 @@
 import { useMeta, useQuasar } from 'quasar'
 import { getCurrentInstance, onMounted, ref, computed } from 'vue'
 
+import IncomesTable from 'components/dash/income/IncomesTable.vue'
+
 const metaData = {
   title: 'Incomes'
 }
 
 export default {
   name: 'Incomes',
+  components: {
+    IncomesTable
+  },
   setup () {
     useMeta(metaData)
 
@@ -38,6 +43,10 @@ export default {
     const isDataAvailable = computed(() => {
       return Array.isArray(incomes.value) && incomes.value.length > 0
     })
+
+    return {
+      incomes
+    }
   }
 }
 </script>
