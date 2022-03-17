@@ -5,11 +5,20 @@
   separator="horizontal"
   :rows-per-page-options="[0]"
   v-model:selected="selectedTableRows"
-  :selection="selection",
+  :selection="selection"
   :columns="columns"
   :rows="incomes"
   :pagination="pagination"
   >
+    <template #body-cell-operation="props">
+      <q-td key="type" :props="props">
+        <q-icon
+          :name="operationTypesMapping[props.row.operation]"
+          size="md"
+        />
+        {{ props.value }}
+      </q-td>
+    </template>
   </q-table>
 </template>
 
@@ -22,6 +31,13 @@ import {
 
 import { date as quasarDate } from 'quasar'
 
+const operationTypesMapping = {
+  1: 'Dividends',
+  2: 'Shares',
+  3: 'Coupons',
+  4: 'Other'
+}
+
 const columns = [
   {
     name: 'operation',
@@ -29,7 +45,7 @@ const columns = [
     label: 'Operation',
     align: 'left',
     field: (row) => row.operation,
-    format: (val) => `${val}`,
+    format: (val) => `${operationTypesMapping[val]}`,
     sortable: true
   },
   {
@@ -37,7 +53,9 @@ const columns = [
     required: true,
     label: 'Asset',
     align: 'left',
-    field: (row) => row.asset.description,
+    field: (row) => row.asset.description ?
+      row.asset.description :
+      `${row.asset.ticker}.${row.asset.exchange}`,
     format: (val) => `${val}`,
     sortable: true
   },
@@ -134,6 +152,7 @@ export default {
       pagination,
       selection,
       areSelected,
+      operationTypesMapping,
       completeEditing,
       removeIncomes,
       selectedTableRows
