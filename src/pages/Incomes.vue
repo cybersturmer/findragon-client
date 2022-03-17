@@ -9,7 +9,7 @@ import { useMeta, useQuasar } from 'quasar'
 import { getCurrentInstance, onMounted, ref, computed } from 'vue'
 
 const metaData = {
-  title: 'Income'
+  title: 'Incomes'
 }
 
 export default {
@@ -23,20 +23,20 @@ export default {
     const isEditing = ref(false)
 
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
-    const income = computed(() => $store.getters['income/INCOME'])
+    const incomes = computed(() => $store.getters['income/INCOMES'])
 
     onMounted(async () => {
       try {
         const { data } = await $api.get('/incomes/')
 
-        $store.commit('income/SET_INCOME', data)
+        $store.commit('income/SET_INCOMES', data)
       } catch (e) {
         console.error(e)
       }
     })
 
     const isDataAvailable = computed(() => {
-      return Array.isArray(income.value) && income.value.length > 0
+      return Array.isArray(incomes.value) && incomes.value.length > 0
     })
   }
 }
