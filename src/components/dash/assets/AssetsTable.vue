@@ -74,10 +74,14 @@ export default {
     assets: Array
   },
   setup (props) {
-    const showSold = ref('false')
+    const showSold = ref(true)
 
     const filteredAssets = computed(() => {
-      return props.assets.filter(asset => asset.amount > 0)
+      if (showSold) {
+        return props.assets
+      } else {
+        return props.assets.filter(asset => asset.amount > 0)
+      }
     })
 
     return {
