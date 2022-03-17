@@ -127,7 +127,7 @@ const columns = [
 ]
 
 export default defineComponent({
-  name: 'AllocationTable',
+  name: 'AllocationsTable',
   emits: [
     'completed',
     'selected',
