@@ -18,7 +18,11 @@
       </div>
       <div class="row">
         <div class="col">
-          <incomes-table :incomes="incomes" :is-editing="false"/>
+          <incomes-table
+            :incomes="incomes"
+            :is-editing="isEditing"
+            @completed="isEditing = !isEditing"
+          />
         </div>
       </div>
     </div>
