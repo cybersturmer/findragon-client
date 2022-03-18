@@ -13,8 +13,10 @@
     <template #body-cell-operation="props">
       <q-td key="type" :props="props">
         <q-icon
-          :name="operationTypesMapping[props.row.operation]"
-          size="md"
+          name="paid"
+          color="positive"
+          size="xs"
+          class="q-mr-sm"
         />
         {{ props.value }}
       </q-td>
