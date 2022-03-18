@@ -22,11 +22,12 @@
               size="md"
               @click="emitAllocationEdit(props.row)"
             />
-            <q-icon
+            <q-img
               v-if="props.row.type !== allocationTypesEnum.CATEGORY"
-              :name="icons[props.row.type]"
-              size="sm"
+              height="35px"
+              width="35px"
               class="q-mr-md"
+              :src="`https://eodhistoricaldata.com/img/logos/${props.row.asset.exchange}/${props.row.asset.ticker}.png`"
             />
             <q-btn
               v-else
