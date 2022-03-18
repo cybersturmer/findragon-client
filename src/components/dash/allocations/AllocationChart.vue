@@ -35,6 +35,7 @@ const emptyDoughnutPlugin = {
 
       ctx.beginPath()
       ctx.lineWidth = width || 2
+      ctx.setLineDash([2, 4])
       ctx.strokeStyle = color || chartPrimaryColor
       ctx.arc(centerX, centerY, (r - radiusDecrease || 0), 0, 2 * Math.PI)
       ctx.stroke()
