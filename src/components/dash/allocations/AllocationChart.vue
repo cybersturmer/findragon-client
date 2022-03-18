@@ -38,8 +38,6 @@ const emptyDoughnutPlugin = {
       ctx.strokeStyle = color || chartPrimaryColor
       ctx.arc(centerX, centerY, (r - radiusDecrease || 0), 0, 2 * Math.PI)
       ctx.stroke()
-
-      ctx.globalAlpha = 0.85
     }
 
 
