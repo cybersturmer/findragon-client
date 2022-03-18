@@ -26,7 +26,9 @@ const columns = [
     required: true,
     label: 'Title',
     align: 'left',
-    field: (row) => row.description,
+    field: (row) => row.description ?
+      row.description :
+      `${row.ticker}.${row.exchange}`,
     format: (val) => `${val}`,
     sortable: true
   },
@@ -36,6 +38,15 @@ const columns = [
     label: 'Ticker',
     align: 'center',
     field: (row) => row.ticker,
+    format: (val) => `${val}`,
+    sortable: true
+  },
+  {
+    name: 'exchange',
+    required: true,
+    label: 'Exchange',
+    align: 'center',
+    field: (row) => row.exchange,
     format: (val) => `${val}`,
     sortable: true
   },
