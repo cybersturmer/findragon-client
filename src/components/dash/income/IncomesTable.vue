@@ -21,6 +21,21 @@
         {{ props.value }}
       </q-td>
     </template>
+    <template v-if="isEditing" #top-right="props">
+      <q-btn-group outline>
+        <q-btn
+          outline
+          label="Remove"
+          :disable="!areSelected"
+          @click="removeIncomes"
+        />
+        <q-btn
+          outline
+          label="Complete"
+          @click="completeEditing"
+        />
+      </q-btn-group>
+    </template>
   </q-table>
 </template>
 
