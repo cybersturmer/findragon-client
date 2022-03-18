@@ -8,7 +8,19 @@
       :columns="columns"
       :rows="filteredAssets"
       :pagination="pagination"
-    />
+    >
+      <template #body-cell-title="props">
+        <q-td key="title" :props="props">
+          <q-img
+            height="35px"
+            width="35px"
+            class="q-mr-md"
+            :src="`https://eodhistoricaldata.com/img/logos/${props.row.exchange}/${props.row.ticker}.png`"
+          />
+          {{ props.value }}
+        </q-td>
+      </template>
+    </q-table>
   </q-scroll-area>
 </template>
 
