@@ -1,6 +1,27 @@
 <template>
   <q-page padding>
-    <incomes-table :incomes="incomes" :is-editing="false"/>
+    <div>
+      <div class="column items-end q-pb-md">
+        <div class="col">
+          <q-btn-group>
+            <q-btn
+              label="Add income"
+            />
+            <q-btn
+              v-if="!isEditing"
+              flat
+              label="Edit"
+              @click="changeEditingMode"
+            />
+          </q-btn-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <incomes-table :incomes="incomes" :is-editing="false"/>
+        </div>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -26,6 +47,9 @@ export default {
     const $q = useQuasar()
 
     const isEditing = ref(false)
+    const changeEditingMode = () => {
+      isEditing.value = !isEditing.value
+    }
 
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
     const incomes = computed(() => $store.getters['income/INCOMES'])
@@ -45,7 +69,9 @@ export default {
     })
 
     return {
-      incomes
+      incomes,
+      isEditing,
+      changeEditingMode
     }
   }
 }
