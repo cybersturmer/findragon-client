@@ -15,6 +15,13 @@ export const assetTypesEnum = {
   FUND: 3
 }
 
+export const operationTypesMapping = {
+  1: 'Dividends',
+  2: 'Shares',
+  3: 'Coupons',
+  4: 'Other'
+}
+
 export const currenciesOptions = [
   { label: 'RUB', value: 'RUB' },
   { label: 'USD', value: 'USD' },
