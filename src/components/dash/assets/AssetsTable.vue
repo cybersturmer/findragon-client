@@ -1,5 +1,5 @@
 <template>
-  <q-scroll-area style="height: 90vh">
+  <q-scroll-area style="height: 85vh">
     <q-table
       flat
       bordered
@@ -100,13 +100,12 @@ export default {
     AssetIcon
   },
   props: {
-    assets: Array
+    assets: Array,
+    showSold: Boolean
   },
   setup (props) {
-    const showSold = ref(true)
-
     const filteredAssets = computed(() => {
-      if (showSold) {
+      if (props.showSold) {
         return props.assets
       } else {
         return props.assets.filter(asset => asset.amount > 0)
