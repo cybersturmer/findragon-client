@@ -28,7 +28,7 @@
 
 <script>
 import { computed, ref } from 'vue'
-import AssetIcon from "./AssetIcon";
+import AssetIcon from 'src/components/dash/assets/AssetIcon.vue'
 
 const pagination = {
   sortBy: 'amount',
@@ -96,7 +96,9 @@ const columns = [
 
 export default {
   name: 'AssetsTable',
-  components: {AssetIcon},
+  components: {
+    AssetIcon
+  },
   props: {
     assets: Array
   },
