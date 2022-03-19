@@ -59,7 +59,7 @@
         </div>
       </div>
       <div class="row">
-        <div v-show="!isEditing" class="col-4">
+        <div v-show="!isEditing" class="col-auto q-px-md">
             <allocation-chart
               :current-node="currentNodeId"
               :row="allocations"
