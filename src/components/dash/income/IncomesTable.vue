@@ -47,7 +47,7 @@ import {
 } from 'vue'
 
 import { date as quasarDate } from 'quasar'
-import { operationTypesMapping } from 'src/services/enums'
+import { incomeTypesMapping } from 'src/services/enums'
 
 const columns = [
   {
@@ -56,7 +56,7 @@ const columns = [
     label: 'Operation',
     align: 'left',
     field: (row) => row.operation,
-    format: (val) => `${operationTypesMapping[val]}`,
+    format: (val) => `${incomeTypesMapping[val]}`,
     sortable: true
   },
   {
@@ -163,7 +163,7 @@ export default {
       pagination,
       selection,
       areSelected,
-      operationTypesMapping,
+      operationTypesMapping: incomeTypesMapping,
       completeEditing,
       removeIncomes,
       selectedTableRows
