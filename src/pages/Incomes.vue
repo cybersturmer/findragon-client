@@ -6,6 +6,7 @@
           <q-btn-group>
             <q-btn
               label="Add income"
+              @click="openAddIncomeDialog"
             />
             <q-btn
               v-if="!isEditing"
@@ -34,6 +35,7 @@ import { useMeta, useQuasar } from 'quasar'
 import { getCurrentInstance, onMounted, ref, computed } from 'vue'
 
 import IncomesTable from 'components/dash/income/IncomesTable.vue'
+import IncomeDialog from 'components/dash/income/dialogs/IncomeDialog.vue'
 
 const metaData = {
   title: 'Incomes'
@@ -58,6 +60,30 @@ export default {
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
     const incomes = computed(() => $store.getters['income/INCOMES'])
 
+    const openEditIncomeDialog = () => {
+      $q.dialog({
+        component: IncomeDialog,
+        componentProps: {
+          editing: true
+        },
+        parent: this,
+        cancel: true,
+        persistent: true
+      })
+    }
+
+    const openAddIncomeDialog = () => {
+      $q.dialog({
+        component: IncomeDialog,
+        componentProps: {
+          editing: false
+        },
+        parent: this,
+        cancel: true,
+        persistent: true
+      })
+    }
+
     onMounted(async () => {
       try {
         const { data } = await $api.get('/incomes/')
@@ -75,7 +101,8 @@ export default {
     return {
       incomes,
       isEditing,
-      changeEditingMode
+      changeEditingMode,
+      openAddIncomeDialog
     }
   }
 }
