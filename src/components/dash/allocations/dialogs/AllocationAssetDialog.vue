@@ -79,7 +79,7 @@ export default {
     const saveAllocation = async () => {
       try {
         const payload = {
-          type: 1,
+          type: 1,  // Hardcoded because menu point mean we create Asset
           title: `${ticker.value}.${exchange.value}`,
           portfolio_id: 1, // It should be defined from $store.
           category_ratio: parseInt(ratio.value) * 100,
