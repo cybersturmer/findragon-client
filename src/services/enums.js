@@ -15,7 +15,7 @@ export const assetTypesEnum = {
   FUND: 3
 }
 
-export const operationTypesMapping = {
+export const incomeTypesMapping = {
   1: 'Dividends',
   2: 'Shares',
   3: 'Coupons',
