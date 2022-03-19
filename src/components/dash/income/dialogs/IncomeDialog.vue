@@ -57,6 +57,19 @@ export default {
       return props.editing
     })
 
+    const ticker = ref('')
+    const exchange = ref('')
+
+    const saveIncome = async () => {
+      try {
+        const payload = {
+
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
     return {
       dialogRef,
       onDialogHide
