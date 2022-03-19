@@ -46,6 +46,7 @@ export default {
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
     const todayString = quasarDate.formatDate(new Date(), dateFormat)
+
     const assets = computed(() => $store.getters['asset/ASSETS'])
     const assetsOptions = computed(() => {
       return assets.value.map(option => ({ label: option.description, value: option.id }))
