@@ -11,13 +11,15 @@
     >
       <template #body-cell-title="props">
         <q-td key="title" :props="props">
-          <q-img
-            height="35px"
-            width="35px"
-            class="q-mr-md"
-            :src="`https://eodhistoricaldata.com/img/logos/${props.row.exchange}/${props.row.ticker}.png`"
-          />
-          {{ props.value }}
+          <div class="row items-center">
+            <asset-icon
+              :ticker="props.row.ticker"
+              :exchange="props.row.exchange"
+            />
+            <div class="col q-pa-md">
+              {{ props.value }}
+            </div>
+          </div>
         </q-td>
       </template>
     </q-table>
@@ -26,6 +28,7 @@
 
 <script>
 import { computed, ref } from 'vue'
+import AssetIcon from "./AssetIcon";
 
 const pagination = {
   sortBy: 'amount',
@@ -93,6 +96,7 @@ const columns = [
 
 export default {
   name: 'AssetsTable',
+  components: {AssetIcon},
   props: {
     assets: Array
   },
