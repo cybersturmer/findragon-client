@@ -38,11 +38,24 @@ import { computed, getCurrentInstance, ref } from 'vue'
 
 export default {
   name: 'IncomeDialog',
-  setup () {
+  emits: [
+    ...useDialogPluginComponent.emits
+  ],
+  props: {
+    editing: {
+      type: Boolean,
+      required: true
+    }
+  },
+  setup (props) {
     const { dialogRef, onDialogHide, onDialogOK } = useDialogPluginComponent()
 
     const $vueInstance = getCurrentInstance()
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
+
+    const isEditing = computed(() => {
+      return props.editing
+    })
 
     return {
       dialogRef,
