@@ -11,10 +11,9 @@
   :pagination="pagination"
   >
     <template #body-cell-operation="props">
-      <q-td key="type" :props="props">
+      <q-td key="type" :props="props" class="text-bold text-positive">
         <q-icon
           name="paid"
-          color="positive"
           size="xs"
           class="q-mr-sm"
         />
@@ -47,7 +46,7 @@ import {
 } from 'vue'
 
 import { date as quasarDate } from 'quasar'
-import { incomeTypesMapping } from 'src/services/enums'
+import { incomesOptions } from 'src/services/enums'
 
 const columns = [
   {
@@ -56,7 +55,7 @@ const columns = [
     label: 'Operation',
     align: 'left',
     field: (row) => row.operation,
-    format: (val) => `${incomeTypesMapping[val]}`,
+    format: (val) => incomesOptions.find(el => el.value === val).label,
     sortable: true
   },
   {
@@ -163,7 +162,7 @@ export default {
       pagination,
       selection,
       areSelected,
-      operationTypesMapping: incomeTypesMapping,
+      incomesOptions,
       completeEditing,
       removeIncomes,
       selectedTableRows
