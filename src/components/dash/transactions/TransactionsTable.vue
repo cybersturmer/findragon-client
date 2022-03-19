@@ -11,10 +11,11 @@
     :pagination="pagination"
   >
     <template #body-cell-type="props">
-      <q-td key="type" :props="props">
+      <q-td key="type"
+            :props="props"
+            :class="`${transactionTypeIconsMapping[props.row.type].color} text-bold`">
         <q-icon
           :name="transactionTypeIconsMapping[props.row.type].icon"
-          :color="transactionTypeIconsMapping[props.row.type].color"
           size="md"
         />
         {{ props.value }}
@@ -51,11 +52,11 @@ const transactionTypesMapping = {
 const transactionTypeIconsMapping = {
   1: {
     icon: 'arrow_drop_up',
-    color: 'positive'
+    color: 'text-positive'
   },
   2: {
     icon: 'arrow_drop_down',
-    color: 'negative'
+    color: 'text-negative'
   }
 }
 
