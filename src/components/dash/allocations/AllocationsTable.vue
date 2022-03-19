@@ -22,15 +22,14 @@
               size="md"
               @click="emitAllocationEdit(props.row)"
             />
-            <q-img
-              v-if="props.row.type !== allocationTypesEnum.CATEGORY"
-              height="35px"
-              width="35px"
-              class="q-mr-md"
-              :src="`https://eodhistoricaldata.com/img/logos/${props.row.asset.exchange}/${props.row.asset.ticker}.png`"
-            />
+          </div>
+          <asset-icon
+            v-if="props.row.type !== allocationTypesEnum.CATEGORY"
+            :ticker="props.row.asset.ticker"
+            :exchange="props.row.asset.exchange"
+          />
+          <div v-else class="col-auto">
             <q-btn
-              v-else
               flat
               dense
               :icon="icons[props.row.type]"
@@ -39,7 +38,7 @@
               @click="emitRowSelection(props.row.id)"
             />
           </div>
-          <div class="col">
+          <div class="col-auto q-pa-sm text-bold">
             {{ props.value }}
           </div>
         </div>
@@ -94,6 +93,7 @@ import {
 } from 'vue'
 
 import { allocationTypesEnum } from 'src/services/enums'
+import AssetIcon from "../assets/AssetIcon";
 
 const icons = {
   1: 'description',
@@ -129,6 +129,7 @@ const columns = [
 
 export default defineComponent({
   name: 'AllocationsTable',
+  components: {AssetIcon},
   emits: [
     'completed',
     'selected',
