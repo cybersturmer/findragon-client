@@ -63,7 +63,16 @@ export default {
     const saveIncome = async () => {
       try {
         const payload = {
-
+          operation: 1,
+          date: "2022-03-19",
+          amount: 0,
+          price: 0,
+          tax: 0,
+          description: "string",
+          currency: "RUB",
+          portfolio_id: 0,
+          ticker: "string",
+          exchange: "string"
         }
       } catch (e) {
         console.error(e)
