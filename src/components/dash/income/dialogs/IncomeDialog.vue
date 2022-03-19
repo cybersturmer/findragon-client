@@ -66,6 +66,12 @@
           />
         </div>
       </div>
+      <q-input
+        autogrow
+        v-model="incomeNote"
+        type="textarea"
+        label="Notes"
+      />
       <q-card-actions vertical>
         <q-btn
           flat
@@ -120,6 +126,8 @@ export default {
 
     const incomeTax = ref(null)
 
+    const incomeNote = ref('')
+
     onMounted(async () => {
       try {
         const { data } = await $api.get('/assets/')
@@ -150,22 +158,24 @@ export default {
 
     const saveIncome = async () => {
       try {
+        const asset = $store.getters['asset/ASSET_BY_ID'](incomeAsset.value.value)
+
         const payload = {
           operation: 1,
-          date: "2022-03-19",
-          amount: 0,
-          price: 0,
-          tax: 0,
-          description: "string",
-          currency: "RUB",
-          portfolio_id: 0,
-          ticker: "string",
-          exchange: "string"
+          date: quasarDate.formatDate(incomeDate.value, 'YYYY-MM-DD'),
+          amount: parseInt(incomeAmount.value),
+          price: parseInt(incomePrice.value),
+          tax: parseInt(incomeTax.value),
+          description: incomeNote.value,
+          currency: incomeCurrency.value.value,
+          portfolio_id: 1,  // @todo Replace hardcoded portfolio_id
+          ticker: asset.ticker,
+          exchange: asset.exchange
         }
 
         const { data } = await $api.post('/incomes/', payload)
 
-        $store.commit('incomes/ADD_INCOME', data)
+        $store.commit('income/ADD_INCOME', data)
       } catch (e) {
         console.error(e)
       }
@@ -184,6 +194,7 @@ export default {
       filterAssets,
       onOKClick,
       incomeType,
+      incomeNote,
       incomeAmount,
       incomeAsset,
       incomeCurrency,
