@@ -11,11 +11,61 @@
         clearable
       />
       <!-- Income Type -->
-      <q-select
-        v-model="incomeType"
-        :options="incomesOptions"
-        label="Transaction Type"
+      <div class="row">
+        <div class="col q-pr-sm">
+          <q-select
+            v-model="incomeType"
+            :options="incomesOptions"
+            label="Income Type"
+          />
+        </div>
+        <div class="col q-pr-sm">
+          <q-select
+            v-model="incomeCurrency"
+            label="Commission currency"
+            :options="currenciesOptions"
+          />
+        </div>
+      </div>
+      <!-- Date -->
+      <q-date
+        v-model="incomeDate"
+        :mask="dateFormat"
+        minimal
+        flat
       />
+      <div class="row">
+        <div class="col">
+          <!-- Amount -->
+          <q-input
+            v-model="incomeAmount"
+            type="number"
+            label="Amount"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col q-pr-sm">
+          <!-- Tax -->
+          <q-input
+            square
+            v-model="incomeTax"
+            type="number"
+            step="0.01"
+            label="Tax"
+          />
+        </div>
+        <div class="col q-pr-sm">
+          <!-- Price -->
+          <q-input
+            square
+            v-model="incomePrice"
+            type="number"
+            step="0.01"
+            label="Price"
+          />
+        </div>
+      </div>
       <q-card-actions vertical>
         <q-btn
           flat
@@ -128,6 +178,7 @@ export default {
 
     return {
       dialogRef,
+      dateFormat,
       isEditing,
       onDialogHide,
       filterAssets,
@@ -140,7 +191,8 @@ export default {
       incomeDate,
       incomePrice,
       incomeTax,
-      filteredAssetsOptions
+      filteredAssetsOptions,
+      currenciesOptions
     }
   }
 }
