@@ -1,9 +1,20 @@
 <template>
   <q-page padding>
-    <div class="column">
+    <div class="row">
+      <div class="col q-py-sm">
+        <q-toggle
+          v-model="showSold"
+          label="Show Sold Assets"
+          keep-color
+          color="primary"
+        />
+      </div>
+    </div>
+    <div class="row">
       <div class="col">
         <assets-table
           :assets="assets"
+          :show-sold="showSold"
         />
       </div>
     </div>
@@ -22,7 +33,9 @@ const metaData = {
 
 export default {
   name: 'Assets',
-  components: { AssetsTable },
+  components: {
+    AssetsTable
+  },
   setup () {
     useMeta(metaData)
 
@@ -30,6 +43,8 @@ export default {
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
 
     const assets = computed(() => $store.getters['asset/ASSETS'])
+
+    const showSold = ref(false)
 
     onMounted(async () => {
       try {
@@ -47,7 +62,8 @@ export default {
 
     return {
       assets,
-      isDataAvailable
+      isDataAvailable,
+      showSold
     }
   }
 }
