@@ -10,6 +10,12 @@
         use-input
         clearable
       />
+      <!-- Income Type -->
+      <q-select
+        v-model="incomeType"
+        :options="incomesOptions"
+        label="Transaction Type"
+      />
       <q-card-actions vertical>
         <q-btn
           flat
@@ -23,8 +29,8 @@
 
 <script>
 import { useDialogPluginComponent, date as quasarDate } from 'quasar'
-import { incomeTypesMapping, currenciesOptions } from 'src/services/enums'
-import {computed, getCurrentInstance, onMounted, ref} from 'vue'
+import { incomesOptions, currenciesOptions, incomeTypesEnum } from 'src/services/enums'
+import { computed, getCurrentInstance, onMounted, ref } from 'vue'
 
 const dateFormat = 'MM/DD/YYYY'
 
@@ -54,7 +60,7 @@ export default {
 
     const filteredAssetsOptions = ref([])
 
-    const incomeType = ref(incomeTypesMapping[0])
+    const incomeType = ref(incomesOptions[0])
     const incomeAsset = ref(assetsOptions.value[0])
     const incomeDate = ref(todayString)
 
@@ -130,6 +136,7 @@ export default {
       incomeAmount,
       incomeAsset,
       incomeCurrency,
+      incomesOptions,
       incomeDate,
       incomePrice,
       incomeTax,
