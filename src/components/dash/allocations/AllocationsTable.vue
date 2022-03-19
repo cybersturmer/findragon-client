@@ -93,7 +93,7 @@ import {
 } from 'vue'
 
 import { allocationTypesEnum } from 'src/services/enums'
-import AssetIcon from "../assets/AssetIcon";
+import AssetIcon from 'src/components/dash/assets/AssetIcon.vue'
 
 const icons = {
   1: 'description',
@@ -129,7 +129,9 @@ const columns = [
 
 export default defineComponent({
   name: 'AllocationsTable',
-  components: {AssetIcon},
+  components: {
+    AssetIcon
+  },
   emits: [
     'completed',
     'selected',
