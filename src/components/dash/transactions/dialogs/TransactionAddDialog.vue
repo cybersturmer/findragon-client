@@ -159,7 +159,7 @@ export default {
           price: transactionPrice.value,
           type: transactionType.value.value,
           date: quasarDate.formatDate(transactionDate.value, 'YYYY-MM-DD'),
-          portfolio_id: 1
+          portfolio_id: 1  // @todo Replace hardcoded portfolio_id
         }
 
         const { data } = await $api.post('/transactions/', payload)
