@@ -199,18 +199,3 @@ export default {
   }
 }
 </script>
-
-<style lang="css">
- .q-date {
-   width: auto;
- }
-
- .q-date__view {
-   min-height: auto;
-   padding: 16px 0 0 0;
- }
-
- .q-date__calendar-days-container {
-   min-height: auto;
- }
-</style>
