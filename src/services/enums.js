@@ -15,12 +15,31 @@ export const assetTypesEnum = {
   FUND: 3
 }
 
-export const incomeTypesMapping = {
-  1: 'Dividends',
-  2: 'Shares',
-  3: 'Coupons',
-  4: 'Other'
+export const incomeTypesEnum = {
+  DIVIDENDS: 1,
+  SHARES: 2,
+  COUPONS: 3,
+  OTHER: 4
 }
+
+export const incomesOptions = [
+  {
+    label: 'Dividends',
+    value: incomeTypesEnum.DIVIDENDS
+  },
+  {
+    label: 'Shares',
+    value: incomeTypesEnum.SHARES
+  },
+  {
+    label: 'Coupons',
+    value: incomeTypesEnum.COUPONS
+  },
+  {
+    label: 'Other',
+    value: incomeTypesEnum.OTHER
+  }
+]
 
 export const currenciesOptions = [
   { label: 'RUB', value: 'RUB' },
