@@ -33,8 +33,11 @@
 </template>
 
 <script>
-import { useDialogPluginComponent } from 'quasar'
+import { useDialogPluginComponent, date as quasarDate } from 'quasar'
+import { operationTypesMapping } from 'src/services/enums'
 import { computed, getCurrentInstance, ref } from 'vue'
+
+const dateFormat = 'MM/DD/YYYY'
 
 export default {
   name: 'IncomeDialog',
@@ -52,6 +55,8 @@ export default {
 
     const $vueInstance = getCurrentInstance()
     const { $api, $store } = $vueInstance.appContext.config.globalProperties
+
+    const todayString = quasarDate.formatDate(new Date(), dateFormat)
 
     const isEditing = computed(() => {
       return props.editing
