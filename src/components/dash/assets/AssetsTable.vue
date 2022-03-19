@@ -16,7 +16,7 @@
               :ticker="props.row.ticker"
               :exchange="props.row.exchange"
             />
-            <div class="col q-pa-md">
+            <div class="col text-bold q-pa-md">
               {{ props.value }}
             </div>
           </div>
