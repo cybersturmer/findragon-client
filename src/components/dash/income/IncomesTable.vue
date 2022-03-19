@@ -47,13 +47,7 @@ import {
 } from 'vue'
 
 import { date as quasarDate } from 'quasar'
-
-const operationTypesMapping = {
-  1: 'Dividends',
-  2: 'Shares',
-  3: 'Coupons',
-  4: 'Other'
-}
+import { operationTypesMapping } from 'src/services/enums'
 
 const columns = [
   {
