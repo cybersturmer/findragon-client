@@ -51,7 +51,7 @@
             square
             v-model="incomeTax"
             type="number"
-            step="0.01"
+            step="0.1"
             label="Tax"
           />
         </div>
@@ -61,7 +61,7 @@
             square
             v-model="incomePrice"
             type="number"
-            step="0.01"
+            step="0.1"
             label="Price"
           />
         </div>
