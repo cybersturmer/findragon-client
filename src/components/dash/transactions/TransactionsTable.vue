@@ -89,8 +89,8 @@ const columns = [
     required: true,
     label: 'Amount',
     align: 'left',
-    field: (row) => row.amount,
-    format: (val) => `${val}`,
+    field: (row) => row.amount_change,
+    format: (val) => `${ val > 0 ? '+' + val : val }`,
     sortable: true
   },
   {
