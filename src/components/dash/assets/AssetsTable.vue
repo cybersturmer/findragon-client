@@ -71,13 +71,13 @@ const columns = [
     label: 'Amount',
     align: 'center',
     field: (row) => row.amount_change,
-    format: (val) => `${val > 0 ? '+' + val : val }`,
+    format: (val) => `${val}`,
     sortable: true
   },
   {
-    name: 'total_price',
+    name: 'total_purchase',
     required: true,
-    label: 'Total price',
+    label: 'Total purchase',
     align: 'center',
     field: (row) => row.cost_change,
     format: (val) => `${ val ? val : '-' }`,
@@ -108,7 +108,7 @@ export default {
       if (props.showSold) {
         return props.assets
       } else {
-        return props.assets.filter(asset => asset.amount > 0)
+        return props.assets.filter(asset => asset.amount_change > 0)
       }
     })
 
