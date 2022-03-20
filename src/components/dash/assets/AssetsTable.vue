@@ -70,8 +70,8 @@ const columns = [
     required: true,
     label: 'Amount',
     align: 'center',
-    field: (row) => row.amount,
-    format: (val) => `${val}`,
+    field: (row) => row.amount_change,
+    format: (val) => `${val > 0 ? '+' + val : val }`,
     sortable: true
   },
   {
@@ -79,7 +79,7 @@ const columns = [
     required: true,
     label: 'Total price',
     align: 'center',
-    field: (row) => row.total_price,
+    field: (row) => row.cost_change,
     format: (val) => `${ val ? val : '-' }`,
     sortable: true
   },
