@@ -5,7 +5,7 @@
 
 <script>
 import { computed, defineComponent, getCurrentInstance } from 'vue'
-import { DoughnutChart, useDoughnutChart } from 'vue-chart-3'
+import { DoughnutChart, useDoughnutChart, usePieChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
 import { allocationTypesEnum } from 'src/services/enums'
 
@@ -39,8 +39,6 @@ const emptyDoughnutPlugin = {
       ctx.arc(centerX, centerY, (r - radiusDecrease || 0), 0, 2 * Math.PI)
       ctx.stroke()
     }
-
-
   }
 }
 
@@ -137,14 +135,14 @@ export default defineComponent({
         emptyDoughnut: {
           color: chartPrimaryColor,
           width: 2,
-          radiusDecrease: 20
+          radiusDecrease: 10
         }
       },
     }))
 
     const { doughnutChartProps, doughnutChartRef } = useDoughnutChart({
-      height: 300,
-      width: 300,
+      height: 320,
+      width: 320,
       chartData: dataObject,
       options,
       plugins: [
