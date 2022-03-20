@@ -90,7 +90,7 @@ const columns = [
     label: 'Amount',
     align: 'left',
     field: (row) => row.amount_change,
-    format: (val) => `${ val > 0 ? '+' + val : val }`,
+    format: (val) => `${ val }`,
     sortable: true
   },
   {
