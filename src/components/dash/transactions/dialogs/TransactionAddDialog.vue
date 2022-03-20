@@ -34,7 +34,7 @@
         square
         v-model="transactionPrice"
         type="number"
-        step="0.01"
+        step="0.1"
         label="Price"
       />
       <!-- Note -->
@@ -44,7 +44,7 @@
           <q-input
             v-model.number="transactionCommission"
             type="number"
-            step="0.01"
+            step="0.1"
             label="Commission"
           />
         </div>
