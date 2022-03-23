@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'IncomeBlock',
+  name: 'IncomeCard',
   props: {
     totalIncome: {
       required: true
