@@ -2,35 +2,43 @@
   <q-page padding>
     <div class="row items-start q-gutter-md">
       <div class="col">
-        <q-card>
-          <q-card-section>
-            <div>
-              Total Purchase
-            </div>
-            <div>
-              Total Market Price
-            </div>
-          </q-card-section>
-        </q-card>
+        <total-block
+          :total-purchase="3000000"
+          :total-price="4500000"
+        />
       </div>
       <div class="col">
-        <q-card>
-          <q-card-section>
-            <div>
-              Total income
-            </div>
-            <div>
-              Day income
-            </div>
-          </q-card-section>
-        </q-card>
+        <income-block
+          :total-income="1500000"
+          :day-income="250000"
+        />
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
+import { useMeta } from 'quasar'
+
+import TotalBlock from 'components/dash/stats/TotalBlock.vue'
+import IncomeBlock from 'components/dash/stats/IncomeBlock.vue'
+
+const metaData = {
+  title: 'Dashboard'
+}
+
 export default {
-  // name: 'PageName',
+  name: 'Stats',
+  components: {
+    TotalBlock,
+    IncomeBlock
+  },
+  setup () {
+    useMeta(metaData)
+
+    return {
+
+    }
+  }
 }
 </script>
