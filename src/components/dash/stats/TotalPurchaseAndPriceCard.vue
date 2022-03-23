@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'TotalBlock',
+  name: 'TotalPurchaseAndPriceCard',
   props: {
     totalPurchase: {
       required: true
