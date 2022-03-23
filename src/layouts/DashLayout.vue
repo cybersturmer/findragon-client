@@ -46,6 +46,12 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
+    title: 'Dashboard',
+    caption: null,
+    icon: 'dashboard',
+    route: 'stats_view'
+  },
+  {
     title: 'Allocation',
     caption: null,
     icon: 'donut_small',
