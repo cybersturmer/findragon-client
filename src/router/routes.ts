@@ -6,11 +6,9 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/DashLayout.vue'),
     children: [
       {
-        name: 'index',
+        name: 'stats',
         path: '/',
-        redirect: to => {
-          return { name: 'allocations_view' }
-        }
+        component: () => import('pages/Stats.vue')
       },
       {
         name: 'allocations_view',
