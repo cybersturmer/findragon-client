@@ -2,13 +2,13 @@
   <q-page padding>
     <div class="row items-start q-gutter-md">
       <div class="col">
-        <total-block
+        <total-purchase-and-price-card
           :total-purchase="3000000"
           :total-price="4500000"
         />
       </div>
       <div class="col">
-        <income-block
+        <income-card
           :total-income="1500000"
           :day-income="250000"
         />
@@ -20,8 +20,8 @@
 <script>
 import { useMeta } from 'quasar'
 
-import TotalBlock from 'components/dash/stats/TotalBlock.vue'
-import IncomeBlock from 'components/dash/stats/IncomeBlock.vue'
+import TotalPurchaseAndPriceCard from 'components/dash/stats/TotalPurchaseAndPriceCard.vue'
+import IncomeCard from 'components/dash/stats/IncomeCard.vue'
 
 const metaData = {
   title: 'Dashboard'
@@ -30,8 +30,8 @@ const metaData = {
 export default {
   name: 'Stats',
   components: {
-    TotalBlock,
-    IncomeBlock
+    TotalPurchaseAndPriceCard,
+    IncomeCard
   },
   setup () {
     useMeta(metaData)
