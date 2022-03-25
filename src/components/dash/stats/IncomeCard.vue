@@ -2,7 +2,7 @@
   <q-card bordered>
     <q-card-section class="dash_half_thin_widget q-px-xl">
       <div class="row items-center">
-        <div class="col text-subtitle1 text-bold">
+        <div class="col text-subtitle1 text-bold text-right">
           Total Income:
         </div>
         <div class="col-auto">
@@ -18,8 +18,8 @@
           </span>
         </div>
       </div>
-      <div class="row items-center">
-        <div class="col">
+      <div class="row items-center text-bold">
+        <div class="col text-blue-grey-4 text-right">
           Day Income:
         </div>
         <div class="col-auto">
