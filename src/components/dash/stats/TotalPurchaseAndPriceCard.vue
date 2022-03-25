@@ -17,7 +17,6 @@
                 Purchase: {{formattedTotalPurchase}}
               </div>
             </div>
-
           </div>
         </div>
       </div>
