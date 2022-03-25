@@ -1,7 +1,7 @@
 <template>
   <q-card bordered>
-    <q-card-section class="dash_half_thin_widget">
-      <div class="row items-start q-pa-sm">
+    <q-card-section class="dash_half_thin_widget q-px-xl">
+      <div class="row items-center">
         <div class="col-auto">
           <q-icon
             name="account_balance"
