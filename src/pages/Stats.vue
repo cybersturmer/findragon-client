@@ -7,7 +7,7 @@
           :total-price="4500000"
         />
       </div>
-      <div class="col-auto">
+      <div class="col-grow">
         <income-card
           :total-income="1500000"
           :day-income="250000"
