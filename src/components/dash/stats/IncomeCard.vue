@@ -1,6 +1,6 @@
 <template>
-  <q-card>
-    <q-card-section>
+  <q-card bordered>
+    <q-card-section class="dash_half_thin_widget">
       <div class="row items-end">
         <div class="col-auto">
           <q-icon
@@ -12,7 +12,7 @@
         <div class="col text-subtitle1 text-bold">
           Total Income:
           <span :class="`text-${totalIncomeIconParams.color}`">
-            {{totalIncomeIconParams.prefix}}{{totalIncome}}₽
+            {{totalIncomeFormattedString}}
           </span>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class="col text-subtitle2">
           Day Income:
           <span :class="`text-${dayIncomeIconParams.color}`">
-            {{dayIncomeIconParams.prefix}}{{dayIncome}}₽
+            {{dayIncomeFormattedString}}
           </span>
         </div>
       </div>
@@ -37,18 +37,7 @@
 
 <script>
 import { computed } from 'vue'
-
-const negativeIconAttrs = {
-  icon: 'arrow_drop_down',
-  color: 'negative',
-  prefix: ''
-}
-
-const positiveIconAttrs = {
-  icon: 'arrow_drop_up',
-  color: 'positive',
-  prefix: '+'
-}
+import { negativeIconAttrs, positiveIconAttrs } from './presets'
 
 export default {
   name: 'IncomeCard',
@@ -69,9 +58,27 @@ export default {
       return props.totalIncome > 0 ? positiveIconAttrs : negativeIconAttrs
     })
 
+    const totalIncomeFormattedString = computed(() => {
+      return Intl.NumberFormat('ru-RU', {
+        style: 'currency',
+        currency: 'RUR' // @todo change it to actual currency
+      })
+        .format(props.totalIncome)
+    })
+
+    const dayIncomeFormattedString = computed(() => {
+      return Intl.NumberFormat('ru-RU', {
+        style: 'currency',
+        currency: 'RUR' // @todo change it to actual currency
+      })
+        .format(props.dayIncome)
+    })
+
     return {
       dayIncomeIconParams,
-      totalIncomeIconParams
+      totalIncomeIconParams,
+      dayIncomeFormattedString,
+      totalIncomeFormattedString
     }
   }
 }
