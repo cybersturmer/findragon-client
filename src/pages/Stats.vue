@@ -13,6 +13,11 @@
           :day-income="250000"
         />
       </div>
+      <div class="col-auto">
+        <currencies-card
+          :currency-rates="[]"
+        />
+      </div>
     </div>
   </q-page>
 </template>
@@ -21,6 +26,7 @@
 import { useMeta } from 'quasar'
 
 import TotalPurchaseAndPriceCard from 'components/dash/stats/TotalPurchaseAndPriceCard.vue'
+import CurrenciesCard from 'components/dash/stats/CurrenciesCard.vue'
 import IncomeCard from 'components/dash/stats/IncomeCard.vue'
 
 const metaData = {
@@ -30,6 +36,7 @@ const metaData = {
 export default {
   name: 'Stats',
   components: {
+    CurrenciesCard,
     TotalPurchaseAndPriceCard,
     IncomeCard
   },
