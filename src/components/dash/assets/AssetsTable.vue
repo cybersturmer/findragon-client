@@ -41,9 +41,7 @@ const columns = [
     required: true,
     label: 'Title',
     align: 'left',
-    field: (row) => row.description ?
-      row.description :
-      `${row.ticker}.${row.exchange}`,
+    field: (row) => row.title,
     format: (val) => `${val}`,
     sortable: true
   },
