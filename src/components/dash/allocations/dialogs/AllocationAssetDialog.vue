@@ -6,12 +6,14 @@
         :autofocus="!isEditing"
         v-model="ticker"
         label="Ticker"
+        shadow-text="For instance: LKOH"
         type="text"
       />
       <q-input
         :disable="isEditing"
         v-model="exchange"
-        label="Exchange"
+        label="Exchange Code"
+        shadow-text="For instance: MCX"
         type="text"
       />
       <q-input
