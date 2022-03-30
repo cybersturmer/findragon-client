@@ -1,18 +1,20 @@
 <template>
   <q-card bordered>
-    <q-card-section class="dash_half_thin_widget q-px-xl">
-      <div class="row items-center">
+    <q-card-section class="dash_half_thin_widget">
+      <div class="row items-center justify-center">
         <div class="col-auto">
           <q-icon
             name="account_balance"
-            size="sm" />
+            size="sm"
+            class="q-pr-sm"
+          />
         </div>
-        <div class="col-auto text-h5 q-pl-md">
+        <div class="col-auto text-center text-h5">
           {{ formattedTotalPrice }}
         </div>
       </div>
-      <div class="row">
-        <div class="col-auto text-caption q-pl-xl text-blue-grey-4">
+      <div class="row justify-center items-center">
+        <div class="col text-center text-caption text-blue-grey-4">
           Purchase: {{formattedTotalPurchase}}
         </div>
       </div>
