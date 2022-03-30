@@ -2,11 +2,11 @@
   <q-card bordered>
     <q-card-section
       class="dash_half_thin_widget">
-      <div v-for="item in example" class="row items-center">
-        <div class="col text-subtitle2 text-bold">
+      <div v-for="item in example" class="row items-center justify-center">
+        <div class="col-auto text-subtitle2 text-bold">
           {{ item.fromCurrency }}/{{ item.toCurrency }}
         </div>
-        <div class="col-auto q-pl-md q-pr-none">
+        <div class="col-auto">
           <q-icon
             :name="item.dayGainPercent > 0 ? positiveIconAttrs.icon : negativeIconAttrs.icon"
             :color="item.dayGainPercent > 0 ? positiveIconAttrs.color : negativeIconAttrs.color"
