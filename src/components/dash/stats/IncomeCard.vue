@@ -1,6 +1,6 @@
 <template>
   <q-card bordered>
-    <q-card-section class="dash_half_thin_widget q-px-xl">
+    <q-card-section class="dash_half_thin_widget">
       <div class="row items-center">
         <div class="col text-subtitle1 text-bold text-right">
           Total Income:
