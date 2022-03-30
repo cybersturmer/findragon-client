@@ -1,7 +1,7 @@
 <template>
   <q-card bordered>
     <q-card-section
-      class="dash_half_thin_widget q-px-xl">
+      class="dash_half_thin_widget">
       <div v-for="item in example" class="row items-center">
         <div class="col text-subtitle2 text-bold">
           {{ item.fromCurrency }}/{{ item.toCurrency }}
