@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div class="row items-start q-gutter-md">
+    <div class="row items-center q-gutter-md">
       <div class="col">
         <total-purchase-and-price-card
           :total-purchase="3162948.23"
