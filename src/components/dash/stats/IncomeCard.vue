@@ -65,7 +65,7 @@ export default {
     const totalIncomeFormattedString = computed(() => {
       return Intl.NumberFormat('ru-RU', {
         style: 'currency',
-        currency: 'RUR' // @todo change it to actual currency
+        currency: 'RUB' // @todo change it to actual currency
       })
         .format(props.totalIncome)
     })
@@ -73,7 +73,7 @@ export default {
     const dayIncomeFormattedString = computed(() => {
       return Intl.NumberFormat('ru-RU', {
         style: 'currency',
-        currency: 'RUR' // @todo change it to actual currency
+        currency: 'RUB' // @todo change it to actual currency
       })
         .format(props.dayIncome)
     })
