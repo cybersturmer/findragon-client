@@ -1,5 +1,5 @@
 <template>
-  <q-scroll-area style="height: 85vh">
+  <q-scroll-area style="height: 80vh">
     <q-table
       flat
       bordered
