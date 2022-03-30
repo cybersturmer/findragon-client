@@ -39,7 +39,7 @@ export default {
     const formattedTotalPurchase = computed(() => {
       return Intl.NumberFormat('ru-RU', {
         style: 'currency',
-        currency: 'RUR' // @todo change it to actual currency
+        currency: 'RUB' // @todo change it to actual currency
       })
       .format(props.totalPurchase)
     })
@@ -47,7 +47,7 @@ export default {
     const formattedTotalPrice = computed(() => {
       return Intl.NumberFormat('ru-RU', {
         style: 'currency',
-        currency: 'RUR' // @todo change it to actual currency
+        currency: 'RUB' // @todo change it to actual currency
       })
       .format(props.totalPrice)
     })
