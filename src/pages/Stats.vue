@@ -21,10 +21,10 @@
     </div>
     <div class="row items-center q-gutter-md">
       <div class="col">
-        <!-- We will use this block for top falls assets -->
+        <!-- We will use this block for Top Gainers Today -->
       </div>
       <div class="col">
-        <!--  We will use this block for top grow assets -->
+        <!--  We will use this block for Top Losers Today -->
       </div>
     </div>
   </q-page>
