@@ -19,6 +19,14 @@
         />
       </div>
     </div>
+    <div class="row items-center q-gutter-md">
+      <div class="col">
+        <!-- We will use this block for top falls assets -->
+      </div>
+      <div class="col">
+        <!--  We will use this block for top grow assets -->
+      </div>
+    </div>
   </q-page>
 </template>
 
