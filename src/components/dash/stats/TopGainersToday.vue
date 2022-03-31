@@ -6,7 +6,7 @@
         <q-btn
           flat
           round
-          icon="paid"
+          icon="account_balance_wallet"
           size="sm"
         />
       </div>
