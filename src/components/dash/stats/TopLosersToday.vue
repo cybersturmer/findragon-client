@@ -5,7 +5,7 @@
     </q-card-section>
     <q-separator inset />
     <q-card-section>
-      Some content
+      Content
     </q-card-section>
   </q-card>
 </template>
