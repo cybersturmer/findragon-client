@@ -9,3 +9,11 @@ export const positiveIconAttrs = {
   color: 'positive',
   prefix: '+'
 }
+
+export const percentChange = {
+  icon: 'percent'
+}
+
+export const rawChange = {
+  icon: 'account_balance_wallet'
+}
