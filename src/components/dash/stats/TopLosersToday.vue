@@ -6,8 +6,9 @@
         <q-btn
           flat
           round
-          icon="percent"
+          :icon="changeIcon"
           size="sm"
+          @click="switchChangeView"
         />
       </div>
     </q-card-section>
@@ -19,10 +20,34 @@
 </template>
 
 <script>
+import { percentChange, rawChange } from './presets'
+import { computed } from 'vue'
+
 export default {
   name: 'TopLosersToday',
-  setup () {
-    return {}
+  props: {
+    isChangeInPercentage: {
+      type: Boolean,
+      default: false
+    }
+  },
+  emits: [
+    'switchedChangedView'
+  ],
+  setup (props, { emit }) {
+
+    const changeIcon = computed(() => {
+      return props.isChangeInPercentage ? percentChange.icon : rawChange.icon
+    })
+
+    const switchChangeView = () => {
+      emit('switchedChangedView')
+    }
+
+    return {
+      changeIcon,
+      switchChangeView
+    }
   }
 }
 </script>
