@@ -22,11 +22,17 @@
     <div class="row items-center q-py-md q-gutter-md">
       <div class="col">
         <!-- We will use this block for Top Gainers Today -->
-        <top-losers-today />
+        <top-losers-today
+          :isChangeInPercentage="isChangeInPercentage"
+          @switchedChangedView="toggleChangeView"
+        />
       </div>
       <div class="col">
         <!--  We will use this block for Top Losers Today -->
-        <top-gainers-today />
+        <top-gainers-today
+          :isChangeInPercentage="isChangeInPercentage"
+          @switchedChangedView="toggleChangeView"
+        />
       </div>
     </div>
   </q-page>
@@ -34,6 +40,7 @@
 
 <script>
 import { useMeta } from 'quasar'
+import { ref } from 'vue'
 
 import TotalPurchaseAndPriceCard from 'components/dash/stats/TotalPurchaseAndPriceCard.vue'
 import CurrenciesCard from 'components/dash/stats/CurrenciesCard.vue'
@@ -57,8 +64,15 @@ export default {
   setup () {
     useMeta(metaData)
 
-    return {
+    const isChangeInPercentage = ref(false)
 
+    const toggleChangeView = () => {
+      isChangeInPercentage.value = !isChangeInPercentage.value
+    }
+
+    return {
+      toggleChangeView,
+      isChangeInPercentage
     }
   }
 }
