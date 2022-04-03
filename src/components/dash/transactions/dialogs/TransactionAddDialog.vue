@@ -107,7 +107,7 @@ export default {
 
     const assets = computed(() => $store.getters['asset/ASSETS'])
     const assetsOptions = computed(() => {
-      return assets.value.map(option => ({ label: option.description, value: option.id }))
+      return assets.value.map(option => ({ label: option.title, value: option.id }))
     })
     const filteredAssetsOptions = ref([])
 
