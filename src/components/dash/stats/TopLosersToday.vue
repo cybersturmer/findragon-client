@@ -14,7 +14,9 @@
     </q-card-section>
     <q-separator inset />
     <q-card-section>
-      Content
+      <div v-for="asset in top">
+        {{ asset.code }} {{ asset.change }} {{ asset.change_p }}%
+      </div>
     </q-card-section>
   </q-card>
 </template>
@@ -29,6 +31,10 @@ export default {
     isChangeInPercentage: {
       type: Boolean,
       default: false
+    },
+    top: {
+      type: Array,
+      default: []
     }
   },
   emits: [
