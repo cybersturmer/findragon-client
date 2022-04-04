@@ -24,6 +24,7 @@
         <!-- We will use this block for Top Gainers Today -->
         <top-losers-today
           :isChangeInPercentage="isChangeInPercentage"
+          :top="assetsTopLosers"
           @switchedChangedView="toggleChangeView"
         />
       </div>
@@ -31,6 +32,7 @@
         <!--  We will use this block for Top Losers Today -->
         <top-gainers-today
           :isChangeInPercentage="isChangeInPercentage"
+          :top="assetsTopGainers"
           @switchedChangedView="toggleChangeView"
         />
       </div>
@@ -39,8 +41,8 @@
 </template>
 
 <script>
-import { useMeta } from 'quasar'
-import { ref } from 'vue'
+import { useMeta, useQuasar } from 'quasar'
+import { ref, getCurrentInstance, onMounted, computed } from 'vue'
 
 import TotalPurchaseAndPriceCard from 'components/dash/stats/TotalPurchaseAndPriceCard.vue'
 import CurrenciesCard from 'components/dash/stats/CurrenciesCard.vue'
@@ -64,13 +66,45 @@ export default {
   setup () {
     useMeta(metaData)
 
+    const $vueInstance = getCurrentInstance()
+    const $q = useQuasar()
+
+    const { $api, $store } = $vueInstance.appContext.config.globalProperties
+
     const isChangeInPercentage = ref(false)
 
     const toggleChangeView = () => {
       isChangeInPercentage.value = !isChangeInPercentage.value
     }
 
+    const assets = computed(() => {
+      return $store.getters['stats/ASSETS']
+    })
+
+    const maxTopAmount = ref(5)
+
+    const assetsTopLosers = computed(() => {
+      return $store.getters['stats/ASSETS_TOP_LOSERS'](maxTopAmount.value)
+    })
+
+    const assetsTopGainers = computed(() => {
+      return $store.getters['stats/ASSETS_TOP_GAINERS'](maxTopAmount.value)
+    })
+
+    onMounted(async () => {
+      try {
+        const { data } = await $api.get('/stats/assets/')
+        $store.commit('stats/SET_ASSETS', data)
+      }
+      catch (e) {
+        console.error(e)
+      }
+    })
+
     return {
+      assets,
+      assetsTopLosers,
+      assetsTopGainers,
       toggleChangeView,
       isChangeInPercentage
     }
