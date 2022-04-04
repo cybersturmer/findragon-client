@@ -2,6 +2,7 @@ import {store} from 'quasar/wrappers';
 import {InjectionKey} from 'vue';
 import {createStore, Store as VuexStore, useStore as vuexUseStore,} from 'vuex';
 
+import stats from './stats'
 import asset from './asset'
 import income from './income'
 import allocation from './allocation'
@@ -43,7 +44,8 @@ export default store(function (/* { ssrContext } */) {
       transaction,
       allocation,
       income,
-      asset
+      asset,
+      stats
     },
 
     // enable strict mode (adds overhead!)
