@@ -14,9 +14,19 @@
     </q-card-section>
     <q-separator inset />
     <q-card-section>
-      <div v-for="asset in top">
-        {{ asset.code }} {{ asset.change }} {{ asset.change_p }}%
-      </div>
+      <q-list bordered>
+        <q-item v-for="asset in top">
+          <q-item-section>
+            {{ asset.code }}
+          </q-item-section>
+          <q-item-section>
+            {{ asset.change }}
+          </q-item-section>
+          <q-item-section>
+            {{ asset.change_p }}%
+          </q-item-section>
+        </q-item>
+      </q-list>
     </q-card-section>
   </q-card>
 </template>
